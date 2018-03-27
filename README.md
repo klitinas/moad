@@ -55,5 +55,3 @@ Log in with the username “admin” and the password you supplied for this user
 
 5. Notes for LORIS post-installation setup are contained in the [LORIS Wiki](https://github.com/aces/Loris/wiki/Setup).
 
-# Community
-Please feel free to subscribe to the [LORIS Developers mailing list](http://www.bic.mni.mcgill.ca/mailman/listinfo/loris-dev) to ask any LORIS-related questions.
