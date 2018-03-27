@@ -1,0 +1,135 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+function recalc($inVal) {
+
+	switch ($inVal) {
+		case 1:
+			$calcVal = 4;
+			break;
+		case 2:
+			$calcVal = 3;
+			break;
+		case 3:
+			$calcVal = 2;
+			break;
+		case 4:
+			$calcVal = 1;
+			break;
+		}
+		
+		return $calcVal;
+		
+}		
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from aesc WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+
+$a = array(
+$record['i01'],
+$record['i02'],
+$record['i03'],
+$record['i04'],
+$record['i05'],
+$record['i06'],
+$record['i07'],
+$record['i08'],
+$record['i09'],
+$record['i10'],
+$record['i11'],
+$record['i12'],
+$record['i13'],
+$record['i14'],
+$record['i15'],
+$record['i16'],
+$record['i17'],
+$record['i18']);
+
+$rescore = array();
+$rescore['c01'] = recalc($record['i01']);
+$rescore['c02'] = recalc($record['i02']);
+$rescore['c03'] = recalc($record['i03']);
+$rescore['c04'] = recalc($record['i04']);
+$rescore['c05'] = recalc($record['i05']);
+$rescore['c06'] = $record['i06'];
+$rescore['c07'] = recalc($record['i07']);
+$rescore['c08'] = recalc($record['i08']);
+$rescore['c09'] = recalc($record['i09']);
+$rescore['c10'] = $record['i10'];
+$rescore['c11'] = $record['i11'];
+$rescore['c12'] = recalc($record['i12']);
+$rescore['c13'] = recalc($record['i13']);
+$rescore['c14'] = recalc($record['i14']);
+$rescore['c15'] = recalc($record['i15']);
+$rescore['c16'] = recalc($record['i16']);
+$rescore['c17'] = recalc($record['i17']);
+$rescore['c18'] = recalc($record['i18']); 
+
+$total = array_sum($rescore);
+
+if(empty($total)) {
+	$scores['total'] = 0;
+} else {
+    $scores['total']          = round($total, 2);
+
+}
+
+// TO DO: why won't notes give instant UI feedback when changed on instrument page??
+if ((array_search('', $a)!==false) or (array_search('na', array_map('strtolower',$a))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['total'] = NULL;
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+	//$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$scores['notes']);
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+
+//save scores
+$result = $db->update('aesc', $scores, $WhereCriteria);
+foreach($scores as $field) {
+  if (empty($field)) {
+  	$total = NULL;
+
+    break; // get out of foreach loop
+  }
+} 
+
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

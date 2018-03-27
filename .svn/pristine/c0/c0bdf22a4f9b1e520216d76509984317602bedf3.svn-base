@@ -1,0 +1,46 @@
+table{@}olfaction
+title{@}Olfaction Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}notes:
+select{@}notes_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+header{@}{@}GENERAL
+numeric{@}omt_tot{@}omt_tot:
+select{@}omt_tot_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}smthresh{@}smthresh:
+select{@}smthresh_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rhinevol_r{@}rhinevol_R:
+select{@}rhinevol_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rhinevol_l{@}rhinevol_L:
+select{@}rhinevol_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}sniff_1{@}sniff_1:
+select{@}sniff_1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}sniff_2{@}sniff_2:
+select{@}sniff_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}sniff_3{@}sniff_3:
+select{@}sniff_3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}sniff_4{@}sniff_4:
+select{@}sniff_4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}snif_th{@}snif_th:
+select{@}snif_th_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}snif_disc{@}snif_disc:
+select{@}snif_disc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}snif_ID{@}snif_ID:
+select{@}snif_ID_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+header{@}{@}RHINO
+text{@}rhino_dec_smell{@}DEC SMELL:
+select{@}rhino_dec_smell_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}rhino_run_nose{@}RUN.NOSE:
+select{@}rhino_run_nose_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}rhino_aller{@}ALLER:
+select{@}rhino_aller_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}rhino_sinus{@}SINUS:
+select{@}rhino_sinus_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}rhino_colds{@}COLDS:
+select{@}rhino_colds_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}rhino_bef_aft{@}BEF/AFT:
+select{@}rhino_bef_aft_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}rhino_w_eat{@}W. EAT:
+select{@}rhino_w_eat_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

@@ -1,0 +1,294 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 03:10:44
+         compiled from "/var/www/loris/modules/imaging_browser/templates/form_viewSession.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:11855497405524fea4099bb6-65526344%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '95c38a6a43a48329bb2033888e58635bfe5cfd44' => 
+    array (
+      0 => '/var/www/loris/modules/imaging_browser/templates/form_viewSession.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '11855497405524fea4099bb6-65526344',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'show3DViewer' => 0,
+    'subject' => 0,
+    'headerTable' => 0,
+    'files' => 0,
+    'has_qc_permission' => 0,
+    'selected_options' => 0,
+    'status_options' => 0,
+    'caveat_options' => 0,
+    'has_permission' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5524fea427ae30_23970627',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5524fea427ae30_23970627')) {function content_5524fea427ae30_23970627($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/xnat/Smarty/smarty3/plugins/function.html_options.php';
+if (!is_callable('smarty_modifier_date_format')) include '/home/xnat/Smarty/smarty3/plugins/modifier.date_format.php';
+?><!-- Main table -->
+<?php echo '<script'; ?>
+ src="GetJS.php?Module=imaging_browser&file=imagingbrowser.js"><?php echo '</script'; ?>
+>
+
+<?php if ($_smarty_tpl->tpl_vars['show3DViewer']->value) {?>
+<input type="button" name="button" value="3D Viewer" class="button" id = "dccid" name = "dccid" style = "background-color: #816e91" onclick="window.open('BrainBrowser/display.html?sessionID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['sessionID'];?>
+')" /></td>
+
+</br>
+<?php }?>
+</tr>
+
+<tr>
+    <td>
+    <div class="row">
+    <?php echo $_smarty_tpl->tpl_vars['headerTable']->value;?>
+
+    </div>
+    <div class="row">
+    <table class='table-header-right'>
+	<tr><td><?php if (count($_smarty_tpl->tpl_vars['files']->value)) {
+echo count($_smarty_tpl->tpl_vars['files']->value);?>
+ file(s) displayed.</td></tr>
+        <tr><td><div id="jivApplet">&nbsp;</div></td></tr>
+    </table>
+    </div>
+    </td>
+</tr>
+</table>
+
+<table class='table-mri'>
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['file'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['file']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['name'] = 'file';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['files']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total']);
+?>
+<tr>
+    <td class='td-mri-lefttable'>
+
+        <table class='table-mri-lefttable'>
+    	<tr>
+	    <td style="min-width: 100px" class='td-mri-lefttable-select'>Add panel<input class='mripanel' data-file-id='<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID'];?>
+' type='checkbox' onClick="javascript:toggle_jiv_panel('<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['JivFilename'];?>
+', '<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['JivAddress'];?>
+');"></td>
+    	</tr>
+
+<?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['OutputType']=="native") {?>
+    	<tr>
+	    <th>Selected</th>
+    	</tr>
+    	<tr>
+	    <td id='td-mri-lefttable-select'>
+	    <?php if ($_smarty_tpl->tpl_vars['has_qc_permission']->value) {?>
+	    <?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['selected_options']->value,'selected'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Selected'],'tabindex'=>"3",'name'=>"selectedvol[".((string)$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID'])."]"),$_smarty_tpl);?>
+
+	    <?php } else { ?>
+		<?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Selected']!='') {
+echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Selected'];?>
+
+		<?php } else { ?>&nbsp;<?php }?>
+            <?php }?>   
+	    </td>
+        </tr>
+<?php }?>
+
+        <tr>
+            <th>QC Status</th>
+        </tr>
+        <tr>
+	    <td id='td-mri-lefttable-select'>
+	    <?php if ($_smarty_tpl->tpl_vars['has_qc_permission']->value) {?>	
+	        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['New']) {?><font color='red'>NEW</font><?php }?>
+		<?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['status_options']->value,'selected'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['QCStatus'],'tabindex'=>"4",'name'=>"status[".((string)$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID'])."]"),$_smarty_tpl);?>
+
+	    <?php } else { ?>
+		<?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['QCStatus']!='') {
+echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['QCStatus'];?>
+
+		<?php } else { ?>&nbsp;<?php }?>
+	    <?php }?>
+	    </td>
+        </tr>
+	<?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID']) {?> 
+            <tr><th>Caveat Emptor</th></tr>
+            <tr><td id='td-mri-lefttable-select'>
+            <?php if ($_smarty_tpl->tpl_vars['has_qc_permission']->value) {?>
+                <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Caveat']) {?>
+                <a href="main.php?test_name=mri_protocol_check_violations&SeriesUID=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SeriesUID'];?>
+&filter=true">Caveat List</a>
+                <?php }?>
+                <?php echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['caveat_options']->value,'selected'=>$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Caveat'],'tabindex'=>"5",'name'=>"caveat[".((string)$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID'])."]"),$_smarty_tpl);?>
+
+                <?php } else { ?>
+                <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Caveat']) {?><a href="main.php?test_name=mri_protocol_check_violations&SeriesUID=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SeriesUID'];?>
+&filter=true">Caveats</a>
+                <?php } else { ?>No caveats<?php }?>
+                <?php }?>
+                </td></tr>
+            <?php }?>
+
+        <tr>
+            <td><?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID']) {?><a href="#noID" onClick='window.open("feedback_mri_popup.php?fileID=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID'];?>
+", "feedback_mri","width=500,height=800,toolbar=no,location=no,status=yes,scrollbars=yes,resizable=yes")'>Link to comments</a><br><?php } else { ?>&nbsp;<?php }?>
+            </td>
+        </tr>
+    </table>  
+    </td>
+
+    <td>
+        <table class="table-mri-right-and-center">
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <td colspan='2'><?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Filename']!='') {
+echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Filename'];?>
+
+		    	<?php } else { ?>&nbsp;<?php }?></td>
+		    <td<?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['QCStatus']!='') {?> class="image<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['QCStatus'];?>
+"<?php }?>><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['QCStatus'];?>
+</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4">
+		    <a href="#noID" onClick="window.open('main.php?test_name=brainbrowser&minc_id=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID'];?>
+', 'BrainBrowser Volume Viewer', 'location = 0,width = auto, height = auto')">
+                    <img class='img-checkpic' src="<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['CheckPic'];?>
+">
+                    </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot> 
+                <tr>
+                    <th>Voxel size</th>
+                    <td colspan="2">
+		    <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Xstep']!=''&&$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Ystep']!='') {?>X: <?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Xstep'];?>
+ mm Y: <?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Ystep'];?>
+ mm Z: <?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Zstep'];?>
+ mm
+                    <?php } elseif ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Xstep']!='') {
+echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Xstep'];
+} else { ?>&nbsp;<?php }?>
+                    </td>
+                    <td>
+		                <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileID']) {?>
+                            <a href="mri/jiv/get_file.php?file=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FullFilename'];?>
+">Download MINC</a>
+                        <?php }?>
+                    </td>
+                </tr>
+                <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SourceFile']!='') {?>
+                <tr>
+                    <th>Source file</th>
+                    <td colspan='3'><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SourceFile'];?>
+</td>
+                </tr>
+                <?php }?>
+                <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Tool']!='') {?>
+                <tr>
+                     <th>Pipeline info</th>
+                     <td> <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['ProcessingPipeline']!='') {
+echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['ProcessingPipeline'];
+} else { ?>&nbsp;<?php }?></td>
+                     <td> Version: <?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Tool'];?>
+</td>
+                     <td> <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['ProcDate']>0) {?>Proc. Date: <?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['procDate']);
+} else { ?>&nbsp;<?php }?></td>
+                </tr>
+                <?php }?>        
+                <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['ProcessingPipeline']=="DTIPrepPipeline") {?>
+                <tr>
+                     <th>DTIPrep files</th>
+                     <td> <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['XMLprotocol']!='') {?><a href="mri/jiv/get_file.php?file=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['XMLprotocol'];?>
+">Download XML Protocol</a><?php } else { ?>&nbsp;<?php }?></td>
+                     <td> <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['XMLreport']!='') {?><a href="mri/jiv/get_file.php?file=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['XMLreport'];?>
+">Download XML Report</a><?php } else { ?>&nbsp;<?php }?></td>
+                     <td> <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['NrrdFile']!='') {?><a href="mri/jiv/get_file.php?file=<?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['NrrdFile'];?>
+">Download NRRD</a><?php } else { ?>&nbsp;<?php }?></td>
+                </tr>
+                <?php }?> 
+            </tfoot> 
+	</table>
+    </td>
+
+    <td>
+        <table class="table-mri-right-and-center" id='table-mri-righttable'>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Pipeline']!='') {?><tr><th>Pipeline</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Pipeline'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['OutputType']!='') {?><tr><th>Output Type</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['OutputType'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['AcquisitionProtocol']!="NA") {?><tr><th>Protocol</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['AcquisitionProtocol'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['CoordinateSpace']!='') {?><tr><th>Space</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['CoordinateSpace'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Algorithm']!='') {?><tr><th>Algorithm</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Algorithm'];?>
+</td></tr><?php }?>
+
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['AcquisitionDate']>0) {?><tr><th>Acq Date</th><td><?php echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['AcquisitionDate']);?>
+</td></tr><?php }?>
+        <tr><th>Inserted</th><td><?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileInsertDate']>0) {
+echo smarty_modifier_date_format($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['FileInsertDate']);
+} elseif ($_smarty_tpl->getVariable('smarty')->value['section']['file']['index']==0) {?>Insert date<?php } else { ?>&nbsp;<?php }?></td></tr>
+ 
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SeriesDescription']!='') {?><tr><th>SerDesc</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SeriesDescription'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SeriesNumber']!='') {?><tr><th>Ser Num</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SeriesNumber'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['EchoTime']!=''&&$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['EchoTime']!="0.00") {?><tr><th>Echo Time</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['EchoTime'];?>
+ ms</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['RepetitionTime']!=''&&$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['RepetitionTime']!="0.00") {?><tr><th>Rep Time</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['RepetitionTime'];?>
+ ms</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SliceThickness']!=''&&$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SliceThickness']!="0.00") {?><tr><th>Slice Thick</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SliceThickness'];?>
+ mm</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Time']!=''&&$_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Time']!="0.00") {?><tr><th>Nb of vol.</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Time'];?>
+ volumes</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Comment']!='') {?><tr><th>Comment</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['Comment'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SlicewiseRejected']!='') {?><tr><th>Slicewise correlations (Nb)</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['SlicewiseRejected'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['InterlaceRejected']!='') {?><tr><th>Interlace correlations (Nb)</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['InterlaceRejected'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['IntergradientRejected']!='') {?><tr><th>Gradient-wise correlations (Nb)</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['IntergradientRejected'];?>
+</td></tr><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['TotalRejected']!='') {?><tr><th width="100px">Nb of rejected directions</th><td><?php echo $_smarty_tpl->tpl_vars['files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']]['TotalRejected'];
+} else { ?>&nbsp;</td></tr><?php }?>
+       	</table>
+    </td>
+</tr>
+<?php endfor; endif; ?>
+</table>
+<?php } else { ?>
+    <p>No data selected</p>
+<?php }?>
+<?php if ($_smarty_tpl->tpl_vars['has_permission']->value) {?></form><?php }?> 
+<?php }} ?>

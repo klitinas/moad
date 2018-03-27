@@ -1,0 +1,168 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_gfq extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "gfq";           // test_names.Test_name
+        $this->table = 'gfq';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("General Feelings Questionnaire");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<MY TITLE>");		
+
+		$notes = $this->form->addElement('text', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+
+		$a = $this->form->addElement('text', 'a', 'A. It makes me upset to see people disobey the law (0-3):', array('size' => 20, 'maxlength' => 255));
+		$this->addRule('a', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+		
+		$b = $this->form->addElement('text', 'b', 'B. I am an easygoing and laid back person (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('b', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$c = $this->form->addElement('text', 'c', 'C. It is difficult to do 2 things at the same time (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('c', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$d = $this->form->addElement('text', 'd', 'D. I like to play the lottery (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$e = $this->form->addElement('text', 'e', 'E. I act on impulse (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('e', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$f = $this->form->addElement('text', 'f', 'F. I find it important to know every detail to make decision (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('f', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$g = $this->form->addElement('text', 'g', 'G. I prefer that people leave me alone and do not bother me (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('g', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$h = $this->form->addElement('text', 'h', 'H. I think that others are playing tricks on me (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('h', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$i = $this->form->addElement('text', 'i', 'I. Sometimes those close to me are not honest with me (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$j = $this->form->addElement('text', 'j', 'J. I need a careful/detailed plan before acting (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('j', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$k = $this->form->addElement('text', 'k', 'K. I believe something bad will happen to me (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('k', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$l = $this->form->addElement('text', 'l', 'L. I tend to keep at something so long that others become irritated (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('l', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$m = $this->form->addElement('text', 'm', 'M. I am losing initiative (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('m', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$n = $this->form->addElement('text', 'n', 'N. I feel nervous with I make eye contact with others (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('n', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$o = $this->form->addElement('text', 'o', 'O. I get so focused on a thought that I cannot get off of it (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('o', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$p = $this->form->addElement('text', 'p', 'P. I need to know all details before acting (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('p', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$q = $this->form->addElement('text', 'q', 'Q. I am uneasy in new surroundings (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('q', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$r = $this->form->addElement('text', 'r', 'R. I have difficulty ending conversations even with nothing to say (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('r', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$s = $this->form->addElement('text', 's', 'S. I am overly careful and precise (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('s', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$t = $this->form->addElement('text', 't', 'T. A certain line of thought stays on my mind for days at a time (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('t', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$u = $this->form->addElement('text', 'u', 'U. I easily become irritated when interrupted while doing things (0-3)', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('u', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$v = $this->form->addElement('text', 'v', 'V. I am flexible (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('v', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$w = $this->form->addElement('text', 'w', 'W. I say things too quickly without thinking (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('w', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$x = $this->form->addElement('text', 'x', 'X. I check and re-check things carefully (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('x', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$y = $this->form->addElement('text', 'y', 'Y. Others find me less interesting (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('y', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$z = $this->form->addElement('text', 'z', 'Z. I make up my mind quickly (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('z', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+		$aa = $this->form->addElement('text', 'aa', 'AA. I am an outgoing and spontaneous person (0-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('aa', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+
+
+    }
+   
+   
+}
+?>

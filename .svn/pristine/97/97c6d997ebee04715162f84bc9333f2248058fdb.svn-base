@@ -1,0 +1,184 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-19 05:09:34
+         compiled from "/var/www/loris/modules/dicom_archive/templates/form_viewDetails.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1751453562550abc7e834f82-43496917%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c5428775e5f5218d086092125406e678c2b13537' => 
+    array (
+      0 => '/var/www/loris/modules/dicom_archive/templates/form_viewDetails.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1751453562550abc7e834f82-43496917',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'archive' => 0,
+    'archive_series' => 0,
+    'archive_files' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_550abc7e8f8c57_44088574',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_550abc7e8f8c57_44088574')) {function content_550abc7e8f8c57_44088574($_smarty_tpl) {?><table class="details-outer-table">
+	<tr><th width="11%">Acquisition ID</th><td width="89%"><a href="main.php?test_name=mri_violations&PatientName=<?php echo $_smarty_tpl->tpl_vars['archive']->value['PatientName'];?>
+&filter=true"><?php echo $_smarty_tpl->tpl_vars['archive']->value['DicomArchiveID'];?>
+</a></td></tr>
+	<tr><th>Patient ID</th><td<?php if ($_smarty_tpl->tpl_vars['archive']->value['patientIDValid']==0) {?> class="error"<?php }?>><?php echo $_smarty_tpl->tpl_vars['archive']->value['PatientID'];?>
+</td></tr>
+	<tr><th>Patient Name</th><td<?php if ($_smarty_tpl->tpl_vars['archive']->value['patientNameValid']==0) {?> class="error"<?php }?>><?php echo $_smarty_tpl->tpl_vars['archive']->value['PatientName'];?>
+</td></tr>
+	<tr><th>Patient Birthdate</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['PatientDoB'];?>
+</td></tr>
+	<tr><th>Date acquired</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['DateAcquired'];?>
+</td></tr>
+	<tr><th>Acquired at</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['CenterName'];?>
+</td></tr>
+	<tr><th>Number of Acquisitions</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['AcquisitionCount'];?>
+</td></tr>
+	<tr><th>Archived by</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['CreatingUser'];?>
+</td></tr>
+	<tr><th>Last update</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['LastUpdate'];?>
+</td></tr>
+	<tr><th>Summary type version</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['sumTypeVersion'];?>
+</td></tr>
+	<tr><th>Source location</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['SourceLocation'];?>
+</td></tr>
+	<tr><th>Archive type version</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['tarTypeVersion'];?>
+</td></tr>
+	<tr><th>Archive location</th><td><?php echo $_smarty_tpl->tpl_vars['archive']->value['ArchiveLocation'];?>
+</td></tr>
+	<tr><th>Archiving log</th><td><pre><?php echo $_smarty_tpl->tpl_vars['archive']->value['CreateInfo'];?>
+</pre></td></tr>
+	<tr><th>md5sum of Archive</th><td><pre><br><b><?php echo $_smarty_tpl->tpl_vars['archive']->value['md5sumArchive'];?>
+</pre></b></td></tr>
+	<tr><th>md5sum of Dicom unzipped</th><td><br><b><pre><?php echo $_smarty_tpl->tpl_vars['archive']->value['md5sumDicomOnly'];?>
+</pre></b></td></tr>
+    <tr><th class="valign-top">Series</th><td>
+        <table class="inner-series-table">
+        <tr>
+            <th>Series Number</th>
+            <th>Series Description</th>
+            <th>Protocol Name</th>
+            <th>Sequence Name</th>
+            <th>Echo Time</th>
+            <th>Repetition Time</th>
+            <th>Inversion Time</th>
+            <th>Slice Thickness</th>
+            <th>Phase Encoding</th>
+            <th>Number of Files</th>
+            <th>SeriesUID</th>
+        </tr>
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['record'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['record']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['name'] = 'record';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['archive_series']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total']);
+?>
+        <tr>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SeriesNumber'];?>
+</td>
+            <td><?php echo mb_convert_encoding(htmlspecialchars($_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SeriesDescription'], ENT_QUOTES, 'UTF-8', true), "HTML-ENTITIES", 'UTF-8');?>
+</td>
+            <td><?php echo (($tmp = @$_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['ProtocolName'])===null||$tmp==='' ? "Unknown" : $tmp);?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SequenceName'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['EchoTime'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['RepetitionTime'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['InversionTime'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SliceThickness'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['PhaseEncoding'];?>
+</td>
+            <td><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['NumberOfFiles'];?>
+</td>
+            <td><a href="main.php?test_name=mri_violations&PatientName=<?php echo $_smarty_tpl->tpl_vars['archive']->value['PatientName'];?>
+&SeriesUID=<?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SeriesUID'];?>
+&filter=true"><?php echo $_smarty_tpl->tpl_vars['archive_series']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SeriesUID'];?>
+</a></td>
+        </tr>
+<?php endfor; endif; ?>
+        </table>
+    </td></tr>
+    <tr><th class="valign-top">Files</th><td><a href="javascript:toggleLayer('filesBlock');">Show/Hide files</a><br><div id="filesBlock">
+    <table class="inner-files-table">    
+    <tr>
+        <th>SeriesNumber</th>
+        <th>FileNumber</th>
+        <th>EchoNumber</th>
+        <th>SeriesDescription</th>
+        <th>Md5Sum</th>
+        <th>FileName</th>
+    </tr>
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['record'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['record']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['name'] = 'record';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['archive_files']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['record']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['record']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['record']['total']);
+?>
+    <tr>
+        <td><?php echo $_smarty_tpl->tpl_vars['archive_files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SeriesNumber'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['archive_files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['FileNumber'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['archive_files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['EchoNumber'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['archive_files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['SeriesDescription'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['archive_files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['Md5Sum'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['archive_files']->value[$_smarty_tpl->getVariable('smarty')->value['section']['record']['index']]['FileName'];?>
+</td>
+    </tr>
+<?php endfor; endif; ?>
+    </table></div>
+    </td></tr>
+	<tr><th class="valign-top">Metadata</th><td><a href="javascript:toggleLayer('metadataBlock');">Show/Hide metadata</a><br><div id="metadataBlock"><pre><?php echo $_smarty_tpl->tpl_vars['archive']->value['AcquisitionMetadata'];?>
+</pre></div></td></tr>
+</table>
+<?php }} ?>

@@ -1,0 +1,26 @@
+table{@}minibest
+title{@}Minibest Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes: 
+numeric{@}sit_to_stand{@}( 1) Sit to stand :
+numeric{@}rise_to_toes{@}( 2) Rise to toes :
+numeric{@}stand_leg_left{@}(3a) Stand on one leg (left) :
+numeric{@}stand_leg_right{@}(3b) Stand on one leg (right) :
+numeric{@}comp_stepcorr_fwd{@}( 4) Compensatory stepping correction [fwd] :
+numeric{@}comp_stepcorr_back{@}( 5) Compensatory stepping correction [back] :
+numeric{@}comp_stepcorr_left{@}(6a) Compensatory stepping corr [left] :
+numeric{@}comp_stepcorr_right{@}(6b) Compensatory stepping corr [right] :
+numeric{@}stance_eyesopen_firm{@}( 7) Stance, eyes open, firm surface :
+numeric{@}stance_eyesopen_foam{@}( 8) stance, eyes open, foam surface :
+numeric{@}incline_eyesclosed{@}( 9) Incline, eyes closed :
+numeric{@}change_gaitspeed{@}(10) Change in gait speed :
+numeric{@}walk_head_horiz{@}(11) Walk with head turns-horizontal :
+numeric{@}walk_pivot{@}(12) Walk with pivot turns :
+numeric{@}step_over_obs{@}(13) Step over obstacles :
+numeric{@}timed_up_go_dualtask{@}(14) Timed up and go with dual task :
+static{@}total{@}Total :
+numeric{@}tug{@}TUG :
+numeric{@}dual_tug{@}Dual TUG :

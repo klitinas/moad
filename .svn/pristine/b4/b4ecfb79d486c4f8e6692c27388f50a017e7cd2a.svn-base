@@ -1,0 +1,203 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 05:54:36
+         compiled from "/var/www/loris/smarty/templates/feedback_mri_popup.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:17614935805525250ce16972-68172564%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '179669c894a85be0d064fc7d3c779ee0b1adbf96' => 
+    array (
+      0 => '/var/www/loris/smarty/templates/feedback_mri_popup.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '17614935805525250ce16972-68172564',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'css' => 0,
+    'error_message' => 0,
+    'saved' => 0,
+    'identifier' => 0,
+    'has_permission' => 0,
+    'comment' => 0,
+    'curr_comment' => 0,
+    'save_comment_status_field_name' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5525250cebedd0_42605413',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5525250cebedd0_42605413')) {function content_5525250cebedd0_42605413($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/xnat/Smarty/smarty3/plugins/function.html_options.php';
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['css']->value;?>
+" type="text/css" />
+<!-- shortcut icon that displays on the browser window -->
+<link rel="shortcut icon" href="images/mni_icon.ico" type="image/ico" />
+
+<title>DCC MRI Quality Control</title>
+</head>
+<body>
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['error'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['error']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['name'] = 'error';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['error_message']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['error']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['error']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['error']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['error']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['error']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['error']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['error']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['error']['total']);
+?>
+<?php echo $_smarty_tpl->tpl_vars['error_message']->value[$_smarty_tpl->getVariable('smarty')->value['section']['error']['index']];?>
+<br />
+<?php endfor; endif; ?>
+
+<p><a href="javascript:window.close()">Click here to close this window</a></p>
+
+<div>
+
+<?php if ($_smarty_tpl->tpl_vars['saved']->value) {?>
+<p>Comments saved.</p>
+<?php }?>
+
+<table cellpadding="2" class="list">
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['data'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['data']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['name'] = 'data';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['identifier']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['data']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['data']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['data']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['data']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['data']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['data']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['data']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['data']['total']);
+?>
+    <tr>
+        <th style="text-align:left"><?php echo $_smarty_tpl->tpl_vars['identifier']->value[$_smarty_tpl->getVariable('smarty')->value['section']['data']['index']]['name'];?>
+:</th>
+        <td style="text-align:left"><?php echo $_smarty_tpl->tpl_vars['identifier']->value[$_smarty_tpl->getVariable('smarty')->value['section']['data']['index']]['value'];?>
+</td>
+    </tr>
+<?php endfor; endif; ?>
+</table>
+
+<?php if ($_smarty_tpl->tpl_vars['has_permission']->value) {?>
+<form method="post">
+<input type="submit" name="fire_away" value="Save">
+<?php }?>
+
+<?php  $_smarty_tpl->tpl_vars['curr_comment'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['curr_comment']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['comment']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['curr_comment']->key => $_smarty_tpl->tpl_vars['curr_comment']->value) {
+$_smarty_tpl->tpl_vars['curr_comment']->_loop = true;
+?>
+<h3>
+<?php if ($_smarty_tpl->tpl_vars['curr_comment']->value['select_name']) {?>
+
+<?php $_smarty_tpl->tpl_vars["save_comment_status_field_name"] = new Smarty_variable((("saveCommentStatusField[").($_smarty_tpl->tpl_vars['curr_comment']->value['select_name'])).("]"), null, 0);?>
+<?php echo smarty_function_html_options(array('name'=>$_smarty_tpl->tpl_vars['save_comment_status_field_name']->value,'values'=>$_smarty_tpl->tpl_vars['curr_comment']->value['select_value_array'],'selected'=>$_smarty_tpl->tpl_vars['curr_comment']->value['selected'],'output'=>$_smarty_tpl->tpl_vars['curr_comment']->value['select_value_array']),$_smarty_tpl);?>
+
+<?php } else { ?>
+<?php echo $_smarty_tpl->tpl_vars['curr_comment']->value['selected'];?>
+
+<?php }?>
+<?php echo $_smarty_tpl->tpl_vars['curr_comment']->value['name'];?>
+
+</h3>
+
+<?php if (!$_smarty_tpl->tpl_vars['has_permission']->value) {?>
+<ul>
+<?php }?>
+
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['name'] = 'predefined';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['curr_comment']->value['predefined']) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['predefined']['total']);
+?>
+<?php if ($_smarty_tpl->tpl_vars['has_permission']->value) {?>
+<input type="checkbox" name="savecomments[predefined][]" value="<?php echo $_smarty_tpl->tpl_vars['curr_comment']->value['predefined'][$_smarty_tpl->getVariable('smarty')->value['section']['predefined']['index']]['id'];?>
+" <?php if ($_smarty_tpl->tpl_vars['curr_comment']->value['predefined'][$_smarty_tpl->getVariable('smarty')->value['section']['predefined']['index']]['checked']) {?>checked="checked"<?php }?>><?php echo $_smarty_tpl->tpl_vars['curr_comment']->value['predefined'][$_smarty_tpl->getVariable('smarty')->value['section']['predefined']['index']]['predefined_text'];?>
+<br />
+<?php } elseif ($_smarty_tpl->tpl_vars['curr_comment']->value['predefined'][$_smarty_tpl->getVariable('smarty')->value['section']['predefined']['index']]['checked']) {?>
+<li><?php echo $_smarty_tpl->tpl_vars['curr_comment']->value['predefined'][$_smarty_tpl->getVariable('smarty')->value['section']['predefined']['index']]['predefined_text'];?>
+</li>
+<?php }?>
+<?php endfor; endif; ?>
+
+<?php if (!$_smarty_tpl->tpl_vars['has_permission']->value) {?>
+</ul>
+<?php }?>
+
+<?php if ($_smarty_tpl->tpl_vars['has_permission']->value) {?>
+<textarea rows='3' cols='60' name='savecomments[text][<?php echo $_smarty_tpl->tpl_vars['curr_comment']->value['type'];?>
+]'>
+<?php }?>
+<?php echo $_smarty_tpl->tpl_vars['curr_comment']->value['saved_text'];?>
+
+<?php if ($_smarty_tpl->tpl_vars['has_permission']->value) {?>
+</textarea><br />
+<?php }?>
+
+<?php } ?>
+
+<?php if ($_smarty_tpl->tpl_vars['has_permission']->value) {?>
+<input type="submit" name="fire_away" value="Save">
+</form>
+<?php }?>
+
+</div>
+
+</body>
+</html>
+<?php }} ?>

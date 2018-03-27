@@ -1,0 +1,351 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 10:15:15
+         compiled from "/var/www/loris/smarty/templates/instrument_html.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:196376749255031b23e9b5d2-39317042%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4f42e8e7e0ec6e06850531d98167e4eb4c77cda0' => 
+    array (
+      0 => '/var/www/loris/smarty/templates/instrument_html.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '196376749255031b23e9b5d2-39317042',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'form' => 0,
+    'element' => 0,
+    'inTable' => 0,
+    'gitem' => 0,
+    'section' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031b240db8a2_72731103',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031b240db8a2_72731103')) {function content_55031b240db8a2_72731103($_smarty_tpl) {?><?php echo '<script'; ?>
+ type="text/javascript" src="js/instrument_form_control.js"><?php echo '</script'; ?>
+>
+<style type="text/css">
+	.table-instrument>tbody>tr>th{
+		color: black;
+	}
+	.table-instrument>tbody>tr>th, .table-instrument>tbody>tr>td  { 
+	     border-top: none; 
+	 }
+</style>
+<form <?php echo $_smarty_tpl->tpl_vars['form']->value['attributes'];?>
+>
+	<?php echo $_smarty_tpl->tpl_vars['form']->value['hidden'];?>
+
+	<?php echo $_smarty_tpl->tpl_vars['form']->value['errors']['mainError'];?>
+
+	<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("FALSE", null, 0);?>
+	<?php  $_smarty_tpl->tpl_vars['element'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['element']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['element']->key => $_smarty_tpl->tpl_vars['element']->value) {
+$_smarty_tpl->tpl_vars['element']->_loop = true;
+?>
+		<?php if ($_smarty_tpl->tpl_vars['element']->value['name']!='mainError') {?>
+			<?php if ($_smarty_tpl->tpl_vars['element']->value['name']=='lorisSubHeader') {?>
+				<div class="col-xs-12">
+					<?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+
+				</div>
+				<br><br><br><br>
+			<?php } elseif ($_smarty_tpl->tpl_vars['element']->value['type']=="group") {?>
+				<?php if (substr_count($_smarty_tpl->tpl_vars['element']->value['elements'][1]['name'],'_status')) {?>
+					<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="TRUE") {?>
+						<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("FALSE", null, 0);?>
+						</table>
+					<?php }?>
+					<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+			    	<div class="row form-group form-inline form-inline has-error">
+			        <?php } else { ?>
+			        <div class="row form-group form-inline form-inline">
+			        <?php }?>
+						<label class="lab col-sm-4 col-xs-12">
+							<?php if ($_smarty_tpl->tpl_vars['element']->value['required']) {?>
+								<span style="color: #ff0000">*</span>
+							<?php }?>
+							<?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+
+						</label>
+						<div class="col-sm-8">
+							<div class="col-xs-12 element">
+								<?php  $_smarty_tpl->tpl_vars['gitem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['gitem']->_loop = false;
+ $_smarty_tpl->tpl_vars['gkey'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['element']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['gitem']->key => $_smarty_tpl->tpl_vars['gitem']->value) {
+$_smarty_tpl->tpl_vars['gitem']->_loop = true;
+ $_smarty_tpl->tpl_vars['gkey']->value = $_smarty_tpl->tpl_vars['gitem']->key;
+?>
+									<?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+
+								<?php } ?>
+							</div>
+							<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+								<div class="col-xs-12">
+				                    <font class="form-error"><?php echo $_smarty_tpl->tpl_vars['element']->value['error'];?>
+</font>
+				                </div>
+							<?php }?>
+						</div>
+					</div>
+				<?php } else { ?>
+					<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="FALSE") {?>
+						<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("TRUE", null, 0);?>
+						<table class="table table-instrument">
+							<tr>
+								<th colspan="2"><?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+</th>
+								<?php  $_smarty_tpl->tpl_vars['gitem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['gitem']->_loop = false;
+ $_smarty_tpl->tpl_vars['gkey'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['element']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['gitem']->key => $_smarty_tpl->tpl_vars['gitem']->value) {
+$_smarty_tpl->tpl_vars['gitem']->_loop = true;
+ $_smarty_tpl->tpl_vars['gkey']->value = $_smarty_tpl->tpl_vars['gitem']->key;
+?>
+									<th><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</th>
+								<?php } ?>
+							</tr>
+					<?php } else { ?>
+						<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+				    	<tr class="has-error">
+				        <?php } else { ?>
+				        <tr>
+				        <?php }?>
+							<td colspan="2"><?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+</td>
+							<?php  $_smarty_tpl->tpl_vars['gitem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['gitem']->_loop = false;
+ $_smarty_tpl->tpl_vars['gkey'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['element']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['gitem']->key => $_smarty_tpl->tpl_vars['gitem']->value) {
+$_smarty_tpl->tpl_vars['gitem']->_loop = true;
+ $_smarty_tpl->tpl_vars['gkey']->value = $_smarty_tpl->tpl_vars['gitem']->key;
+?>
+								<?php if ($_smarty_tpl->tpl_vars['gitem']->value['type']=='date') {?>
+									<td class="element form-inline"><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</td>
+								<?php } elseif ($_smarty_tpl->tpl_vars['gitem']->value['type']=='checkbox') {?>
+									<td class="form-inline"><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</td>
+								<?php } else { ?>
+									<td class="element"><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</td>
+								<?php }?>
+							<?php } ?>
+						</tr>
+						<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+							<tr>
+								<td colspan="2"></td>
+			                    <td colspan="<?php echo count($_smarty_tpl->tpl_vars['element']->value['elements']);?>
+" class="has-error">
+			                    	<font class="form-error"><?php echo $_smarty_tpl->tpl_vars['element']->value['error'];?>
+</font>
+			                    </td>
+			                </tr>
+						<?php }?>
+					<?php }?>
+				<?php }?>
+			<?php } else { ?>
+				<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="TRUE") {?>
+					<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("FALSE", null, 0);?>
+					</table>
+				<?php }?>
+				<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+		    	<div class="row form-group form-inline form-inline has-error">
+		        <?php } else { ?>
+		        <div class="row form-group form-inline form-inline">
+		        <?php }?>
+		        	<label class="lab col-sm-4 col-xs-12">
+						<?php if ($_smarty_tpl->tpl_vars['element']->value['required']) {?>
+							<span style="color: #ff0000">*</span>
+						<?php }?>
+						<?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+
+					</label>
+					<div class="col-sm-8">
+						<div class="col-xs-12 element">
+							<?php echo $_smarty_tpl->tpl_vars['element']->value['html'];?>
+
+						</div>
+						<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+							<div class="col-xs-12">
+			                    <font class="form-error"><?php echo $_smarty_tpl->tpl_vars['element']->value['error'];?>
+</font>
+			                </div>
+						<?php }?>
+					</div>
+				</div>
+			<?php }?>
+		<?php }?>
+	<?php } ?>
+	<?php  $_smarty_tpl->tpl_vars['section'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['section']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['sections']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['section']->key => $_smarty_tpl->tpl_vars['section']->value) {
+$_smarty_tpl->tpl_vars['section']->_loop = true;
+?>
+		<div class="col-sm-12">
+			<div class="col-sm-8">
+				<h3 align="center"><?php echo $_smarty_tpl->tpl_vars['section']->value['header'];?>
+</h3>
+				<br>
+			</div>
+		</div>
+		<?php  $_smarty_tpl->tpl_vars['element'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['element']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['section']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['element']->key => $_smarty_tpl->tpl_vars['element']->value) {
+$_smarty_tpl->tpl_vars['element']->_loop = true;
+?>
+			<?php if ($_smarty_tpl->tpl_vars['element']->value['name']!='mainError') {?>
+				<?php if ($_smarty_tpl->tpl_vars['element']->value['name']=='lorisSubHeader') {?>
+					<div class="col-xs-12">
+						<?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+
+					</div>
+					<br><br><br><br>
+				<?php } elseif ($_smarty_tpl->tpl_vars['element']->value['type']=="group") {?>
+					<?php if (substr_count($_smarty_tpl->tpl_vars['element']->value['elements'][1]['name'],'_status')) {?>
+						<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="TRUE") {?>
+							<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("FALSE", null, 0);?>
+							</table>
+						<?php }?>
+						<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+				    	<div class="row form-group form-inline form-inline has-error">
+				        <?php } else { ?>
+				        <div class="row form-group form-inline form-inline">
+				        <?php }?>
+							<label class="lab col-sm-4 col-xs-12">
+								<?php if ($_smarty_tpl->tpl_vars['element']->value['required']) {?>
+									<span style="color: #ff0000">*</span>
+								<?php }?>
+								<?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+
+							</label>
+							<div class="col-sm-8">
+								<div class="col-xs-12 element">
+									<?php  $_smarty_tpl->tpl_vars['gitem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['gitem']->_loop = false;
+ $_smarty_tpl->tpl_vars['gkey'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['element']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['gitem']->key => $_smarty_tpl->tpl_vars['gitem']->value) {
+$_smarty_tpl->tpl_vars['gitem']->_loop = true;
+ $_smarty_tpl->tpl_vars['gkey']->value = $_smarty_tpl->tpl_vars['gitem']->key;
+?>
+										<?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+
+									<?php } ?>
+								</div>
+								<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+									<div class="col-xs-12">
+					                    <font class="form-error"><?php echo $_smarty_tpl->tpl_vars['element']->value['error'];?>
+</font>
+					                </div>
+								<?php }?>
+							</div>
+						</div>
+					<?php } else { ?>
+						<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="FALSE") {?>
+							<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("TRUE", null, 0);?>
+							<table class="table table-instrument">
+								<tr>
+									<th colspan="2"><?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+</th>
+									<?php  $_smarty_tpl->tpl_vars['gitem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['gitem']->_loop = false;
+ $_smarty_tpl->tpl_vars['gkey'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['element']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['gitem']->key => $_smarty_tpl->tpl_vars['gitem']->value) {
+$_smarty_tpl->tpl_vars['gitem']->_loop = true;
+ $_smarty_tpl->tpl_vars['gkey']->value = $_smarty_tpl->tpl_vars['gitem']->key;
+?>
+										<th><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</th>
+									<?php } ?>
+								</tr>
+						<?php } else { ?>
+							<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+					    	<tr class="has-error">
+					        <?php } else { ?>
+					        <tr>
+					        <?php }?>
+								<td colspan="2"><?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+</td>
+								<?php  $_smarty_tpl->tpl_vars['gitem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['gitem']->_loop = false;
+ $_smarty_tpl->tpl_vars['gkey'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['element']->value['elements']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['gitem']->key => $_smarty_tpl->tpl_vars['gitem']->value) {
+$_smarty_tpl->tpl_vars['gitem']->_loop = true;
+ $_smarty_tpl->tpl_vars['gkey']->value = $_smarty_tpl->tpl_vars['gitem']->key;
+?>
+									<?php if ($_smarty_tpl->tpl_vars['gitem']->value['type']=='date') {?>
+										<td class="element form-inline"><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</td>
+									<?php } elseif ($_smarty_tpl->tpl_vars['gitem']->value['type']=='checkbox') {?>
+										<td class="form-inline"><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</td>
+									<?php } else { ?>
+										<td class="element"><?php echo $_smarty_tpl->tpl_vars['gitem']->value['html'];?>
+</td>
+									<?php }?>
+								<?php } ?>
+							</tr>
+							<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+								<tr>
+									<td colspan="2"></td>
+				                    <td colspan="<?php echo count($_smarty_tpl->tpl_vars['element']->value['elements']);?>
+" class="has-error">
+				                    	<font class="form-error"><?php echo $_smarty_tpl->tpl_vars['element']->value['error'];?>
+</font>
+				                    </td>
+				                </tr>
+							<?php }?>
+						<?php }?>
+					<?php }?>
+				<?php } else { ?>
+					<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="TRUE") {?>
+						<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("FALSE", null, 0);?>
+						</table>
+					<?php }?>
+					<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+			    	<div class="row form-group form-inline has-error">
+			        <?php } else { ?>
+			        <div class="row form-group form-inline">
+			        <?php }?>
+			        	<label class="lab col-sm-4 col-xs-12">
+							<?php if ($_smarty_tpl->tpl_vars['element']->value['required']) {?>
+								<span style="color: #ff0000">*</span>
+							<?php }?>
+							<?php echo $_smarty_tpl->tpl_vars['element']->value['label'];?>
+  
+						</label>
+						<div class="col-sm-8">
+							<div class="col-xs-12 element">
+								<?php echo $_smarty_tpl->tpl_vars['element']->value['html'];?>
+
+							</div>
+							<?php if ($_smarty_tpl->tpl_vars['element']->value['error']) {?>
+								<div class="col-xs-12">
+				                    <font class="form-error"><?php echo $_smarty_tpl->tpl_vars['element']->value['error'];?>
+</font>
+				                </div>
+							<?php }?>
+						</div>
+					</div>
+				<?php }?>
+			<?php }?>
+		<?php } ?>
+		<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="TRUE") {?>
+			<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("FALSE", null, 0);?>
+			</table>
+		<?php }?>
+	<?php } ?>
+	<?php if ($_smarty_tpl->tpl_vars['inTable']->value=="TRUE") {?>
+		<?php $_smarty_tpl->tpl_vars["inTable"] = new Smarty_variable("FALSE", null, 0);?>
+		</table>
+	<?php }?>
+</form><?php }} ?>

@@ -1,0 +1,110 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_bonedens extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function additem($name,$text) {
+		$element = $this->form->addElement('text', $name, $text);
+		$this->addRule($name, 'Enter a number', 'numeric', 'client');	
+		return $element;
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "bonedens";           // test_names.Test_name
+        $this->table = 'bonedens';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Bone Densitometer");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+
+		$this->addHeader("<MY TITLE>");		
+		$hdr = $this->form->addElement('static','hdr','Enter numeric values for all fields below:');
+		$this->addHeader("<MY TITLE>");		
+
+		$lh2 = $this->additem('lh2','Lean/Height2:');
+		$lh2yn = $this->additem('lh2yn','L/H2 YN:');
+		$lh2am = $this->additem('lh2am','L/H2 AM:');
+		$app_lh2 = $this->additem('app_lh2','Appen L/H2:');
+		$app_lh2yn = $this->additem('app_lh2yn','Appen L/H2 YN:');
+		$app_lh2am = $this->additem('app_lh2am','Appen L/H2 AM:');
+		$bmd = $this->additem('bmd','BMD T Spine:');
+		$lspine = $this->additem('lspine','L Spine:');
+		$pelvis = $this->additem('pelvis','Pelvis:');
+		$lleg = $this->additem('lleg','L Leg:');
+		$rleg = $this->additem('rleg','R Leg:');
+		$total = $this->additem('total','Total:');
+
+
+    }
+   
+   
+}
+?>

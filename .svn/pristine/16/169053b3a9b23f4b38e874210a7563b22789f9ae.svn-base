@@ -1,0 +1,103 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-16 04:46:55
+         compiled from "/var/www/loris/modules/statistics/templates/menu_statistics_site.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:6916928725506c2afa33683-18202765%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '668dc777ca8a8ed27128b50cd527d12c9ef4d60e' => 
+    array (
+      0 => '/var/www/loris/modules/statistics/templates/menu_statistics_site.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '6916928725506c2afa33683-18202765',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'SiteName' => 0,
+    'NumVisitLabels' => 0,
+    'AllVisits' => 0,
+    'visit' => 0,
+    'data' => 0,
+    'Candidate' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5506c2afaabc40_88019426',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5506c2afaabc40_88019426')) {function content_5506c2afaabc40_88019426($_smarty_tpl) {?><h2><?php echo $_smarty_tpl->tpl_vars['SiteName']->value;?>
+ Completion Statistics</h2>
+<table class="fancytable" width="100%">
+   <tr>
+      <th>Instrument</th>
+      <th>Completion Count</th>
+      <th colspan="<?php echo $_smarty_tpl->tpl_vars['NumVisitLabels']->value;?>
+" width="80%">Incomplete Candidates</th>
+   </tr>
+   <tr>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <?php  $_smarty_tpl->tpl_vars['visit'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['visit']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['AllVisits']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['visit']->key => $_smarty_tpl->tpl_vars['visit']->value) {
+$_smarty_tpl->tpl_vars['visit']->_loop = true;
+?>
+      <th width="20%"><?php echo $_smarty_tpl->tpl_vars['visit']->value;?>
+</th>
+      <?php } ?>
+   </tr>
+   <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['item'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['item']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['name'] = 'item';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['data']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total']);
+?>
+   <tr bgcolor="#FFFFFF">
+      <td><?php echo $_smarty_tpl->tpl_vars['data']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['name'];?>
+</td>
+      <td><?php echo $_smarty_tpl->tpl_vars['data']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['count'];?>
+</td>
+      <?php  $_smarty_tpl->tpl_vars['visit'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['visit']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['AllVisits']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['visit']->key => $_smarty_tpl->tpl_vars['visit']->value) {
+$_smarty_tpl->tpl_vars['visit']->_loop = true;
+?>
+      <td><?php  $_smarty_tpl->tpl_vars['Candidate'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['Candidate']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['incompletes'][$_smarty_tpl->tpl_vars['visit']->value]; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['Candidate']->key => $_smarty_tpl->tpl_vars['Candidate']->value) {
+$_smarty_tpl->tpl_vars['Candidate']->_loop = true;
+?>
+            <a href="main.php?test_name=<?php echo $_smarty_tpl->tpl_vars['Candidate']->value['test_url'];?>
+&candID=<?php echo $_smarty_tpl->tpl_vars['Candidate']->value['CandID'];?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['Candidate']->value['SessionID'];?>
+&commentID=<?php echo $_smarty_tpl->tpl_vars['Candidate']->value['CommentID'];?>
+"><?php echo $_smarty_tpl->tpl_vars['Candidate']->value['PSCID'];?>
+</a>
+          <?php } ?>
+      </td>
+      <?php } ?>
+   </tr>
+   <?php endfor; endif; ?>
+</table>
+<?php }} ?>

@@ -1,0 +1,343 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 10:12:17
+         compiled from "/var/www/loris/modules/instrument_list/templates/instrument_list_controlpanel.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:46784629755031a72000430-79711252%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'd007ec3d5699f0b88124419e6284cd8c14b8b704' => 
+    array (
+      0 => '/var/www/loris/modules/instrument_list/templates/instrument_list_controlpanel.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '46784629755031a72000430-79711252',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'access' => 0,
+    'candID' => 0,
+    'sessionID' => 0,
+    'next_stage' => 0,
+    'current_stage' => 0,
+    'status' => 0,
+    'send_to_dcc' => 0,
+    'bvl_qc_type_none' => 0,
+    'bvl_qc_type_visual' => 0,
+    'bvl_qc_type_hardcopy' => 0,
+    'bvl_qc_status_none' => 0,
+    'bvl_qc_status_complete' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031a7218bfe9_92070977',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031a7218bfe9_92070977')) {function content_55031a7218bfe9_92070977($_smarty_tpl) {?>	<h3 class="controlPanelSection">Actions</h3>
+	<ul class="controlPanel">
+	    	<li>
+		<?php if ($_smarty_tpl->tpl_vars['access']->value['next_stage']) {?>
+                        <img src="images/open.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=next_stage&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+">Start <?php echo $_smarty_tpl->tpl_vars['next_stage']->value;?>
+ Stage</a>
+<?php } else { ?>
+                        <img src="images/locked.gif" alt="" border="0" width="12" height="12" />&nbsp;Start Next Stage
+<?php }?>
+	    	</li>
+
+	</ul>
+
+	<h3 class="controlPanelSection">Stage: <?php echo $_smarty_tpl->tpl_vars['current_stage']->value;?>
+</h3>
+	<ul class="controlPanel">
+		<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['item'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['item']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['name'] = 'item';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['status']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total']);
+?>
+		<li>
+			<?php if ($_smarty_tpl->tpl_vars['access']->value['status']&&$_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['showlink']) {?>
+                        	<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setStageUpdate=<?php echo $_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['label'];?>
+"><?php echo $_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['label'];?>
+</a>
+			<?php } else { ?>
+                        	<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<?php echo $_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['label'];?>
+
+			<?php }?>
+		</li>
+		<?php endfor; endif; ?>
+
+	</ul>
+
+	<h3 class="controlPanelSection">Send Time Point</h3>
+	<ul class="controlPanel">
+		<li>
+			<?php if ($_smarty_tpl->tpl_vars['access']->value['send_to_dcc']===true) {?>
+    				<?php if ($_smarty_tpl->tpl_vars['send_to_dcc']->value['set_submitted']=='Check') {?>
+                        		<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=timepoint_flag&subtest=check_timepoint_flag&identifier=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['reverse'])===null||$tmp==='' ? "Send To DCC" : $tmp);?>
+</a><br>
+	    			<?php } else { ?>
+                        	<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setSubmitted=<?php echo $_smarty_tpl->tpl_vars['send_to_dcc']->value['set_submitted'];?>
+"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['reverse'])===null||$tmp==='' ? "Send To DCC" : $tmp);?>
+</a>
+    				<?php }?>
+			<?php } else { ?>
+                        <span title='<?php echo $_smarty_tpl->tpl_vars['access']->value['send_to_dcc_status_message'];?>
+'><img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['icon'])===null||$tmp==='' ? 'locked' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;Send To DCC</span>
+			<?php }?>
+		</li>		
+	</ul>
+
+
+	<h3 class="controlPanelSection">BVL QC Type</h3>
+	<ul class="controlPanel">
+		<li>
+			<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_type_none']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+			<?php if ($_smarty_tpl->tpl_vars['bvl_qc_type_none']->value['showlink']) {?>
+                        	<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCType=">Not Done</a>
+			<?php } else { ?>
+                                                Not Done
+			<?php }?>
+		</li>
+		
+		<li>
+		          <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_type_visual']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+			<?php if ($_smarty_tpl->tpl_vars['bvl_qc_type_visual']->value['showlink']) {?>
+                        	<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCType=Visual">Visual</a>
+			<?php } else { ?>
+                                                Visual
+			<?php }?>
+		</li>
+		<li>
+                	<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_type_hardcopy']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+			<?php if ($_smarty_tpl->tpl_vars['bvl_qc_type_hardcopy']->value['showlink']) {?>
+                        	<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCType=Hardcopy">Hardcopy</a>
+			<?php } else { ?>
+                                                Hardcopy
+			<?php }?>
+		</li>
+	</ul>
+
+	<h3 class="controlPanelSection">BVL QC Status</h3>
+	<ul class="controlPanel">
+		<li>
+			<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_status_none']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+			<?php if ($_smarty_tpl->tpl_vars['bvl_qc_status_none']->value['showlink']) {?>
+                        	<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCStatus=">Not Done</a>
+			<?php } else { ?>
+                                                Not Done
+			<?php }?>
+		</li>
+		
+		<li>
+                	<img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_status_complete']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+			<?php if ($_smarty_tpl->tpl_vars['bvl_qc_status_complete']->value['showlink']) {?>
+                        	<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCStatus=Complete">Complete</a>
+			<?php } else { ?>
+                                                Complete
+			<?php }?>
+		</li>
+	</ul>
+<!--table class="std" style="width:150px">
+                <th>Actions</th>
+                <tr>
+                    <td class="controlPanelItem">
+<?php if ($_smarty_tpl->tpl_vars['access']->value['next_stage']) {?>
+                        <img src="images/open.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=next_stage&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+">Start <?php echo $_smarty_tpl->tpl_vars['next_stage']->value;?>
+ Stage</a>
+<?php } else { ?>
+                        <img src="images/locked.gif" alt="" border="0" width="12" height="12" />&nbsp;Start Next Stage
+<?php }?>
+                    </td>
+                </tr>
+                <tr><td class="controlPanelSection">Stage: <?php echo $_smarty_tpl->tpl_vars['current_stage']->value;?>
+</td></tr>
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['item'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['item']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['name'] = 'item';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['status']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total']);
+?>
+                <tr>
+                    <td class="controlPanelItem">
+<?php if ($_smarty_tpl->tpl_vars['access']->value['status']&&$_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['showlink']) {?>
+                        <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setStageUpdate=<?php echo $_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['label'];?>
+"><?php echo $_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['label'];?>
+</a>
+<?php } else { ?>
+                        <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<?php echo $_smarty_tpl->tpl_vars['status']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['label'];?>
+
+<?php }?>
+                    </td>
+                </tr>
+<?php endfor; endif; ?>
+                <tr><td class="controlPanelSection">Send Time Point</td></tr>
+                <tr>
+                    <td class="controlPanelItem">
+<?php if ($_smarty_tpl->tpl_vars['access']->value['send_to_dcc']===true) {?>
+    <?php if ($_smarty_tpl->tpl_vars['send_to_dcc']->value['set_submitted']=='Check') {?>
+                        <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=timepoint_flag&subtest=check_timepoint_flag&identifier=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['reverse'])===null||$tmp==='' ? "Send To DCC" : $tmp);?>
+</a><br>
+    <?php } else { ?>
+                        <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;<a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setSubmitted=<?php echo $_smarty_tpl->tpl_vars['send_to_dcc']->value['set_submitted'];?>
+"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['reverse'])===null||$tmp==='' ? "Send To DCC" : $tmp);?>
+</a>
+    <?php }?>
+<?php } else { ?>
+                        <span title='<?php echo $_smarty_tpl->tpl_vars['access']->value['send_to_dcc_status_message'];?>
+'><img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['send_to_dcc']->value['icon'])===null||$tmp==='' ? 'locked' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;Send To DCC</span>
+<?php }?>
+                    </td>
+                </tr>
+                <tr><td class="controlPanelSection">BVL QC Type</td></tr>
+                
+                <tr>
+                    <td class="controlPanelItem">
+                    <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_type_none']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+<?php if ($_smarty_tpl->tpl_vars['bvl_qc_type_none']->value['showlink']) {?>
+                        <a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCType=">Not Done</a>
+<?php } else { ?>
+						Not Done
+<?php }?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="controlPanelItem">
+                    <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_type_visual']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+<?php if ($_smarty_tpl->tpl_vars['bvl_qc_type_visual']->value['showlink']) {?>
+                        <a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCType=Visual">Visual</a>
+<?php } else { ?>
+						Visual
+<?php }?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="controlPanelItem">
+                    <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_type_hardcopy']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+<?php if ($_smarty_tpl->tpl_vars['bvl_qc_type_hardcopy']->value['showlink']) {?>
+                        <a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCType=Hardcopy">Hardcopy</a>
+<?php } else { ?>
+						Hardcopy
+<?php }?>
+                    </td>
+                </tr>
+                <tr><td class="controlPanelSection">BVL QC Status</td></tr>
+                
+                <tr>
+                    <td class="controlPanelItem">
+                    <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_status_none']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+<?php if ($_smarty_tpl->tpl_vars['bvl_qc_status_none']->value['showlink']) {?>
+                        <a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCStatus=">Not Done</a>
+<?php } else { ?>
+						Not Done
+<?php }?>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="controlPanelItem">
+                    <img src="images/<?php echo (($tmp = @$_smarty_tpl->tpl_vars['bvl_qc_status_complete']->value['icon'])===null||$tmp==='' ? 'default' : $tmp);?>
+.gif" alt="" border="0" width="12" height="12" />&nbsp;
+<?php if ($_smarty_tpl->tpl_vars['bvl_qc_status_complete']->value['showlink']) {?>
+                        <a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&setBVLQCStatus=Complete">Complete</a>
+<?php } else { ?>
+						Complete
+<?php }?>
+                    </td>
+                </tr>
+</table-->
+
+
+
+<?php }} ?>

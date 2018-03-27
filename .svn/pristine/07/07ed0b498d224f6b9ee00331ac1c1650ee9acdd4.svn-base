@@ -1,0 +1,46 @@
+[2015-04-07 04:44:10] Setting up variables 
+
+
+[2015-04-07 04:44:31] Processing files 
+
+
+[2015-04-07 04:44:34] The CandID: 999999 Doesn't exist
+
+[2015-04-07 04:44:34] The PSCID: csm14aff10069 Doesn't exist
+
+[2015-04-07 04:44:34] Error: the process completed with errors 
+
+
+[2015-04-07 04:47:16] Processing files 
+
+
+[2015-04-07 04:49:00] Processing files 
+
+
+[2015-04-07 04:50:10] Processing files 
+
+
+[2015-04-07 04:50:13] Setting up variables 
+
+
+[2015-04-07 04:50:13] file-name : spgr_upload.tar, and sourcelocation/data/incoming/spgr_upload.tar.gz
+
+[2015-04-07 04:50:13]  visitlabel V1 pscid: csm14aff10069and candid: 999999
+
+[2015-04-07 04:50:13] The File /data/incoming/spgr_upload.tar.gz is nowuntarred into /data/incoming/ 
+
+
+[2015-04-07 04:50:13] The Environment Variables are now set 
+
+
+[2015-04-07 04:50:13] Running DICOM 
+
+
+[2015-04-07 04:50:13] cmd : perl /data/loris/data/dicom-archive/dicomTar.pl /data/incoming//spgr_upload /data/loris/data/tarchive -clobber -database -profile prod 
+
+
+[2015-04-07 04:50:13] 
+
+[2015-04-07 04:50:13] The DICOM file is now tarred into /data/loris/data/tarchive/DCM_2014-11-23_uploadtest.tar 
+
+

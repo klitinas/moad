@@ -1,0 +1,361 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_updrs extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "updrs";           // test_names.Test_name
+        $this->table = 'updrs';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("MDS-UPDRS");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		//$this->addHeader("<MY TITLE>");		
+
+		$this->addHeader("<MY TITLE>");		
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 150, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+		$this->addHeader("<MY TITLE>");
+
+		$this->addHeader("Part I: Non-Motor Aspects of Experiences of Daily Living");
+		$this->form->addElement('static','hdr','Part 1A: Complex Behaviors (Enter 0-4 for all)');
+
+		$cog = $this->form->addElement('text', 'cog', '1.1 Cognitive Impairment:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cog', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$hal_psy = $this->form->addElement('text', 'hal_psy', '1.2 Hallucinations and Psychosis:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('hal_psy', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+	
+		$dep = $this->form->addElement('text', 'dep', '1.3 Depressed Mood:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dep', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$anxious = $this->form->addElement('text', 'anxious', '1.4 Anxious Mood:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('anxious', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$apathy = $this->form->addElement('text', 'apathy', '1.5 Apathy:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('apathy', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$dds = $this->form->addElement('text', 'dds', '1.6 Features of Dopamine Dysregulation Syndrome:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dep', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->addHeader("Part I-II: Patient Questionnaire");
+		$this->form->addElement('static','hdr','ENTER VALUES 0-4 FOR ALL FIELDS');
+		$this->form->addElement('static','hdr','');
+		$this->form->addElement('static','hdr','Part 1: Non-motor Aspects of Experiences of Daily Living');
+
+		$sleep = $this->form->addElement('text', 'sleep', '1.7 Sleep Problems:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sleep', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$day_sleep = $this->form->addElement('text', 'day_sleep', '1.8 Daytime Sleepiness:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('day_sleep', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$pain = $this->form->addElement('text', 'pain', '1.9 Pain and other Sensations:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('pain', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$urine = $this->form->addElement('text', 'urine', '1.10 Urinary Problems:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('urine', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$constip = $this->form->addElement('text', 'constip', '1.11 Constipation Problems:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('constip', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$light_head = $this->form->addElement('text', 'light_head', '1.12 Light Headedness on Standing:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('light_head', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$fatigue = $this->form->addElement('text', 'fatigue', '1.13 Fatigue:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('fatigue', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','');
+		$this->form->addElement('static','hdr','Part II: Motor Aspects of Experiences of Daily Living');
+
+		$spch = $this->form->addElement('text', 'spch', '2.1 Speech:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('spch', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$saliva = $this->form->addElement('text', 'saliva', '2.2 Saliva and Drooling:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('saliva', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$swallow = $this->form->addElement('text', 'swallow', '2.3 Speech:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('swallow', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$eating = $this->form->addElement('text', 'eating', '2.4 Eating Tasks:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('eating', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$dress = $this->form->addElement('text', 'dress', '2.5 Dressing:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dress', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$hygiene = $this->form->addElement('text', 'hygiene', '2.6 Hygiene:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('hygiene', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$handwr = $this->form->addElement('text', 'handwr', '2.7 Handwriting:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('handwr', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$hobby = $this->form->addElement('text', 'hobby', '2.8 Doing Hobbies/other Activities:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('hobby', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$turn = $this->form->addElement('text', 'turn', '2.9 Turning in Bed:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('turn', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$trem = $this->form->addElement('text', 'trem', '2.10 Tremor:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('trem', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$out_bed = $this->form->addElement('text', 'out_bed', '2.11 Getting out of a Bed/Car/Deep Chair:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('out_bed', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$walk = $this->form->addElement('text', 'walk', '2.12 Walking and Balance:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('walk', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$freeze = $this->form->addElement('text', 'freeze', '2.13 Freezing:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('freeze', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+
+		$this->addHeader("Part III: Motor Examination");
+
+		$taking_pdmeds = $this->form->addElement('text', 'taking_pdmeds', 'Taking PD medications? (Y/N):', array('size' => 50, 'maxlength' => 255));		
+
+		$offstate = $this->form->addElement('text', 'offstate', 'Currently in an OFF state? (Y/N):', array('size' => 50, 'maxlength' => 255));	
+		//$this->form->addElement('date', 'test_cur_time', 'Current time:',array('format'=>'hiA','addEmptyOption'=>'true'));//, $options, $attr);
+		//$this->form->addElement('date', 'last_med_time', 'Last medication time:',array('format'=>'hiA','addEmptyOption'=>'true'));//, $options, $attr);
+		$this->form->addElement('text', 'test_cur_time', 'Current time (e.g. 1:20 PM):',array('size' => 50, 'maxlength' => 255));
+		$this->form->addElement('text', 'last_med_time', 'Last medication time (e.g. 11:00 AM):',array('size' => 50, 'maxlength' => 255));
+
+		$last_med_day = $this->form->addElement('text', 'last_med_day', '--------- Yesterday / Today / Other :', array('size' => 50, 'maxlength' => 255));	
+		 $this->addRule('last_med_day', 'Enter yesterday, today, other, or NA', 'regex', '/(?i)^(na|today|yesterday|other)$/', 'client');
+		 $this->addRule('offstate', 'Enter Y, N, or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+		 $this->addRule('taking_pdmeds', 'Enter Y, N, or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$this->addHeader("<MY TITLE>");	
+
+		$spch_motor = $this->form->addElement('text', 'spch_motor', '3.1 Motor:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('spch_motor', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$face_exp = $this->form->addElement('text', 'face_exp', '3.2 Facial Expression:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('face_exp', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.3 Rigidity');
+		$rig_neck = $this->form->addElement('text', 'rig_neck', '-------- Neck:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('rig_neck', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$rig_rue = $this->form->addElement('text', 'rig_rue', '-------- RUE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('rig_rue', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$rig_lue = $this->form->addElement('text', 'rig_lue', '-------- LUE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('rig_lue', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$rig_rle = $this->form->addElement('text', 'rig_rle', '-------- RLE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('rig_rle', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$rig_lle = $this->form->addElement('text', 'rig_lle', '-------- LLE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('rig_lle', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.4 Finger Tapping');
+		$fngtp_r = $this->form->addElement('text', 'fngtp_r', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('fngtp_r', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$fngtp_l = $this->form->addElement('text', 'fngtp_l', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('fngtp_l', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.5 Hand Movements');
+		$hndmv_r = $this->form->addElement('text', 'hndmv_r', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('hndmv_r', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$hndmv_l = $this->form->addElement('text', 'hndmv_l', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('hndmv_l', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.6 Pronation-Supination Movements');
+		$pro_r = $this->form->addElement('text', 'pro_r', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('pro_r', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$pro_l = $this->form->addElement('text', 'pro_l', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('pro_l', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.7 Toe Tapping');
+		$toe_r = $this->form->addElement('text', 'toe_r', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('toe_r', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$toe_l = $this->form->addElement('text', 'toe_l', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('toe_l', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.8 Leg Agility');
+		$leg_r = $this->form->addElement('text', 'leg_r', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('leg_r', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$leg_l = $this->form->addElement('text', 'leg_l', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('leg_l', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$chair = $this->form->addElement('text', 'chair', '3.9 Arising From Chair:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('chair', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$gait = $this->form->addElement('text', 'gait', '3.10 Gait:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('gait', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$freez = $this->form->addElement('text', 'freez', '3.11 Freezing of Gait:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('gait', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$pos_stab = $this->form->addElement('text', 'pos_stab', '3.12 Postural Stability:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('pos_stab', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$posture = $this->form->addElement('text', 'posture', '3.13 Posture:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('posture', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$mvmnt = $this->form->addElement('text', 'mvmnt', '3.14 Global Spontaneity or Movement:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('mvmnt', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.15 Postural Tremor of the Hands');
+		$postrem_r = $this->form->addElement('text', 'postrem_r', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('postrem_r', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$postrem_l = $this->form->addElement('text', 'postrem_l', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('postrem_l', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.16 Kinetic Tremor of the Hands');
+		$kintrem_r = $this->form->addElement('text', 'kintrem_r', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('kintrem_r', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$kintrem_l = $this->form->addElement('text', 'kintrem_l', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('kintrem_l', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','3.17 Rest Tremor Amplitude');
+		$trem_rue = $this->form->addElement('text', 'trem_rue', '-------- RUE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('rig_neck', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$trem_lue = $this->form->addElement('text', 'trem_lue', '-------- LUE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('trem_lue', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$trem_rle = $this->form->addElement('text', 'trem_rle', '-------- RLE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('trem_rle', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$trem_lle = $this->form->addElement('text', 'trem_lle', '-------- LLE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('trem_lle', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$trem_lip = $this->form->addElement('text', 'trem_lip', '-------- Lip/Jaw:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('trem_lip', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$const_trem = $this->form->addElement('text', 'const_trem', '3.18 Constancy of Rest Tremor:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('const_trem', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$this->form->addElement('static','hdr','Dyskinesia Impact on Part III ratings');
+		$dys_imp = $this->form->addElement('text', 'dys_imp', '-------- A. Dyskinesias present during exam (Y/N):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dys_imp', 'Enter Y,N, or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$this->form->addElement('static','hdr','X. Arm swing decrease');
+		$swing_rue = $this->form->addElement('text', 'swing_rue', '-------- R:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('swing_rue', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$swing_lue = $this->form->addElement('text', 'swing_lue', '-------- L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('swing_lue', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$body = $this->form->addElement('text', 'body', 'XXX. Most affected body side (R/L/symm):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('body', 'Enter R,L, or symm', 'regex', '/(?i)^(na|r|l|symm)$/', 'client');
+
+		// ----------------------------------------------------------------------------------------
+		$this->addHeader("Part IV: Motor Complications");
+		$time_dys = $this->form->addElement('text', 'time_dys', '4.1 Time Spent with Dyskinesias:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('time_dys', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+		
+		$func_dys = $this->form->addElement('text', 'func_dys', '4.2 Functional Impact of Dyskinesias:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('func_dys', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$motfluc_time_off = $this->form->addElement('text', 'motfluc_time_off', '4.3 Motor Fluctuations: Time spent in OFF state:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('motfluc_time_off', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$motfluc_hrs_awake = $this->form->addElement('text', 'motfluc_hrs_awake', '-------- 4.3a Total hours awake:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('motfluc_hrs_awake', 'Value must be numeric', 'numeric', 'client');
+
+		$motfluc_hrs_off = $this->form->addElement('text', 'motfluc_hrs_off', '-------- 4.3b Total hours OFF:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('motfluc_hrs_off', 'Value must be numeric', 'numeric', 'client');
+
+		$mot_fluc_pct_off = $this->form->addElement('static','mot_fluc_pct_off','-------- 4.3c % OFF:');
+
+		$fluct_impact = $this->form->addElement('text', 'fluct_impact', '4.4 Functional Impact of Fluctuations:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('fluct_impact', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$fluct_complex = $this->form->addElement('text', 'fluct_complex', '4.5 Complexity of Motor Fluctuations:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('fluct_complex', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$pain_off_dys = $this->form->addElement('text', 'pain_off_dys', '4.6 Painful OFF-state Dystonia:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('pain_off_dys', 'Enter 0-4', 'regex', '/(?i)^(na|0|1|2|3|4|1.00|2.00|3.00|4.00)$/', 'client');
+
+		$pain_off_hrs = $this->form->addElement('text', 'pain_off_hrs', '-------- 4.6a Total hours OFF:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('pain_off_hrs', 'Value must be numeric', 'numeric', 'client');
+
+		$pain_hrs_off_dys = $this->form->addElement('text', 'pain_hrs_off_dys', '-------- 4.6b Total OFF hours with Dystonia:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('pain_hrs_off_dys', 'Value must be numeric', 'numeric', 'client');
+
+		$pct_off_dys = $this->form->addElement('static','pct_off_dys','-------- 4.6c % OFF Dystonia:');
+
+		// static calculated fields
+		$this->addHeader("Calculations");
+		$total = $this->form->addElement('static','updrs_total','Total:');
+		$motor = $this->form->addElement('static','updrs_motor','Motor:');
+		// $trem = $this->form->addElement('static','updrs_trem','Tremor:');
+		// $pigd = $this->form->addElement('static','updrs_pigd','Pigd:');
+
+    }
+   
+   
+}
+?>

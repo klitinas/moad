@@ -1,0 +1,10 @@
+table{@}testvalidate
+title{@}Array
+header{@}{@}<MY TITLE>
+date{@}Date_taken{@}Date of Administration{@}2004{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+header{@}{@}<MY TITLE>
+text{@}one{@}One (Y/N):
+text{@}two{@}Two (Y/N):

@@ -1,0 +1,85 @@
+table{@}motor
+title{@}Motor Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes: 
+numeric{@}eq_1{@}eq_1:
+select{@}eq_1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str_1{@}str_1:
+select{@}str_1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_1a{@}cog_1a:
+select{@}cog_1a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_1b{@}cog_1b:
+select{@}cog_1b_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}eq_2{@}eq_2:
+select{@}eq_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str_2{@}str_2:
+select{@}str_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_2a{@}cog_2a:
+select{@}cog_2a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_2b{@}cog_2b:
+select{@}cog_2b_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}eq_3{@}eq_3:
+select{@}eq_3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str_3{@}str_3:
+select{@}str_3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_3a{@}cog_3a:
+select{@}cog_3a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_3b{@}cog_3b:
+select{@}cog_3b_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}eq_4{@}eq_4:
+select{@}eq_4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str_4{@}str_4:
+select{@}str_4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_4a{@}cog_4a:
+select{@}cog_4a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_4b{@}cog_4b:
+select{@}cog_4b_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}eq_5{@}eq_5:
+select{@}eq_5_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str_5{@}str_5:
+select{@}str_5_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_5a{@}cog_5a:
+select{@}cog_5a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_5b{@}cog_5b:
+select{@}cog_5b_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}eq_6{@}eq_6:
+select{@}eq_6_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str_6{@}str_6:
+select{@}str_6_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_6a{@}cog_6a:
+select{@}cog_6a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cog_6b{@}cog_6b:
+select{@}cog_6b_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fap{@}FAP:
+select{@}fap_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg2r_off{@}peg2R_OFF:
+select{@}peg2r_off_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg5r_off{@}peg5R_OFF:
+select{@}peg5r_off_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg2l_off{@}peg2L_OFF:
+select{@}peg2l_off_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg5l_off{@}peg5L_OFF:
+select{@}peg5l_off_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fgtap_r{@}fgtap_R:
+select{@}fgtap_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fgtap_l{@}fgtap_L:
+select{@}fgtap_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fttap_resp{@}fttap_resp:
+select{@}fttap_resp_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fttap_err{@}fttap_err:
+select{@}fttap_err_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vib_r{@}vib_R:
+select{@}vib_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vib_l{@}vib_L:
+select{@}vib_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg2r_on{@}peg2R_ON:
+select{@}peg2r_on_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg5r_on{@}peg5R_ON:
+select{@}peg5r_on_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg2l_on{@}peg2L_ON:
+select{@}peg2l_on_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}peg5l_on{@}peg5L_ON:
+select{@}peg5l_on_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

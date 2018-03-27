@@ -1,0 +1,131 @@
+<?php
+if ($_FILES['wb']) {
+  $FILEIN=$_FILES['wb']['tmp_name'];
+  $subject = $_POST['subject'];
+
+
+  $db = new PDO('mysql:host=141.214.246.201;dbname=loris_prod;charset=utf8mb4', 'lorisuser', 'lorisuser');
+  $str = "select CandID from parameter_candidate where Value like '%%%s%%';";
+  $sql = sprintf($str,$subject);
+
+  $stmt = $db->query($sql);
+  $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+  $s = array();
+  foreach ($stmt as $row) {
+    $s = $row['CandID'];
+  };
+  $subject = $s;
+
+  $visit = $_POST['visit'];
+  $arr = explode(":", $visit);
+  $visit_label = $arr[0];
+
+  $db = new PDO('mysql:host=141.214.246.201;dbname=loris_prod;charset=utf8mb4', 'lorisuser', 'lorisuser');
+  $str = "select ID from session where CandID='%s' and visit_label='%s';";
+  $sql = sprintf($str,$subject,$visit_label);
+
+  $stmt = $db->query($sql);
+  $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+  $s = array();
+  foreach ($stmt as $row) {
+    $s = $row['ID'];
+  };
+
+  $visit = $s;
+  $name = sprintf('%s_wb.pdf',date("YmdHis"));
+  $dir = sprintf("/var/www/loris/htdocs/workbooks/%s/%s",$subject,$visit);
+  mkdir($dir, 0755, true);
+  move_uploaded_file($FILEIN,"$dir/$name");
+
+  // Check that it was a success
+  if (file_exists("$dir/$name")) {
+    echo "File Upload Success.";
+  } else {
+    echo "File Upload NOT Successful.";
+  }
+
+
+
+  echo "<a href=\"upload.php\">Refresh</a>";
+
+  //exit();
+}
+
+
+?>
+
+<html>
+<head>
+  <title>Workbook Uploader</title>
+</head>
+<body>
+
+  <form action="<?php $_PHP_SELF ?>" method="post" enctype="multipart/form-data">
+
+    Upload Workbook:
+    <input type = "file" name = "wb"/>
+    <input type = "submit" value="Submit"/>
+
+
+    <?php
+    $db = new PDO('mysql:host=141.214.246.201;dbname=loris_prod;charset=utf8mb4', 'lorisuser', 'lorisuser');
+    $sql="select Value from parameter_candidate order by Value";
+
+    $stmt = $db->query($sql);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    $allCodes = array();
+    foreach ($stmt as $row) {
+      $bigstr = $row['Value'];
+      $arr = explode(" ", $bigstr);
+      $allCodes = array_merge($arr,$allCodes);
+    };
+    $allCodes = array_unique($allCodes);
+    asort($allCodes);
+
+    ?>
+
+    <br></br>
+    <select name="subject" id="subjectbox" onchange="javascript:valueselect(this.value)">
+      <option value="">--Select a subject code--</option>
+      <?php foreach ($allCodes as $subj) {
+        echo '<option value="'.$subj.'">'.$subj.'</option>';
+      }?>
+    </select>
+
+
+
+
+    <script>
+
+    function valueselect(str) {
+
+      if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+      } else {
+        if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+          }
+        };
+        xmlhttp.open("GET","getvisit.php?q="+str,true);
+        xmlhttp.send();
+      }
+    }
+    </script>
+
+    <div id="txtHint"><b></b></div>
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-18 05:48:39
+         compiled from "/var/www/loris/modules/statistics/templates/form_statistics.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:189487852155097427971301-83040431%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '50716b156fcb1fe25ab6ab2735a6244ca4f1a103' => 
+    array (
+      0 => '/var/www/loris/modules/statistics/templates/form_statistics.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '189487852155097427971301-83040431',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'StatsTabs' => 0,
+    'tab' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_550974279b4799_15744616',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_550974279b4799_15744616')) {function content_550974279b4799_15744616($_smarty_tpl) {?><div id="tabs" style="background: white">
+    <div class="hidden-xs hidden-sm">
+        <ul class="nav nav-tabs">
+            <?php  $_smarty_tpl->tpl_vars['tab'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['tab']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['StatsTabs']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_smarty_tpl->tpl_vars['tab']->index=-1;
+foreach ($_from as $_smarty_tpl->tpl_vars['tab']->key => $_smarty_tpl->tpl_vars['tab']->value) {
+$_smarty_tpl->tpl_vars['tab']->_loop = true;
+ $_smarty_tpl->tpl_vars['tab']->index++;
+ $_smarty_tpl->tpl_vars['tab']->first = $_smarty_tpl->tpl_vars['tab']->index === 0;
+ $_smarty_tpl->tpl_vars['smarty']->value['foreach']['tabs']['first'] = $_smarty_tpl->tpl_vars['tab']->first;
+?>
+            <li class="statsTab<?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['tabs']['first']) {?> active onLoad<?php }?>">
+                <a class="statsTabLink" value="main.php?test_name=<?php echo $_smarty_tpl->tpl_vars['tab']->value['ModuleName'];?>
+&subtest=<?php echo $_smarty_tpl->tpl_vars['tab']->value['SubModuleName'];?>
+&dynamictabs=dynamictabs"><?php echo $_smarty_tpl->tpl_vars['tab']->value['Description'];?>
+</a>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="visible-xs visible-sm panel panel-primary">
+        <div class="panel-heading" onclick="toggleTabs()">
+            <label id="hiddenTabs">General Description</label>
+            <span class="glyphicon glyphicon-chevron-down pull-right" id="down"></span>
+            <span class="glyphicon glyphicon-chevron-up pull-right" id="up" style="display:none"></span>
+        </div>
+        <ul class="list-group" style="display:none" id="tabsContent">
+            <?php  $_smarty_tpl->tpl_vars['tab'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['tab']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['StatsTabs']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['tab']->key => $_smarty_tpl->tpl_vars['tab']->value) {
+$_smarty_tpl->tpl_vars['tab']->_loop = true;
+?>
+            <li class="statsTab active list-group-item">
+                <a class="statsTabLink" value="main.php?test_name=<?php echo $_smarty_tpl->tpl_vars['tab']->value['ModuleName'];?>
+&subtest=<?php echo $_smarty_tpl->tpl_vars['tab']->value['SubModuleName'];?>
+&dynamictabs=dynamictabs"><?php echo $_smarty_tpl->tpl_vars['tab']->value['Description'];?>
+</a>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane active">
+        </div>
+    </div>
+</div>
+<?php }} ?>

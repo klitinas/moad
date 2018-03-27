@@ -1,0 +1,98 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-20 03:04:31
+         compiled from "/var/www/loris/modules/candidate_parameters/templates/form_update_participant_status.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:287826727550bf0af7d47c3-53612437%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'a713498a903aed8ea879f9c7632b5c7cc17d1dfc' => 
+    array (
+      0 => '/var/www/loris/modules/candidate_parameters/templates/form_update_participant_status.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '287826727550bf0af7d47c3-53612437',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'success' => 0,
+    'form' => 0,
+    'error' => 0,
+    'pscid' => 0,
+    'candID' => 0,
+    'pstatus_options' => 0,
+    'pstat' => 0,
+    'pstatus_suboptions' => 0,
+    'pstat_sub' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_550bf0af84b665_24859003',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_550bf0af84b665_24859003')) {function content_550bf0af84b665_24859003($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/xnat/Smarty/smarty3/plugins/function.html_options.php';
+?><?php if ($_smarty_tpl->tpl_vars['success']->value) {?>
+
+<p>Participant Status was updated successful<br /></p>
+<br />
+<?php }?>
+<form method="post" name="update_participant_status" id="update_participant_status" enctype="multipart/form-data">
+<?php if (!$_smarty_tpl->tpl_vars['success']->value) {?>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Update Participant Status
+    </div>
+    <div class="panel-body">
+        <?php  $_smarty_tpl->tpl_vars['error'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['error']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['errors']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['error']->key => $_smarty_tpl->tpl_vars['error']->value) {
+$_smarty_tpl->tpl_vars['error']->_loop = true;
+?>
+            <font class="error"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</font>
+        <?php } ?>
+        <div class="row">
+            <label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['pscid']['label'];?>
+</label>
+            <div class="col-sm-10" id="pscid">
+                <?php echo $_smarty_tpl->tpl_vars['pscid']->value;?>
+
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-2">DCCID:</label>
+            <div class="col-sm-10">
+                <?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">Participant Status</label>
+            <div class="col-sm-8">
+                <?php echo smarty_function_html_options(array('id'=>"participant_status",'options'=>$_smarty_tpl->tpl_vars['pstatus_options']->value,'name'=>"participant_status",'selected'=>$_smarty_tpl->tpl_vars['pstat']->value),$_smarty_tpl);?>
+
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4">Specify Reason</br>(Required only for status Inactive/Incomplete)</label>
+            <div class="col-sm-8">
+                <?php echo smarty_function_html_options(array('id'=>"participant_suboptions",'options'=>$_smarty_tpl->tpl_vars['pstatus_suboptions']->value,'name'=>"participant_suboptions",'selected'=>$_smarty_tpl->tpl_vars['pstat_sub']->value),$_smarty_tpl);?>
+
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['reason_specify_group']['label'];?>
+</label>
+            <div class="col-sm-8">
+                <?php echo $_smarty_tpl->tpl_vars['form']->value['reason_specify_group']['html'];?>
+
+            </div>
+        </div>
+        <input class="btn btn-sm btn-primary col-sm-offset-2" name="fire_away" value="Save" type="submit" />
+        <?php }?>
+        <input class="btn btn-sm btn-primary" onclick="location.href='main.php?test_name=candidate_parameters&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'" value="Return to Candidate Info" type="button" />
+    </div>
+</div><?php }} ?>

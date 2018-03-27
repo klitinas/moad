@@ -1,0 +1,331 @@
+<?php /* Smarty version 3.1.27, created on 2015-07-02 15:05:11
+         compiled from "/var/www/loris/smarty/templates/login.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:101187370955958b67b76fa6_96914962%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '85268d715ca7d7721e95f803caaca8c6bf723be4' => 
+    array (
+      0 => '/var/www/loris/smarty/templates/login.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '101187370955958b67b76fa6_96914962',
+  'variables' => 
+  array (
+    'title' => 0,
+    'study_logo' => 0,
+    'study_title' => 0,
+    'error_message' => 0,
+    'action' => 0,
+    'username' => 0,
+    'studylinks' => 0,
+    'link' => 0,
+    'currentyear' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_55958b67b92d75_67751961',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_55958b67b92d75_67751961')) {
+function content_55958b67b92d75_67751961 ($_smarty_tpl) {
+
+$_smarty_tpl->properties['nocache_hash'] = '101187370955958b67b76fa6_96914962';
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="height:100%">
+<head>
+<meta charset="utf-8"/>
+<!-- shortcut icon that displays on the browser window -->
+<link rel="shortcut icon" href="images/mni_icon.ico" type="image/ico" />
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/custom-css.css">
+<!-- page title -->
+<title><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
+</title>
+
+<!-- About this Javascript. As time goes on, one may need to update this file with new browsers and latest versions -->
+
+<?php echo '<script'; ?>
+ type="text/javascript">
+<!--
+var BrowserDetect = {
+init: function () {
+	      this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+	      this.version = this.searchVersion(navigator.userAgent)
+		      || this.searchVersion(navigator.appVersion)
+		      || "an unknown version";
+	      this.OS = this.searchString(this.dataOS) || "an unknown OS";
+      },
+searchString: function (data) {
+		      for (var i=0;i<data.length;i++)	{
+			      var dataString = data[i].string;
+			      var dataProp = data[i].prop;
+			      this.versionSearchString = data[i].versionSearch || data[i].identity;
+			      if (dataString) {
+				      if (dataString.indexOf(data[i].subString) != -1)
+					      return data[i].identity;
+			      }
+			      else if (dataProp)
+				      return data[i].identity;
+		      }
+	      },
+searchVersion: function (dataString) {
+		       var index = dataString.indexOf(this.versionSearchString);
+		       if (index == -1) return;
+		       return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
+	       },
+dataBrowser: [
+	     { 	string: navigator.userAgent,
+subString: "OmniWeb",
+	   versionSearch: "OmniWeb/",
+	   identity: "OmniWeb"
+	     },
+	     {
+string: navigator.vendor,
+	subString: "Apple",
+	identity: "Safari"
+	     },
+	     {
+prop: window.opera,
+      identity: "Opera"
+	     },
+	     {
+string: navigator.vendor,
+	subString: "iCab",
+	identity: "iCab"
+	     },
+	     {
+string: navigator.vendor,
+	subString: "KDE",
+	identity: "Konqueror"
+	     },
+	     {
+string: navigator.userAgent,
+	subString: "Firefox",
+	identity: "Firefox"
+	     },
+	     {
+string: navigator.vendor,
+	subString: "Camino",
+	identity: "Camino"
+	     },
+	     {		// for newer Netscapes (6+)
+string: navigator.userAgent,
+	subString: "Netscape",
+	identity: "Netscape"
+	     },
+	     {
+string: navigator.userAgent,
+	subString: "MSIE",
+	identity: "Explorer",
+	versionSearch: "MSIE"
+	     },
+	     {
+string: navigator.userAgent,
+	subString: "Gecko",
+	identity: "Mozilla",
+	versionSearch: "rv"
+	     },
+	     { 		// for older Netscapes (4-)
+string: navigator.userAgent,
+	subString: "Mozilla",
+	identity: "Netscape",
+	versionSearch: "Mozilla"
+	     }
+      ],
+	      dataOS : [
+	      {
+string: navigator.platform,
+	subString: "Win",
+	identity: "Windows"
+	      },
+	      {
+string: navigator.platform,
+	subString: "Mac",
+	identity: "Mac"
+	      },
+	      {
+string: navigator.platform,
+	subString: "Linux",
+	identity: "Linux"
+	      }
+      ]
+
+};
+BrowserDetect.init();
+
+// -->
+<?php echo '</script'; ?>
+>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+<body background="" class="LoginBackground">
+	<div class ="logo">
+
+	</div>
+	
+ 	<div class="navbar navbar-default" role="navigation" style="height:90px">
+ 		<div class="container">
+	 		<a class="navbar-brand" href="#" style="align:center;">
+		 		<img src="<?php echo $_smarty_tpl->tpl_vars['study_logo']->value;?>
+" border="0" width="64" height="57" />
+		 		<?php echo $_smarty_tpl->tpl_vars['study_title']->value;?>
+
+	 		</a>
+	 	</div>
+ 	</div>
+ 	<div class="row panel panel-default col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+		  <div class="panel-body">
+		  		<div class="col-xs-12">
+		  			<center>
+		  				<img src="images/LORIS_logo_141007.svg" class="img-responsive" alt="Responsive image" onerror="this.src='images/LORIS_Logo_141007.png'" align="middle" width="85%"> 
+		  			</center>
+					<br>
+		  		</div>
+		  		<div class="hidden-xs hidden-sm">
+		  			<br><br><br><br>
+		  		</div>
+		  		<div class="col-xs-12">
+		  			<font color="red" align="middle">
+		  				<?php echo $_smarty_tpl->tpl_vars['error_message']->value;?>
+
+		  			</font>
+		  		</div>
+		  		<div class="row">
+			  		<div class="col-xs-12">
+				  		<form action="<?php echo $_smarty_tpl->tpl_vars['action']->value;?>
+" method="post">
+				  			<div class="form-group">
+				  				<input name="username" class="form-control" type="text" value="<?php echo $_smarty_tpl->tpl_vars['username']->value;?>
+" placeholder="User"/>
+				  			</div>
+				  			<div class="form-group">
+				  				<input name="password" class="form-control" type="password" placeholder="Password"/>
+				  			</div>
+				  			<input class="btn btn-primary col-xs-12" name="login" type="submit" value="login" />
+				  			<br><br><br>
+				  			<a href="lost_password.php"><center>Forgot your password?</center></a>
+				  			<a href="request_account/process_new_account.php"><center>Request Account</center></a>
+				  		</form>
+			  		</div>
+			  	</div>	
+		  		<div class="row">
+		  		<table class="LoginFooter" align="center">
+					<tr>
+					<hr width = 70<?php echo '%>';?>
+					<td width="100%">
+					<ul id="navlist" style="margin-top: 5px; margin-bottom: 2px;">
+
+					<li id="active">|</li>
+					<?php
+$_from = $_smarty_tpl->tpl_vars['studylinks']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['link'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['link']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['link']->value) {
+$_smarty_tpl->tpl_vars['link']->_loop = true;
+$foreach_link_Sav = $_smarty_tpl->tpl_vars['link'];
+?>
+					<li><a href="<?php echo $_smarty_tpl->tpl_vars['link']->value['url'];?>
+" target="<?php echo $_smarty_tpl->tpl_vars['link']->value['windowName'];?>
+"><?php echo $_smarty_tpl->tpl_vars['link']->value['label'];?>
+</a> | </li>
+					<?php
+$_smarty_tpl->tpl_vars['link'] = $foreach_link_Sav;
+}
+?>
+
+					</ul>
+					</td>
+					</tr>
+					<tr>
+					<!--td align="center" colspan="1"><br><font color="#C40A29">A WebGL-compatible browser is required for full functionality.</font></td-->
+					</tr>       
+					<tr>
+					<td align="center" colspan="1" style="color:#808080" >A WebGL-compatible browser is required for full functionality (Mozilla Firefox, Google Chrome)</td>
+					</tr>	
+					<tr>
+					<td align="center" colspan="1" style="color:#808080" >Powered by LORIS &copy; <?php echo $_smarty_tpl->tpl_vars['currentyear']->value;?>
+. All rights reserved.</td>
+					</tr>	
+					<tr>
+					<td align="center" colspan="1"style="color: #808080">Created by <a href="http://mcin-cnim.ca" style="color: #064785" target="_blank">MCIN</a></td>
+					</tr>
+					<tr>
+					<td align="center" colspan="1" style="color: #808080"> Developed at <a href="http://www.mni.mcgill.ca" style="color: #064785" target="_blank">Montreal Neurological Institute and Hospital</a></td>
+
+					</tr>
+				</table>
+				</div>
+		  </div>
+	</div>
+
+
+
+<!-- old study web links positioning
+<table class="StudyWeblinks" align="center">
+<tr>
+<div id="footerLinks">
+<td width="100%">
+<ul id="navlist" style="margin-top: 5px; margin-bottom: 2px;" >
+
+<li id="active">|</li>
+<?php
+$_from = $_smarty_tpl->tpl_vars['studylinks']->value;
+if (!is_array($_from) && !is_object($_from)) {
+settype($_from, 'array');
+}
+$_smarty_tpl->tpl_vars['link'] = new Smarty_Variable;
+$_smarty_tpl->tpl_vars['link']->_loop = false;
+foreach ($_from as $_smarty_tpl->tpl_vars['link']->value) {
+$_smarty_tpl->tpl_vars['link']->_loop = true;
+$foreach_link_Sav = $_smarty_tpl->tpl_vars['link'];
+?>
+<li><a href="<?php echo $_smarty_tpl->tpl_vars['link']->value['url'];?>
+" target="<?php echo $_smarty_tpl->tpl_vars['link']->value['windowName'];?>
+"><?php echo $_smarty_tpl->tpl_vars['link']->value['label'];?>
+</a> | </li>
+<?php
+$_smarty_tpl->tpl_vars['link'] = $foreach_link_Sav;
+}
+?>
+
+</ul>
+</td>
+</div>
+</tr>
+
+</table>
+-->
+<!--img src="images/mni_logo.png" class="watermark" alt="Montreal Neurological Institute" border="0" width="100" height="83"-->
+
+
+
+<?php echo '<script'; ?>
+ type='text/javascript'>
+<!--
+if(BrowserDetect.browser == "Explorer") {
+	document.write('<p align="center"><b>The browser you are using (Internet Explorer) is not compatible with this database!</b><br>For full functionality please download the latest version of <a href="http://www.mozilla.com/" target="blank">Firefox.</a></p>');
+}
+// -->	
+<?php echo '</script'; ?>
+>
+
+
+
+	</form>
+</body>
+	</html>
+<?php }
+}
+?>

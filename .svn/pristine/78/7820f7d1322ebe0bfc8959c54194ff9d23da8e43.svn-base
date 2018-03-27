@@ -1,0 +1,606 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-18 04:56:25
+         compiled from "/var/www/loris/modules/document_repository/templates/menu_document_repository.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:320012101550967e9d6ed84-40113434%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'f530dd745aeefa649b1808e4830ad4076353427b' => 
+    array (
+      0 => '/var/www/loris/modules/document_repository/templates/menu_document_repository.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '320012101550967e9d6ed84-40113434',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'form' => 0,
+    'openAccordion' => 0,
+    'headers' => 0,
+    'File_categories' => 0,
+    'val' => 0,
+    'k' => 0,
+    'find' => 0,
+    'replaceFind' => 0,
+    'FileDetails' => 0,
+    'Sites' => 0,
+    'Instruments' => 0,
+    'User' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_550967e9eb0c75_46294816',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_550967e9eb0c75_46294816')) {function content_550967e9eb0c75_46294816($_smarty_tpl) {?><?php if (!is_callable('smarty_modifier_replace')) include '/home/xnat/Smarty/smarty3/plugins/modifier.replace.php';
+?><div class="row">
+<div class="col-sm-12">
+    <div class="col-xs-12">
+        <form method="post" action="main.php?filtered=true&test_name=document_repository" id = "filterForm">
+            <div class="panel panel-primary">
+                <div class="panel-heading" onclick="hideFilter();">
+                    Selection Filter
+                    <span class="glyphicon glyphicon-chevron-down pull-right" style="display:none" id="down"></span>
+                    <span class="glyphicon glyphicon-chevron-up pull-right" id="up"></span>
+                </div>
+                <div class="panel-body" id="panel-body">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-12 col-md-1"><?php echo $_smarty_tpl->tpl_vars['form']->value['File_name']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['File_name']['html'];?>
+</div>
+                            <label class="col-sm-12 col-md-1"><?php echo $_smarty_tpl->tpl_vars['form']->value['version']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['version']['html'];?>
+</div>
+                            <label class="col-sm-12 col-md-1"><?php echo $_smarty_tpl->tpl_vars['form']->value['uploaded_by']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['uploaded_by']['html'];?>
+</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-12 col-md-1"><?php echo $_smarty_tpl->tpl_vars['form']->value['File_type']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['File_type']['html'];?>
+</div>
+                            <label class="col-sm-12 col-md-1"><?php echo $_smarty_tpl->tpl_vars['form']->value['For_site']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['For_site']['html'];?>
+</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-2 col-sm-offset-4">
+                                <input type="submit" name="filter" value="Show Data" class="btn btn-sm btn-primary col-xs-12" />
+                            </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="col-sm-2">
+                                <input type="button" name="reset" value="Clear Form" class="btn btn-sm btn-primary col-xs-12" onclick="location.href='main.php?test_name=document_repository&reset=true'" />
+                            </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="col-sm-2">
+                                <button type="button" name = "upload" class = "btn btn-sm btn-primary col-xs-12" data-toggle="modal" data-target="#fileUploadModal">Upload File</button>
+                            </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="col-sm-2">
+                                <button type="button" name = "addCategory" class = "btn btn-sm btn-primary col-xs-12" data-toggle="modal" data-target="#addCategoryModal">Add Category</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+                
+<div class = "ui-accordion ui-widget ui-helper-reset">
+<table border="0" width="80%" id = "accordionTable" class="docRepository" data-open = "<?php echo $_smarty_tpl->tpl_vars['openAccordion']->value;?>
+">
+<tr>
+    <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['header'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['header']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['name'] = 'header';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['headers']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total']);
+?>
+        <th nowrap="nowrap" class="accordionHeaders">
+            <?php if ($_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName']=="Edit"||$_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName']=="Delete") {?>
+                <?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName'];?>
+
+            <?php } else { ?>
+                <a href="main.php?openAccordion=true&test_name=document_repository&filter[order][field]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['name'];?>
+&filter[order][fieldOrder]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['fieldOrder'];?>
+" class = "sortHeaders">
+                    <?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName'];?>
+
+                </a>
+            <?php }?>
+        </th>
+    <?php endfor; endif; ?>
+</tr>
+
+<?php $_smarty_tpl->tpl_vars["find"] = new Smarty_variable(array(' ','>','(',')'), null, 0);?>
+<?php $_smarty_tpl->tpl_vars["replaceFind"] = new Smarty_variable(array('_','_','_','_'), null, 0);?>
+<div id="accordion" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+<?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['File_categories']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+    <?php if ($_smarty_tpl->tpl_vars['val']->value!="Any") {?>
+        <tr>
+                <td nowrap="nowrap" colspan = "11">
+                    <h3 id = "header_<?php echo smarty_modifier_replace($_smarty_tpl->tpl_vars['File_categories']->value[$_smarty_tpl->tpl_vars['k']->value]['CategoryName'],$_smarty_tpl->tpl_vars['find']->value,$_smarty_tpl->tpl_vars['replaceFind']->value);?>
+" class="categories_header ui-accordion-header ui-helper-reset  ui-state-default ui-corner-all" style="background-color: #e0dde2; padding: 3px;" align="left"><?php echo $_smarty_tpl->tpl_vars['File_categories']->value[$_smarty_tpl->tpl_vars['k']->value]['CategoryName'];?>
+
+                        <span class="tip">...
+                            <span id="categorycomment<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" class="categorycomments" name="headercomment_<?php echo smarty_modifier_replace($_smarty_tpl->tpl_vars['File_categories']->value[$_smarty_tpl->tpl_vars['k']->value]['CategoryName'],$_smarty_tpl->tpl_vars['find']->value,$_smarty_tpl->tpl_vars['replaceFind']->value);?>
+" contenteditable="true">
+                                <?php echo $_smarty_tpl->tpl_vars['File_categories']->value[$_smarty_tpl->tpl_vars['k']->value]['Comment'];?>
+
+                            </span>
+                </span>
+            </h3>
+        </tr>
+        <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['file'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['file']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['name'] = 'file';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['File_categories']->value[$_smarty_tpl->tpl_vars['k']->value]['Files']) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['file']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['file']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['file']['total']);
+?>
+            <?php $_smarty_tpl->tpl_vars["FileDetails"] = new Smarty_variable($_smarty_tpl->tpl_vars['File_categories']->value[$_smarty_tpl->tpl_vars['k']->value]['Files'][$_smarty_tpl->getVariable('smarty')->value['section']['file']['index']], null, 0);?>
+            <tr class="categories_<?php echo smarty_modifier_replace($_smarty_tpl->tpl_vars['File_categories']->value[$_smarty_tpl->tpl_vars['k']->value]['CategoryName'],$_smarty_tpl->tpl_vars['find']->value,$_smarty_tpl->tpl_vars['replaceFind']->value);?>
+ ui-accordion ui-widget ui-helper-reset ui-accordion-icons">
+                <td class="File_name" nowrap="nowrap">
+                    <a href="AjaxHelper.php?Module=document_repository&script=GetFile.php&File=<?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['Data_dir'];?>
+" target="_blank" download="<?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['File_name'];?>
+"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['File_name'];?>
+</a> (<?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['File_size'];?>
+)
+                </td>
+                <td class="version" nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['version'];?>
+</td>
+                <td class="File_type" nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['File_type'];?>
+</td>
+                <td class="Instrument" nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['Instrument'];?>
+</td>
+                <td class="uploaded_by" nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['uploaded_by'];?>
+</td>
+                <td class="For_site" nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['For_site'];?>
+</td>
+                <td class="comments" nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['comments'];?>
+</td>
+                <td class="Date_uploaded" nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['Date_uploaded'];?>
+</td>
+                <td nowrap="nowrap">
+                    <a href="#" id="<?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['record_id'];?>
+" class="theeditlink">Edit</a>
+                </td>
+                <td nowrap="nowrap">
+                    <a href="#" id="<?php echo $_smarty_tpl->tpl_vars['FileDetails']->value['record_id'];?>
+" class="thedeletelink">Delete</a>
+                </td>
+            </tr>
+        <?php endfor; endif; ?>
+    <?php }?>
+<?php } ?>
+</div> <!--end of toggle div-->
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">Please Confirm</h3>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <span class="ui-icon ui-icon-trash" style="float:left; margin:0 7px 50px 0;"></span>
+                    Are you sure you want to delete this file?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="postDelete" role="button" aria-disabled="false" data-dismiss="modal">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">Upload File</h3>
+            </div>
+            <form id="addCategoryForm" action="AjaxHelper.php?Module=document_repository&script=addCategory.php" method="POST">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>What category would you like to add?</p>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4">
+                                Category Name:
+                            </label>
+                            <div class="col-xs-8">
+                                <input type="text" name="category_name" class="form-control input-sm" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4">
+                                Parent:
+                            </label>
+                            <div class="col-xs-8">
+                                <select name="parent_id" id="parent_id" class="form-control input-sm">
+                                    <option value=" "> </option>
+                                    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['File_categories']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+                                        <?php if ($_smarty_tpl->tpl_vars['val']->value!="Any") {?>
+                                                <option value=<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['val']->value['CategoryName'];?>
+</option>
+                                            <?php }?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4">
+                                Comments:
+                            </label>
+                            <div class="col-xs-8">
+                                <input type="text" name="comments" class="form-control input-sm"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="postCategory" role="button" aria-disabled="false" data-dismiss="modal">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fileUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">Upload File</h3>
+            </div>
+            <form name = "uploadForm" id = "uploadForm" method = "POST" enctype="multipart/form-data" action="AjaxHelper.php?Module=document_repository&script=documentEditUpload.php">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class = "upload-error col-xs-12">
+                            <p style = "color: #f33;">
+                                <span class="ui-icon ui-icon-alert" style = "float:left;"></span>
+                                Please enter all required (*) fields.
+                            </p>
+                        </div>
+                        <div class = "file-error col-xs-12">
+                            <p style = "color: #f33;">
+                                <span class="ui-icon ui-icon-alert" style = "float:left;"></span>
+                                Please choose a file to upload.
+                            </p>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label for="category" class="col-xs-4">Category<font color="red"><sup> *</sup></font></label>
+                            <div class="col-xs-8">
+                                <select name="category" id = "category" class = "form-fields form-control input-sm">
+                                    <option value=" "> </option>
+                                    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['File_categories']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+                                        <?php if ($_smarty_tpl->tpl_vars['val']->value!="Any") {?>
+                                            <option value=<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['val']->value['CategoryName'];?>
+</option>
+                                    <?php }?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="site">Site<font color="red"><sup> *</sup></font></label>
+                            <div class="col-xs-8">
+                                <select name="site" id = "site" class = "form-fields form-control input-sm">
+                                <option value=" "> </option>
+                                    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Sites']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+                                        <option value=<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="instrument">Instrument<font color="red"><sup> *</sup></font></label>
+                            <div class="col-xs-8">
+                                <select name="instrument" id = "instrument" class = "form-fields form-control input-sm">
+                                <option value=""> </option>
+                                    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Instruments']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+                                        <option value=<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="pscid">PSCID</label>
+                            <div class="col-xs-8">
+                                <input type="text" size = "27" name="pscid" id="pscid" class="ui-corner-all form-fields form-control input-sm" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="visit">Visit label</label>
+                            <div class="col-xs-8">
+                                <input type="text" size = "27" name="visit" id="visit" class="ui-corner-all form-fields form-control input-sm" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="comments">Comments</label>
+                            <div class="col-xs-8">
+                                <textarea cols = "20" rows = "3" name="comments" id="comments" style = "border: 2px inset;" class="ui-corner-all form-fields form-control input-sm"> </textarea><p></p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="file">File<font color="red"><sup> *</sup></font></label>
+                            <div class="col-xs-8">
+                                <span class="file-wrapper">
+                                    <input type="file" name="file" id="file" style = "margin-left: 1em;"/>
+                                <span class="button-file ui-button-text ui-widget ui-state-default ui-corner-all ui-button-text-only" role = "button" aria-disabled = "false" style = "margin-left:10.5em; padding: 0.5em;">Choose file</span>
+                                <span class="fileName"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="version">Version</label>
+                            <div class="col-xs-8">
+                                <input type="text" size = "27" name="version" id="version" class="ui-corner-all form-fields form-control input-sm" />
+                            </div>
+                        </div>
+                        <input type="hidden" name = "user" id = "user" value = "<?php echo $_smarty_tpl->tpl_vars['User']->value;?>
+">
+                        <input type="hidden" name = "action" id = "action" value = "upload">
+                        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="100000000" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id = "uploadButton" role="button" aria-disabled="false">Upload</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--The Edit Dialog-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h3 class="modal-title" id="myModalLabel">Edit File</h3>
+            </div>
+            <form name = "editForm" id = "editForm" method = "post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="category">Category</label>
+                            <div class="col-xs-8">
+                                <select name="category" id = "categoryEdit" class = "form-fields form-control input-sm">
+                                    <option value=""> </option>
+                                    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['File_categories']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+                                        <?php if ($_smarty_tpl->tpl_vars['val']->value!="Any") {?>
+                                            <option value=<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['val']->value['CategoryName'];?>
+</option>
+                                        <?php }?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="site">Site</label>
+                            <div class="col-xs-8">
+                                <select name="site" id = "siteEdit" class = "form-fields form-control input-sm">
+                                    <option value=""> </option>
+                                    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Sites']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+                                        <option value=<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="instrument">
+                                Instrument<font color="red"><sup> *</sup></font>
+                            </label>
+                            <div class="col-xs-8">
+                                <select name="instrument" id = "instrumentEdit" class = "form-fields form-control input-sm">
+                                    <option value=""> </option>
+                                    <?php  $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['val']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Instruments']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['val']->key => $_smarty_tpl->tpl_vars['val']->value) {
+$_smarty_tpl->tpl_vars['val']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['val']->key;
+?>
+                                        <option value=<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+><?php echo $_smarty_tpl->tpl_vars['val']->value;?>
+</option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="pscid">PSCID</label>
+                            <div class="col-xs-8">
+                                <input type="text" size = "27" name="pscid" id="pscidEdit" class="ui-corner-all form-fields form-control input-sm" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="visit">Visit label</label>
+                            <div class="col-xs-8">
+                                <input type="text" size = "27" name="visit" id="visitEdit" class="ui-corner-all form-fields form-control input-sm" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="comments">Comments</label>
+                            <div class="col-xs-8">
+                                <textarea cols = "20" rows = "3" name="comments" id="commentsEdit" style = "border: 2px inset;" class="ui-corner-all form-fields form-control input-sm"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label class="col-xs-4" for="version">Version</label>
+                            <div class="col-xs-8">
+                                <input type="text" size = "27" name="version" id="versionEdit" class="ui-corner-all form-fields form-control input-sm" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id = "postEdit" role="button" aria-disabled="false" data-dismiss="modal">Edit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+                <input type="hidden" name = "action" id = "actionEdit" value = "edit">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class = "upload-success">
+    <p>
+	    <span class="ui-icon ui-icon-circle-check" style = "float:left;"></span>
+	    The file was successfully uploaded. Loading changes in 3 seconds...
+    </p>
+</div>
+
+<div class = "edit-success">
+    <p>
+	    <span class="ui-icon ui-icon-circle-check" style = "float:left;"></span>
+	    The file was successfully modified. Loading changes in 3 seconds...
+    </p>
+</div>
+
+<div class = "delete-success">
+    <p>
+	    <span class="ui-icon ui-icon-circle-check" style = "float:left;"></span>
+	    The file was successfully deleted. Loading changes in 3 seconds...
+    </p>
+</div>
+
+<div class = "add-success">
+    <p>
+            <span class="ui-icon ui-icon-circle-check" style = "float:left;"></span>
+            New category successfully added! Loading changes in 3 seconds...
+    </p>
+</div>
+
+<div class = "no-files">
+    <p>
+	    <span class="ui-icon ui-icon-info" style = "float:left;"></span>
+	    No files were found.
+    </p>
+</div>
+
+</br>
+
+</table>
+</div>
+<?php }} ?>

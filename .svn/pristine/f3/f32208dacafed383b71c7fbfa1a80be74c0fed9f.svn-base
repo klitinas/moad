@@ -1,0 +1,162 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from updrs WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_smell = '';
+
+$scores['updrs_total'] = 
+$record['cog'] 
++$record['hal_psy'] 
++$record['dep'] 
++$record['anxious'] 
++$record['apathy'] 
++$record['dds'] 
++$record['sleep'] 
++$record['day_sleep'] 
++$record['pain'] 
++$record['urine'] 
++$record['constip'] 
++$record['light_head'] 
++$record['fatigue'] 
++$record['spch'] 
++$record['saliva'] 
++$record['swallow'] 
++$record['eating'] 
++$record['dress'] 
++$record['hygiene'] 
++$record['handwr'] 
++$record['hobby'] 
++$record['turn'] 
++$record['trem'] 
++$record['out_bed'] 
++$record['walk'] 
++$record['freeze'] 
++$record['spch_motor'] 
++$record['face_exp'] 
++$record['rig_neck'] 
++$record['rig_rue'] 
++$record['rig_lue'] 
++$record['rig_rle'] 
++$record['rig_lle'] 
++$record['fngtp_r'] 
++$record['fngtp_l'] 
++$record['hndmv_r'] 
++$record['hndmv_l'] 
++$record['pro_r'] 
++$record['pro_l'] 
++$record['toe_r'] 
++$record['toe_l'] 
++$record['leg_r'] 
++$record['leg_l'] 
++$record['chair'] 
++$record['gait'] 
++$record['freez'] 
++$record['pos_stab'] 
++$record['posture'] 
++$record['mvmnt'] 
++$record['postrem_r'] 
++$record['postrem_l'] 
++$record['kintrem_r'] 
++$record['kintrem_l'] 
++$record['trem_rue'] 
++$record['trem_lue'] 
++$record['trem_rle'] 
++$record['trem_lle'] 
++$record['trem_lip'] 
++$record['const_trem'] 
++$record['time_dys']
++$record['func_dys'];
+   
+$scores['updrs_motor'] = 
+$record['spch_motor'] 
++$record['face_exp'] 
++$record['rig_neck'] 
++$record['rig_rue'] 
++$record['rig_lue'] 
++$record['rig_rle'] 
++$record['rig_lle'] 
++$record['fngtp_r'] 
++$record['fngtp_l'] 
++$record['hndmv_r'] 
++$record['hndmv_l'] 
++$record['pro_r'] 
++$record['pro_l'] 
++$record['toe_r'] 
++$record['toe_l'] 
++$record['leg_r'] 
++$record['leg_l'] 
++$record['chair'] 
++$record['gait'] 
++$record['freez'] 
++$record['pos_stab'] 
++$record['posture'] 
++$record['mvmnt'] 
++$record['postrem_r'] 
++$record['postrem_l'] 
++$record['kintrem_r'] 
++$record['kintrem_l'] 
++$record['trem_rue'] 
++$record['trem_lue'] 
++$record['trem_rle'] 
++$record['trem_lle'] 
++$record['trem_lip'] 
++$record['const_trem'] ;
+
+$scores['updrs_trem'] = 
+$record['postrem_r'] 
++$record['postrem_l'] 
++$record['kintrem_r'] 
++$record['kintrem_l'] 
++$record['trem_rue'] 
++$record['trem_lue'] 
++$record['trem_rle'] 
++$record['trem_lle'] 
++$record['trem_lip'] 
++$record['const_trem'] ;
+
+$scores['updrs_pigd'] = 
+$record['chair'] 
++$record['gait'] 
++$record['freez'] 
++$record['pos_stab'] 
++$record['posture'] 
++$record['mvmnt'] ;
+
+
+//save scores
+$result = $db->update('updrs', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

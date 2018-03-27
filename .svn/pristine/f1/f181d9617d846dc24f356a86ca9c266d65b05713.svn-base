@@ -1,0 +1,89 @@
+table{@}spielberger
+title{@}Spielberger Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes: 
+numeric{@}i21{@}21:{@}1{@}4
+select{@}i21_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i22{@}22:{@}1{@}4
+select{@}i22_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i23{@}23:{@}1{@}4
+select{@}i23_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i24{@}24:{@}1{@}4
+select{@}i24_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i25{@}25:{@}1{@}4
+select{@}i25_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i26{@}26:{@}1{@}4
+select{@}i26_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i27{@}27:{@}1{@}4
+select{@}i27_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i28{@}28:{@}1{@}4
+select{@}i28_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i29{@}29:{@}1{@}4
+select{@}i29_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i30{@}30:{@}1{@}4
+select{@}i30_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i31{@}31:{@}1{@}4
+select{@}i31_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i32{@}32:{@}1{@}4
+select{@}i32_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i33{@}33:{@}1{@}4
+select{@}i33_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i34{@}34:{@}1{@}4
+select{@}i34_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i35{@}35:{@}1{@}4
+select{@}i35_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i36{@}36:{@}1{@}4
+select{@}i36_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i37{@}37:{@}1{@}4
+select{@}i37_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i38{@}38:{@}1{@}4
+select{@}i38_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i39{@}39:{@}1{@}4
+select{@}i39_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}i40{@}40:{@}1{@}4
+select{@}i40_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}total{@}Total:
+select{@}total_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c21{@}cat_21:
+select{@}c21_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c22{@}cat_22:
+select{@}c22_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c23{@}cat_23:
+select{@}c23_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c24{@}cat_24:
+select{@}c24_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c25{@}cat_25:
+select{@}c25_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c26{@}cat_26:
+select{@}c26_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c27{@}cat_27:
+select{@}c27_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c28{@}cat_28:
+select{@}c28_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c29{@}cat_29:
+select{@}c29_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c30{@}cat_30:
+select{@}c30_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c31{@}cat_31:
+select{@}c31_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c32{@}cat_32:
+select{@}c32_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c33{@}cat_33:
+select{@}c33_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c34{@}cat_34:
+select{@}c34_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c35{@}cat_35:
+select{@}c35_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c36{@}cat_36:
+select{@}c36_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c37{@}cat_37:
+select{@}c37_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c38{@}cat_38:
+select{@}c38_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c39{@}cat_39:
+select{@}c39_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}c40{@}cat_40:
+select{@}c40_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

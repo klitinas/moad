@@ -1,0 +1,310 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_neuropsych extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "neuropsych";           // test_names.Test_name
+        $this->table = 'neuropsych';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Neuropsychological Testing");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<MY TITLE>");		
+
+		$notes = $this->form->addElement('text', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+
+		$this->addHeader("WAIS-III");		
+
+		//$this->form->addElement('static','hdr','FOR ALL ENTRIES ANSWER 1,2,3,4 OR NA:');
+
+		$dig_sym = $this->form->addElement('text', 'dig_sym', 'Digit Symbol (coding):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dig_sym', 'Enter numeric value', 'numeric', 'client');
+	
+		$matrix = $this->form->addElement('text', 'matrix', 'Matrix Reasoning:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('matrix', 'Enter numeric value', 'numeric', 'client');
+		
+		$dig_for = $this->form->addElement('text', 'dig_for', 'Digit FW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dig_for', 'Enter numeric value', 'numeric', 'client');
+		
+		$dig_back = $this->form->addElement('text', 'dig_back', 'Digit BW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dig_back', 'Enter numeric value', 'numeric', 'client');
+
+		$digit_total = $this->form->addElement('text', 'digit_total', 'Digit BW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('digit_total', 'Enter numeric value', 'numeric', 'client');
+
+		$info = $this->form->addElement('text', 'info', 'Information:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('info', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("CVLT-II");		
+
+		$cvlt1 = $this->form->addElement('text', 'cvlt1', 'CVLT-1:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvlt1', 'Enter numeric value', 'numeric', 'client');
+
+		$cvlt2 = $this->form->addElement('text', 'cvlt2', 'CVLT-2:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvlt2', 'Enter numeric value', 'numeric', 'client');
+
+		$cvlt3 = $this->form->addElement('text', 'cvlt3', 'CVLT-3:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvlt3', 'Enter numeric value', 'numeric', 'client');
+
+		$cvlt4 = $this->form->addElement('text', 'cvlt4', 'CVLT-4:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvlt4', 'Enter numeric value', 'numeric', 'client');
+
+		$cvlt5 = $this->form->addElement('text', 'cvlt5', 'CVLT-5:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvlt5', 'Enter numeric value', 'numeric', 'client');
+
+		$cvltstm = $this->form->addElement('text', 'cvltstm', 'CVLT-STM:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvltstm', 'Enter numeric value', 'numeric', 'client');
+
+		$cvtltm = $this->form->addElement('text', 'cvtltm', 'CVLT-LTM:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvtltm', 'Enter numeric value', 'numeric', 'client');
+
+		$cvltrec = $this->form->addElement('text', 'cvltrec', 'RECOGNITION:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('cvltrec', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("REACTION TIME TEST");		
+		//$total = $this->form->addElement('static','total','Calculated total:');
+
+		$b_rt_m = $this->form->addElement('text', 'b_rt_m', 'RXN R/L:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('b_rt_m', 'Enter numeric value', 'numeric', 'client');
+
+		$rx_sd = $this->form->addElement('text', 'rx_sd', '- - - - - SD:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('rx_sd', 'Enter numeric value', 'numeric', 'client');
+
+		$ch_rt_m = $this->form->addElement('text', 'ch_rt_m', 'CHOICE:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('ch_rt_m', 'Enter numeric value', 'numeric', 'client');
+
+		$ch_sd = $this->form->addElement('text', 'ch_sd', '- - - - - SD:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('ch_sd', 'Enter numeric value', 'numeric', 'client');
+
+		$co_rt_m = $this->form->addElement('text', 'co_rt_m', 'CONDITIONAL:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('co_rt_m', 'Enter numeric value', 'numeric', 'client');
+
+		$co_sd = $this->form->addElement('text', 'co_sd', '- - - - - SD:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('co_sd', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("D-KEFS");		
+
+		$str1 = $this->form->addElement('text', 'str1', 'STROOP-I:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('str1', 'Enter numeric value', 'numeric', 'client');
+
+		$str2 = $this->form->addElement('text', 'str2', 'STROOP-II:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('str2', 'Enter numeric value', 'numeric', 'client');
+
+		$str3 = $this->form->addElement('text', 'str3', 'STROOP-III:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('str3', 'Enter numeric value', 'numeric', 'client');
+
+		$str4 = $this->form->addElement('text', 'str4', 'STROOP-IV:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('str4', 'Enter numeric value', 'numeric', 'client');
+
+		$sort1 = $this->form->addElement('text', 'sort1', 'SORTING-1:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sort1', 'Enter numeric value', 'numeric', 'client');
+
+		$sort2 = $this->form->addElement('text', 'sort2', 'SORTING-2:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sort2', 'Enter numeric value', 'numeric', 'client');
+
+		$s_rec1 = $this->form->addElement('text', 's_rec1', 'RECOGN-1:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('s_rec1', 'Enter numeric value', 'numeric', 'client');
+
+		$s_rec2 = $this->form->addElement('text', 's_rec2', 'RECOGN-2:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('s_rec2', 'Enter numeric value', 'numeric', 'client');
+
+		$s_rec2 = $this->form->addElement('text', 's_rec2', 'RECOGN-2:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('s_rec2', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("FAS");		
+
+		$dkvf_f = $this->form->addElement('text', 'dkvf_f', 'F:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dkvf_f', 'Enter numeric value', 'numeric', 'client');
+
+		$dkvf_a = $this->form->addElement('text', 'dkvf_a', 'A:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dkvf_a', 'Enter numeric value', 'numeric', 'client');
+
+		$dkvf_s = $this->form->addElement('text', 'dkvf_s', 'S:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dkvf_s', 'Enter numeric value', 'numeric', 'client');
+
+		$dk_anim = $this->form->addElement('text', 'dk_anim', 'ANIMALS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('dk_anim', 'Enter numeric value', 'numeric', 'client');
+
+		$fas_raw = $this->form->addElement('text', 'fas_raw', 'FAS TOTAL:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('fas_raw', 'Enter numeric value', 'numeric', 'client');
+
+		$fas_sc = $this->form->addElement('text', 'fas_sc', 'FAS SCALED:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('fas_sc', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("TRAIL MAKING TEST");		
+
+		$tmt1 = $this->form->addElement('text', 'tmt1', 'TMT 1:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('tmt1', 'Enter numeric value', 'numeric', 'client');
+
+		$tmt2 = $this->form->addElement('text', 'tmt2', 'TMT 2:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('tmt2', 'Enter numeric value', 'numeric', 'client');
+
+		$tmt3 = $this->form->addElement('text', 'tmt3', 'TMT 3:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('tmt3', 'Enter numeric value', 'numeric', 'client');
+
+		$tmt4 = $this->form->addElement('text', 'tmt4', 'TMT 4:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('tmt4', 'Enter numeric value', 'numeric', 'client');
+
+		$tmt5 = $this->form->addElement('text', 'tmt5', 'TMT 5:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('tmt5', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("WMS III");
+
+		$vr_1 = $this->form->addElement('text', 'vr_1', 'Design A:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('vr_1', 'Enter numeric value', 'numeric', 'client');		
+
+		$vr_2 = $this->form->addElement('text', 'vr_2', 'Design B:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('vr_2', 'Enter numeric value', 'numeric', 'client');	
+
+		$vr_3 = $this->form->addElement('text', 'vr_3', 'Design C:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('vr_3', 'Enter numeric value', 'numeric', 'client');	
+
+		$vr_4 = $this->form->addElement('text', 'vr_4', 'Design D:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('vr_4', 'Enter numeric value', 'numeric', 'client');	
+
+		$vr_5 = $this->form->addElement('text', 'vr_5', 'Design E:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('vr_5', 'Enter numeric value', 'numeric', 'client');	
+
+		$t_vr = $this->form->addElement('text', 't_vr', 'TOTAL:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('t_vr', 'Enter numeric value', 'numeric', 'client');	
+
+		$t_vr_sc = $this->form->addElement('text', 't_vr_sc', 'SCALED:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('t_vr_sc', 'Enter numeric value', 'numeric', 'client');	
+
+		$this->addHeader("DRS");
+
+		$this->form->addElement('static','hdr','ATT');
+		$drs_att = $this->form->addElement('text', 'drs_att', '-- RAW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('drs_att', 'Enter numeric value', 'numeric', 'client');
+
+		$d_att_am = $this->form->addElement('text', 'd_att_am', '-- AMSS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_att_am', 'Enter numeric value', 'numeric', 'client');
+
+		$d_att_per = $this->form->addElement('text', 'd_att_per', '-- PERCENT:', array('size' => 50, 'maxlength' => 255));
+		//$this->addRule('drs_att', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("<MY TITLE>");
+		$this->form->addElement('static','hdr','I/P');
+		$drs_ip = $this->form->addElement('text', 'drs_ip', '-- RAW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('drs_ip', 'Enter numeric value', 'numeric', 'client');
+
+		$d_iam = $this->form->addElement('text', 'd_iam', '-- AMSS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_iam', 'Enter numeric value', 'numeric', 'client');
+
+		$d_iper = $this->form->addElement('text', 'd_iper', '-- PERCENT:', array('size' => 50, 'maxlength' => 255));
+
+
+		$this->addHeader("<MY TITLE>");
+		$this->form->addElement('static','hdr','CONST');
+		$drs_con = $this->form->addElement('text', 'drs_con', '-- RAW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('drs_con', 'Enter numeric value', 'numeric', 'client');
+
+		$d_co_am = $this->form->addElement('text', 'd_co_am', '-- AMSS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_co_am', 'Enter numeric value', 'numeric', 'client');
+
+		$d_co_per = $this->form->addElement('text', 'd_co_per', '-- PERCENT:', array('size' => 50, 'maxlength' => 255));
+
+		$this->addHeader("<MY TITLE>");
+		$this->form->addElement('static','hdr','CONCEPT');
+		$drs_cept = $this->form->addElement('text', 'drs_cept', '-- RAW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('drs_cept', 'Enter numeric value', 'numeric', 'client');
+
+		$d_ce_am = $this->form->addElement('text', 'd_ce_am', '-- AMSS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_ce_am', 'Enter numeric value', 'numeric', 'client');
+
+		$d_ce_per = $this->form->addElement('text', 'd_ce_per', '-- PERCENT:', array('size' => 50, 'maxlength' => 255));
+
+		$this->addHeader("<MY TITLE>");
+		$this->form->addElement('static','hdr','MEMORY');
+		$drs_mem = $this->form->addElement('text', 'drs_mem', '-- RAW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('drs_mem', 'Enter numeric value', 'numeric', 'client');
+
+		$d_m_am = $this->form->addElement('text', 'd_m_am', '-- AMSS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_m_am', 'Enter numeric value', 'numeric', 'client');
+
+		$d_m_per = $this->form->addElement('text', 'd_m_per', '-- PERCENT:', array('size' => 50, 'maxlength' => 255));
+
+
+		$this->addHeader("<MY TITLE>");
+		$this->form->addElement('static','hdr','TOTAL');
+		$t_raw = $this->form->addElement('text', 't_raw', '-- RAW:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('t_raw', 'Enter numeric value', 'numeric', 'client');
+
+		$t_amss = $this->form->addElement('text', 't_amss', '-- AMSS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('t_amss', 'Enter numeric value', 'numeric', 'client');
+
+		$aemss = $this->form->addElement('text', 'aemss', '-- AEMSS:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('aemss', 'Enter numeric value', 'numeric', 'client');
+
+		$t_amss_per = $this->form->addElement('text', 't_amss_per', '-- PERCENT:', array('size' => 50, 'maxlength' => 255));
+    }
+   
+   
+}
+?>

@@ -1,0 +1,133 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+
+
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from cognition WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+
+
+		// get corresponding CommentID
+		$cID=$CommentID;
+		$r = array();
+		$db->select("select SessionID from flag where CommentID = '$cID'",$r);
+		$r = $r[0];
+		$sessionID = $r['SessionID'];
+		//print_r($sessionID);	
+		$stripCID = substr($cID, 0, 6);
+		$r = array();
+		$db->select("select CommentID from flag where Test_name='demographics' and SessionID = '$sessionID' and CommentID like '$stripCID%'",$r);
+		$r = $r[0];
+		$demoCID=$r['CommentID'];
+
+
+
+$scores = array();
+
+
+$all = array(
+//$record['moca'],
+$record['mmse'],
+$record['pdcrs'],
+$record['cdr']);
+
+
+$temp_educ = $record['temp_educ'];
+if($temp_educ !== '') {
+//if($temp_educ !== NULL) {
+	$educ = $temp_educ;
+	$demoswitch = array();
+	$demoswitch['educ_year'] = $record['temp_educ'];
+	$DemoWhereCriteria = array('CommentID'=>$demoCID);
+	$db->update('demographics',$demoswitch,$DemoWhereCriteria);
+	$scores['temp_educ'] = '';
+} else {
+	$dquery = "select educ_year from demographics where commentID = '$demoCID'";
+    $dresult = array();
+	$db->select($dquery, $dresult);
+	$dresult=$dresult[0];
+	$educ=$dresult['educ_year'];
+}
+
+
+// Get total moca score
+$mocaSub = array(
+	$record['moca_visual'],
+	$record['moca_naming'],
+	$record['moca_attention'],
+	$record['moca_language'],
+	$record['moca_abstraction'],
+	$record['moca_delrecall'],
+	$record['moca_orientation'] );
+
+//$mocaCheck = array_push($mocaSub,$educ);
+$mocaCheck = $mocaSub;
+/*$mocaCheck = array(
+	$record['moca_visual'],
+	$record['moca_naming'],
+	$record['moca_attention'],
+	$record['moca_language'],
+	$record['moca_abstraction'],
+	$record['moca_delrecall'],
+	$record['moca_orientation'],
+	$educ );
+*/
+if ((array_search('', $mocaCheck)!==false) or (array_search('na', array_map('strtolower',$mocaCheck))!==false)) {
+	$scores['moca'] = NULL;
+
+} else {
+
+	$moca = array_sum($mocaSub);
+	if ( ($moca < 30 ) and ($educ < 13) ) {
+	//if ($educ < 13) {
+		$moca = $moca + 1;
+	}
+
+	$scores['moca'] = $moca;
+
+}
+
+// TO DO: why won't notes give instant UI feedback when changed on instrument page??
+if ((array_search('', $all)!==false) or (array_search('na', array_map('strtolower',$all))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+} else {
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$scores['notes']);
+}
+//save scores
+$result = $db->update('cognition', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save scores: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

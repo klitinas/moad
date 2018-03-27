@@ -1,0 +1,42 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 10:11:57
+         compiled from "/var/www/loris/modules/timepoint_list/templates/timepoint_list_controlpanel.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:203647260355031a5d05ef58-98606735%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '5dcf168857a8cf6dd8b8c61d501113fa809c1fa0' => 
+    array (
+      0 => '/var/www/loris/modules/timepoint_list/templates/timepoint_list_controlpanel.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '203647260355031a5d05ef58-98606735',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'isDataEntryPerson' => 0,
+    'candID' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031a5d08ff58_48994090',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031a5d08ff58_48994090')) {function content_55031a5d08ff58_48994090($_smarty_tpl) {?>
+<?php if ($_smarty_tpl->tpl_vars['isDataEntryPerson']->value) {?>
+<button class="btn btn-primary" onclick="location.href='main.php?test_name=create_timepoint&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'">Create time point</button>
+<?php } else { ?>
+Create time point
+<?php }?>
+<?php if ($_smarty_tpl->tpl_vars['isDataEntryPerson']->value) {?>
+<button class="btn btn-primary" onclick="location.href='main.php?test_name=candidate_parameters&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'">Edit Candidate Info</button>
+<?php } else { ?>
+Edit Candidate Info
+<?php }?>
+<?php }} ?>

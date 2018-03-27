@@ -1,0 +1,102 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 03:10:43
+         compiled from "/var/www/loris/modules/imaging_browser/templates/imaging_session_controlpanel.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:6219832535524fea3f27f41-49595872%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '0b8c7ea301935f53872f9d26a68ab5060623a0b4' => 
+    array (
+      0 => '/var/www/loris/modules/imaging_browser/templates/imaging_session_controlpanel.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '6219832535524fea3f27f41-49595872',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'subject' => 0,
+    'prevTimepoint' => 0,
+    'nextTimepoint' => 0,
+    'tarchive' => 0,
+    'backURL' => 0,
+    'mantis' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5524fea407c1b1_88574640',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5524fea407c1b1_88574640')) {function content_5524fea407c1b1_88574640($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/xnat/Smarty/smarty3/plugins/function.html_options.php';
+?><!-- Control Panel -->
+    <?php if ($_smarty_tpl->tpl_vars['subject']->value['backURL']!='') {?><h3>Navigation</h3><?php }?>
+    <ul><?php if ($_smarty_tpl->tpl_vars['subject']->value['backURL']!='') {?>
+        <li><a href="<?php echo $_smarty_tpl->tpl_vars['subject']->value['backURL'];?>
+"><img class='img-navigation-array' src="images/left.gif" alt="Back"><img class='img-navigation-array' src="images/left.gif" alt="Back">&nbsp;Back to list</a></li><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['subject']->value['prevTimepoint']['URL']!='') {?><li><a href="<?php echo $_smarty_tpl->tpl_vars['subject']->value['prevTimepoint']['URL'];?>
+">&nbsp;&nbsp;&nbsp;<img class='img-navigation-array' src="images/left.gif" alt="Prev">&nbsp;Previous</a></li><?php }?>
+       	<?php if ($_smarty_tpl->tpl_vars['subject']->value['nextTimepoint']['URL']!='') {?><li><a href="<?php echo $_smarty_tpl->tpl_vars['subject']->value['nextTimepoint']['URL'];?>
+">&nbsp;&nbsp;&nbsp;<img class='img-navigation-array' src="images/right.gif" alt="Next">&nbsp;Next</a></li><?php }?>
+    </ul>
+    <?php if ($_smarty_tpl->tpl_vars['prevTimepoint']->value['URL']!=''&&$_smarty_tpl->tpl_vars['nextTimepoint']->value['URL']!='') {?><br><br><?php }?>
+    <h3>3D Panel Viewing</h3>
+    <ul>
+       	<li><input id="bboverlay" type="button" class="button" accesskey="c" value="3D+Overlay"></li>
+       	<li><input id="bbonly" type="button" class="button" accesskey="d" value="3D Only"></li>
+    </ul>
+
+    <h3>Links</h3>
+    <ul>
+        <li><a href="main.php?test_name=mri_parameter_form&candID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['candid'];?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['sessionID'];?>
+&commentID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['ParameterFormCommentID'];?>
+">MRI Parameter Form</a></li>
+        <li><a href="main.php?test_name=radiology_review&candID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['candid'];?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['sessionID'];?>
+&commentID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['RadiologyReviewCommentID'];?>
+">Radiology Review</a></li>
+        <?php  $_smarty_tpl->tpl_vars['tarchive'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['tarchive']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['subject']->value['tarchiveids']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['tarchive']->key => $_smarty_tpl->tpl_vars['tarchive']->value) {
+$_smarty_tpl->tpl_vars['tarchive']->_loop = true;
+?>
+        <li><a href="main.php?test_name=dicom_archive&subtest=viewDetails&tarchiveID=<?php echo $_smarty_tpl->tpl_vars['tarchive']->value['TarchiveID'];?>
+&backURL=<?php echo rawurlencode($_smarty_tpl->tpl_vars['backURL']->value);?>
+">DICOM Archive(s) <?php echo $_smarty_tpl->tpl_vars['tarchive']->value['TarchiveID'];?>
+</a></li><?php } ?>
+        <?php if ($_smarty_tpl->tpl_vars['mantis']->value) {?>
+            <li><a target="mantis" href="<?php echo $_smarty_tpl->tpl_vars['mantis']->value;?>
+">Report a Bug (Mantis)</a></li>
+        <?php }?>
+    </ul>
+
+    <h3>Visit Controls</h3>
+    <ul>
+        <li><a href="#" onClick="javascript:open_popup('feedback_mri_popup.php?sessionID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['sessionID'];?>
+')">Visit Level Feedback</a></li>
+    </ul>
+
+    <h3>Visit QC</h3>
+    <?php if ($_smarty_tpl->tpl_vars['subject']->value['has_permission']) {?><form action='' method='post'><?php }?>
+    <div class='div-controlpanel-bottom'>
+    <dl>
+        <dt>QC Status</dt>
+       	<dt class='dt-qc-status'><?php if ($_smarty_tpl->tpl_vars['subject']->value['has_permission']) {
+echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['subject']->value['status_options'],'selected'=>$_smarty_tpl->tpl_vars['subject']->value['mriqcstatus'],'name'=>'visit_status','tabindex'=>1,'class'=>"form-control input-sm",'style'=>"width:100px"),$_smarty_tpl);
+} else {
+echo $_smarty_tpl->tpl_vars['subject']->value['mriqcstatus'];
+}?></dt>
+       	<dt>QC Pending</dt>
+       	<dt><?php if ($_smarty_tpl->tpl_vars['subject']->value['has_permission']) {
+echo smarty_function_html_options(array('options'=>$_smarty_tpl->tpl_vars['subject']->value['pending_options'],'selected'=>$_smarty_tpl->tpl_vars['subject']->value['mriqcpending'],'name'=>'visit_pending','tabindex'=>2,'class'=>"form-control input-sm",'style'=>"width:100px"),$_smarty_tpl);
+} else {
+if ($_smarty_tpl->tpl_vars['subject']->value['mriqcpending']=='Y') {?>Yes<?php } else { ?>No<?php }
+}?></dt>
+    </dl>
+    <?php if ($_smarty_tpl->tpl_vars['subject']->value['has_permission']) {?><input class="button" type="submit" accesskey="s" value="Save" name="save_changes"><?php }?>
+</div>
+</td>
+<td class='td-cpanel-fake'><table class='table-cpanel-fake'></table>
+<!-- /Control Panel -->
+<?php }} ?>

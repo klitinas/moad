@@ -1,0 +1,324 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-18 05:48:45
+         compiled from "/var/www/loris/modules/statistics/templates/form_stats_behavioural.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:20227818095509742dda8bc4-13451585%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '29079641f1cde5f0df2537d6eeb18e78e9dd2d85' => 
+    array (
+      0 => '/var/www/loris/modules/statistics/templates/form_stats_behavioural.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '20227818095509742dda8bc4-13451585',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'CurrentProject' => 0,
+    'Projects' => 0,
+    'Centers' => 0,
+    'center' => 0,
+    'Visits' => 0,
+    'visit' => 0,
+    'behaviour' => 0,
+    'CurrentSite' => 0,
+    'dde' => 0,
+    'InstrumentsTable' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5509742df0af04_87939202',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5509742df0af04_87939202')) {function content_5509742df0af04_87939202($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/xnat/Smarty/smarty3/plugins/function.html_options.php';
+?><div id="data_entry">
+<h2 class="statsH2">Data Entry Statistics  <?php if ($_smarty_tpl->tpl_vars['CurrentProject']->value) {?> for <?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['Name'];?>
+ <?php }?></h2>
+<?php echo '<script'; ?>
+ type="text/javascript" src="GetJS.php?Module=statistics&file=form_stats_behavioural.js"><?php echo '</script'; ?>
+>
+<div class="col-sm-2">
+  <?php echo smarty_function_html_options(array('id'=>"BehaviouralProject",'options'=>$_smarty_tpl->tpl_vars['Projects']->value,'name'=>"BehaviouralProject",'selected'=>$_smarty_tpl->tpl_vars['CurrentProject']->value['ID'],'class'=>"form-control"),$_smarty_tpl);?>
+
+</div>
+<button class="btn btn-primary btn-sm" onClick="updateBehaviouralTab()">Submit Query</button>
+<br><br>
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <!-- <div class="col-xs-10 col-xs-offset-1" style="overflow-y:auto"> -->
+    <div class="table-scroll-static" id="content">
+      <table class="table table-primary table-bordered">
+          <thead>
+              <tr class="info">
+                  <th class="static-col headcol spacer"> </th>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                      <th id='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+' class="centers tip" colspan="3" onclick="hideStats(this)" data-toggle="tooltip" data-placement="bottom" data-container="body" title="Click to minimize">
+                          <?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+
+                      </th>
+                  <?php } ?>
+                 <!--  <th colspan="3" id='total'>Total</th>
+                  <th rowspan="2"></th> -->
+              </tr>
+              <tr class="info">
+                <th class="static-col headcol">Visit</th>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+?>
+                   <th class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+'>Completed</th>
+                   <th class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+'>Created</th>
+                   <th nowrap="nowrap">% Completion</th>
+                  <?php } ?>
+                   
+                   <!-- <th class='total'>Completed</th>
+                   <th class='total'>Created</th>
+                   <th>% Completion</th> -->
+                </tr>
+          </thead>
+          <tbody>
+              <?php  $_smarty_tpl->tpl_vars['visit'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['visit']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['Visits']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['visit']->key => $_smarty_tpl->tpl_vars['visit']->value) {
+$_smarty_tpl->tpl_vars['visit']->_loop = true;
+?>
+                  <tr>
+                      <td class="static-col headcol"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['visit']->value, 'UTF-8');?>
+</td>
+                      <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                          <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']][$_smarty_tpl->tpl_vars['visit']->value]['complete'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                          <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']][$_smarty_tpl->tpl_vars['visit']->value]['total'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                          <td><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']][$_smarty_tpl->tpl_vars['visit']->value]['percent'])===null||$tmp==='' ? "0" : $tmp);?>
+%</td>
+                      <?php } ?>
+                      <!-- <td class="total"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['complete'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class="total"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['total'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class="total"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['percent'])===null||$tmp==='' ? "0" : $tmp);?>
+%</td>
+                      <td> <a href='main.php?test_name=statistics_site&CenterID=<?php echo $_smarty_tpl->tpl_vars['center']->value['NumericID'];?>
+&ProjectID=<?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['ID'];?>
+'>Please Click Here</a></td> -->
+                   </tr>
+              <?php } ?>
+              <tr>
+                  <td class="static-col headcol">Total</td>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                      <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['complete'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['total'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class="total"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['percent'])===null||$tmp==='' ? "0" : $tmp);?>
+%</td>
+                  <?php } ?>
+              </tr>
+              <tr>
+                  <td class="static-col headcol pis">Per Instrument Stats</td>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                      <td id='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+PIS' class="pis" colspan="3">
+                          <a href='main.php?test_name=statistics&submenu=statistics_site&CenterID=<?php echo $_smarty_tpl->tpl_vars['center']->value['NumericID'];?>
+&ProjectID=<?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['ID'];?>
+'>Please Click Here</a>
+                      </td>
+                  <?php } ?>
+              </tr>
+          </tbody>
+      </table>
+      </div>
+    <!-- </div> -->
+    <a class="left carousel-control"  id="scrollLeft" href="#carousel-example-generic">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" id="scrollRight" href="#carousel-example-generic" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
+
+<b><a href='main.php?test_name=statistics&submenu=statistics_site&CenterID=<?php echo $_smarty_tpl->tpl_vars['CurrentSite']->value['ID'];?>
+&ProjectID=<?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['ID'];?>
+'>Click here for breakdown per participant <?php if ($_smarty_tpl->tpl_vars['CurrentSite']->value) {?> for <?php echo $_smarty_tpl->tpl_vars['CurrentSite']->value['Name'];?>
+ <?php }?> <?php if ($_smarty_tpl->tpl_vars['CurrentProject']->value) {?> <?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['Name'];?>
+ <?php }?></a></b>
+
+<h2 class="statsH2">Double Data Entry Statistics:</h2>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="table-scroll-static" id="contentDD">
+      <table class="table table-primary table-bordered">
+        <thead>
+              <tr class="info">
+                  <td class="static-col headcolDD spacer"> </td>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                      <th id='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DD' class="centers tip" colspan="3" onclick="hideStats(this)">
+                          <?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+
+                      </th>
+                  <?php } ?>
+                 <!--  <th colspan="3" id='total'>Total</th>
+                  <th rowspan="2"></th> -->
+              </tr>
+              <tr class="info">
+                  <th class="static-col headcolDD">Visit</th>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+?>
+                   <th class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DD'>Completed</th>
+                   <th class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DD'>Created</th>
+                   <th nowrap="nowrap">% Completion</th>
+                  <?php } ?>
+                   
+                   <!-- <th class='total'>Completed</th>
+                   <th class='total'>Created</th>
+                   <th>% Completion</th> -->
+              </tr>
+        </thead>
+        <tbody>
+              <?php  $_smarty_tpl->tpl_vars['visit'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['visit']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['Visits']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['visit']->key => $_smarty_tpl->tpl_vars['visit']->value) {
+$_smarty_tpl->tpl_vars['visit']->_loop = true;
+?>
+                  <tr>
+                      <td class="static-col headcolDD"><?php echo mb_strtoupper($_smarty_tpl->tpl_vars['visit']->value, 'UTF-8');?>
+</td>
+                      <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                          <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DD'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['dde']->value[$_smarty_tpl->tpl_vars['center']->value['ID']][$_smarty_tpl->tpl_vars['visit']->value]['complete'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                          <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DD'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['dde']->value[$_smarty_tpl->tpl_vars['center']->value['ID']][$_smarty_tpl->tpl_vars['visit']->value]['total'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                          <td><?php echo (($tmp = @$_smarty_tpl->tpl_vars['dde']->value[$_smarty_tpl->tpl_vars['center']->value['ID']][$_smarty_tpl->tpl_vars['visit']->value]['percent'])===null||$tmp==='' ? "0" : $tmp);?>
+%</td>
+                      <?php } ?>
+                      <!-- <td class="total"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['complete'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class="total"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['total'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class="total"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['behaviour']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['percent'])===null||$tmp==='' ? "0" : $tmp);?>
+%</td>
+                      <td> <a href='main.php?test_name=statistics_site&CenterID=<?php echo $_smarty_tpl->tpl_vars['center']->value['NumericID'];?>
+&ProjectID=<?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['ID'];?>
+'>Please Click Here</a></td> -->
+                   </tr>
+              <?php } ?>
+              <tr>
+                  <td class="static-col headcolDD">Total</td>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                      <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DD'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['dde']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['complete'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DD'><?php echo (($tmp = @$_smarty_tpl->tpl_vars['dde']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['total'])===null||$tmp==='' ? "0" : $tmp);?>
+</td>
+                      <td class="totalDD"><?php echo (($tmp = @$_smarty_tpl->tpl_vars['dde']->value[$_smarty_tpl->tpl_vars['center']->value['ID']]['all']['percent'])===null||$tmp==='' ? "0" : $tmp);?>
+%</td>
+                  <?php } ?>
+              </tr>
+              <tr>
+                  <td class="static-col headcolDD pis">Per Instrument Stats</td>
+                  <?php  $_smarty_tpl->tpl_vars['center'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['center']->_loop = false;
+ $_smarty_tpl->tpl_vars['centername'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Centers']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['center']->key => $_smarty_tpl->tpl_vars['center']->value) {
+$_smarty_tpl->tpl_vars['center']->_loop = true;
+ $_smarty_tpl->tpl_vars['centername']->value = $_smarty_tpl->tpl_vars['center']->key;
+?>
+                      <td id='<?php echo $_smarty_tpl->tpl_vars['center']->value['LongName'];?>
+DDPIS' class="pis" colspan="3">
+                          <a href='main.php?test_name=statistics&submenu=statistics_dd_site&CenterID=<?php echo $_smarty_tpl->tpl_vars['center']->value['NumericID'];?>
+&ProjectID=<?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['ID'];?>
+'>Please Click Here</a>
+                      </td>
+                  <?php } ?>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+    <a class="left carousel-control"  id="scrollLeftDD" href="#carousel-example-generic">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" id="scrollRightDD" href="#carousel-example-generic" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
+
+<br />
+</div>
+
+<b><a href='main.php?test_name=statistics&submenu=statistics_dd_site&CenterID=<?php echo $_smarty_tpl->tpl_vars['CurrentSite']->value['ID'];?>
+&ProjectID=<?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['ID'];?>
+'>Click here for breakdown per participant for <?php if ($_smarty_tpl->tpl_vars['CurrentSite']->value) {?> for <?php echo $_smarty_tpl->tpl_vars['CurrentSite']->value['Name'];?>
+ <?php }?> <?php if ($_smarty_tpl->tpl_vars['CurrentProject']->value) {?> <?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['Name'];?>
+ <?php }?></a></b>
+
+<br />
+        <?php echo $_smarty_tpl->tpl_vars['InstrumentsTable']->value;?>
+
+</div>
+
+<?php }} ?>

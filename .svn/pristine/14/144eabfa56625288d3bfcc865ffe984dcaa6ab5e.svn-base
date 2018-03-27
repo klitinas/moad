@@ -1,0 +1,32 @@
+[2015-03-19 06:22:23] Processing files 
+
+
+[2015-03-19 06:22:23] The CandID: 4 Doesn't exist
+
+[2015-03-19 06:22:23] Error: the process completed with errors 
+
+
+[2015-03-19 06:22:37] Processing files 
+
+
+[2015-03-19 06:22:37] Setting up variables 
+
+
+[2015-03-19 06:22:37] file-name : uploadtest.tar, and sourcelocation/data/incoming/uploadtest.tar.gz
+
+[2015-03-19 06:22:37]  visitlabel V4 pscid: 0001and candid: 480194
+
+[2015-03-19 06:22:37] The File /data/incoming/uploadtest.tar.gz is nowuntarred into /data/incoming/ 
+
+
+[2015-03-19 06:22:37] The Environment Variables are now set 
+
+
+[2015-03-19 06:22:37] Running DICOM 
+
+
+[2015-03-19 06:22:37] cmd : perl /data/loris/data/dicom-archive/dicomTar.pl /data/incoming//uploadtest /data/loris/data/tarchive -clobber -database -profile prod 
+
+
+[2015-03-19 06:22:37] 
+

@@ -1,0 +1,161 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+// input is item value + which y/n is = 1
+function yesnomap($strRecord, $strIsTrue) {
+
+	
+	
+	
+		if (strcasecmp($strRecord, $strIsTrue) !== 0) {
+			$bln = 0;
+		}
+		else {
+			$bln = 1;
+		}
+		return $bln;
+		
+}
+
+// check vals are y/n
+function checkentry($entry, $allowable) {
+
+	if (!in_array($entry,$allowable)) {
+		$ok=0;
+	}
+	else {
+		$ok=1;
+	}
+	return $ok;
+}
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from gds WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_smell = '';
+
+$all = array(
+$record['i01'],
+$record['i02'],
+$record['i03'],
+$record['i04'],
+$record['i05'],
+$record['i06'],
+$record['i07'],
+$record['i08'],
+$record['i09'],
+$record['i10'],
+$record['i11'],
+$record['i12'],
+$record['i13'],
+$record['i14'],
+$record['i15'],
+$record['i16'],
+$record['i17'],
+$record['i18'],
+$record['i19'],
+$record['i20'],
+$record['i21'],
+$record['i22'],
+$record['i23'],
+$record['i24'],
+$record['i25'],
+$record['i26'],
+$record['i27'],
+$record['i28'],
+$record['i29'],
+$record['i30']);
+
+
+/* $ok=checkentry($record['i30'],array('y','n'));
+if ($ok == 0) {
+	//$scores['total'] = NULL;
+	$total = '';
+}
+else { */  
+$total = 
+yesnomap($record['i01'],'n')
++yesnomap($record['i02'],'y')
++yesnomap($record['i03'],'y')
++yesnomap($record['i04'],'y')
++yesnomap($record['i05'],'n')
++yesnomap($record['i06'],'y')
++yesnomap($record['i07'],'n')
++yesnomap($record['i08'],'y')
++yesnomap($record['i09'],'n')
++yesnomap($record['i10'],'y')
++yesnomap($record['i11'],'y')
++yesnomap($record['i12'],'y')
++yesnomap($record['i13'],'y')
++yesnomap($record['i14'],'y')
++yesnomap($record['i15'],'n')
++yesnomap($record['i16'],'y')
++yesnomap($record['i17'],'y')
++yesnomap($record['i18'],'y')
++yesnomap($record['i19'],'n')
++yesnomap($record['i20'],'y')
++yesnomap($record['i21'],'n')
++yesnomap($record['i22'],'y')
++yesnomap($record['i23'],'y')
++yesnomap($record['i24'],'y')
++yesnomap($record['i25'],'y')
++yesnomap($record['i26'],'y')
++yesnomap($record['i27'],'n')
++yesnomap($record['i28'],'y')
++yesnomap($record['i29'],'n')
++yesnomap($record['i30'],'n');
+
+
+if(empty($total)) {
+    $scores['total']          = 'Unable to calculate';
+
+} else {
+    $scores['total']          = round($total, 2);
+
+}
+
+// TO DO: why won't notes give instant UI feedback when changed on instrument page??
+if ((array_search('', $all)!==false) or (array_search('na', array_map('strtolower',$all))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+	$scores['total'] = NULL;
+} else {
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$scores['notes']);
+}
+
+//save scores
+$result = $db->update('gds', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

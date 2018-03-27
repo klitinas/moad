@@ -1,0 +1,61 @@
+table{@}gfq
+title{@}GFQ Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes: 
+numeric{@}a{@}A:
+select{@}a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}b{@}B:
+select{@}b_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}c{@}C:
+select{@}c_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}d{@}D:
+select{@}d_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}e{@}E:
+select{@}e_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}f{@}F:
+select{@}f_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}g{@}G:
+select{@}g_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}h{@}H:
+select{@}h_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}I{@}I:
+select{@}I_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}j{@}J:
+select{@}j_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}k{@}K:
+select{@}k_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}l{@}L:
+select{@}l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}m{@}M:
+select{@}m_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}n{@}N:
+select{@}n_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}o{@}O:
+select{@}o_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}p{@}P:
+select{@}p_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}q{@}Q:
+select{@}q_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}r{@}R:
+select{@}r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}s{@}S:
+select{@}s_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}t{@}T:
+select{@}t_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}u{@}U:
+select{@}u_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}v{@}V:
+select{@}v_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}w{@}W:
+select{@}w_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}x{@}X:
+select{@}x_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}y{@}Y:
+select{@}y_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}z{@}Z:
+select{@}z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}aa{@}AA:
+select{@}aa_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

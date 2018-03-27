@@ -1,0 +1,134 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+function recalc($inVal) {
+
+	switch ($inVal) {
+		case 1:
+			$calcVal = 4;
+			break;
+		case 2:
+			$calcVal = 3;
+			break;
+		case 3:
+			$calcVal = 2;
+			break;
+		case 4:
+			$calcVal = 1;
+			break;
+		}
+		
+		return $calcVal;
+		
+}		
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from aesc WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+
+$scores['c01'] = recalc($record['i01']);
+$scores['c02'] = recalc($record['i02']);
+$scores['c03'] = recalc($record['i03']);
+$scores['c04'] = recalc($record['i04']);
+$scores['c05'] = recalc($record['i05']);
+$scores['c06'] = $record['i06'];
+$scores['c07'] = recalc($record['i07']);
+$scores['c08'] = recalc($record['i08']);
+$scores['c09'] = recalc($record['i09']);
+$scores['c10'] = $record['i10'];
+$scores['c11'] = $record['i11'];
+$scores['c12'] = recalc($record['i12']);
+$scores['c13'] = recalc($record['i13']);
+$scores['c14'] = recalc($record['i14']);
+$scores['c15'] = recalc($record['i15']);
+$scores['c16'] = recalc($record['i16']);
+$scores['c17'] = recalc($record['i17']);
+$scores['c18'] = recalc($record['i18']);
+
+$total = 
+$scores['c01'] +
+$scores['c02'] +
+$scores['c03'] +
+$scores['c04'] +
+$scores['c05'] +
+$scores['c06'] +
+$scores['c07'] +
+$scores['c08'] +
+$scores['c09'] +
+$scores['c10'] +
+$scores['c11'] +
+$scores['c12'] +
+$scores['c13'] +
+$scores['c14'] +
+$scores['c15'] +
+$scores['c16'] +
+$scores['c17'] +
+$scores['c18'];
+
+if (array_search('', $scores)!==false) {
+	$total=NULL;
+}
+
+
+
+if(empty($total)) {
+    // $scores['total']          = 'Unable to calculate';
+    //print "Could not save total score: ". $result->getMessage();
+    $scores['total']          = NULL;
+	//exit(3);
+
+} else {
+    $scores['total']          = round($total, 2);
+
+}
+
+
+
+//save scores
+$result = $db->update('aesc', $scores, $WhereCriteria);
+foreach($scores as $field) {
+  if (empty($field)) {
+  	$total = NULL;
+  		//system('python /var/www/loris/python/test.py');
+  		//system("/usr/bin/zenity --info --text 'warning: need all fields' 2> /tmp/trash");
+  		system("su xnat -c 'xhost local:xnat; zenity --question --text 'continue or cancel? ' 2>/tmp/trash");
+
+    break; // get out of foreach loop
+  }
+} 
+
+    //$result->getMessage();
+
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

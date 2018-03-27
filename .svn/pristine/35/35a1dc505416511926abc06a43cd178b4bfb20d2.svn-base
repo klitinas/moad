@@ -1,0 +1,241 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+
+
+function dosubtotal($fields,$r) {
+	$arr = array();
+
+	foreach ($fields as $f) {
+		$arr[$f] = $r[$f];
+	}
+	
+	if ((array_search('', $arr)!==false) or (array_search('na', array_map('strtolower',$arr))!==false)) {
+		$tot=NULL;
+	} else {
+		$tot = array_sum($arr);
+	}
+
+
+	return $tot;
+}
+
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from mdsupdrs WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_smell = '';
+
+//$scores['updrs_total'] = 
+$tot = array(
+$record['cog'], 
+$record['hal_psy'], 
+$record['dep'], 
+$record['anxious'], 
+$record['apathy'], 
+$record['dds'], 
+$record['sleep'], 
+$record['day_sleep'], 
+$record['pain'], 
+$record['urine'], 
+$record['constip'], 
+$record['light_head'], 
+$record['fatigue'], 
+$record['spch'], 
+$record['saliva'], 
+$record['swallow'], 
+$record['eating'], 
+$record['dress'], 
+$record['hygiene'], 
+$record['handwr'], 
+$record['hobby'], 
+$record['turn'], 
+$record['trem'], 
+$record['out_bed'], 
+$record['walk'], 
+$record['freeze'], 
+$record['spch_motor'], 
+$record['face_exp'], 
+$record['rig_neck'], 
+$record['rig_rue'], 
+$record['rig_lue'], 
+$record['rig_rle'], 
+$record['rig_lle'], 
+$record['fngtp_r'], 
+$record['fngtp_l'], 
+$record['hndmv_r'], 
+$record['hndmv_l'], 
+$record['pro_r'], 
+$record['pro_l'], 
+$record['toe_r'], 
+$record['toe_l'], 
+$record['leg_r'], 
+$record['leg_l'],
+$record['chair'], 
+$record['gait'], 
+$record['freez'], 
+$record['pos_stab'], 
+$record['posture'], 
+$record['mvmnt'], 
+$record['postrem_r'], 
+$record['postrem_l'], 
+$record['kintrem_r'], 
+$record['kintrem_l'], 
+$record['trem_rue'], 
+$record['trem_lue'], 
+$record['trem_rle'], 
+$record['trem_lle'], 
+$record['trem_lip'], 
+$record['const_trem'], 
+$record['time_dys'],
+$record['func_dys'] );
+//add 'motfluc_time_off','fluct_impact','fluct_complex','pain_off_dys'?
+
+
+if ((array_search('', $tot)!==false) or (array_search('na', array_map('strtolower',$tot))!==false)) {
+	$scores['updrs_total']=NULL;
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+	$scores['updrs_total'] = array_sum($tot);
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+
+//$scores['updrs_motor'] = 
+$motor = array(
+$record['spch_motor'], 
+$record['face_exp'], 
+$record['rig_neck'], 
+$record['rig_rue'], 
+$record['rig_lue'], 
+$record['rig_rle'], 
+$record['rig_lle'], 
+$record['fngtp_r'], 
+$record['fngtp_l'], 
+$record['hndmv_r'], 
+$record['hndmv_l'], 
+$record['pro_r'], 
+$record['pro_l'], 
+$record['toe_r'], 
+$record['toe_l'], 
+$record['leg_r'], 
+$record['leg_l'], 
+$record['chair'], 
+$record['gait'], 
+$record['freez'], 
+$record['pos_stab'], 
+$record['posture'], 
+$record['mvmnt'], 
+$record['postrem_r'], 
+$record['postrem_l'], 
+$record['kintrem_r'], 
+$record['kintrem_l'], 
+$record['trem_rue'], 
+$record['trem_lue'], 
+$record['trem_rle'], 
+$record['trem_lle'], 
+$record['trem_lip'], 
+$record['const_trem'] );
+
+if ((array_search('', $motor)!==false) or (array_search('na', array_map('strtolower',$motor))!==false)) {
+	$scores['updrs_motor']=NULL;
+} else {
+	$scores['updrs_motor'] = array_sum($motor);
+}
+
+$trem = array(
+$record['postrem_r'], 
+$record['postrem_l'],
+$record['kintrem_r'],
+$record['kintrem_l'], 
+$record['trem_rue'], 
+$record['trem_lue'], 
+$record['trem_rle'], 
+$record['trem_lle'], 
+$record['trem_lip'], 
+$record['const_trem'] );
+
+if ((array_search('', $trem)!==false) or (array_search('na', array_map('strtolower',$trem))!==false)) {
+	$scores['updrs_trem']=NULL;
+} else {
+	$scores['updrs_trem'] = array_sum($trem);
+}
+
+
+$pigd = array(
+$record['chair'], 
+$record['gait'],
+$record['freez'], 
+$record['pos_stab'], 
+$record['posture'],
+$record['mvmnt'] );
+
+if ((array_search('', $pigd)!==false) or (array_search('na', array_map('strtolower',$pigd))!==false)) {
+	$scores['updrs_pigd']=NULL;
+} else {
+	$scores['updrs_pigd'] = array_sum($pigd);
+}
+
+// new fields one per section
+$fields_one = array('cog','hal_psy','dep','anxious','apathy','dds','sleep','day_sleep','pain','urine','constip','light_head','fatigue'); 
+$scores['total_one'] = dosubtotal($fields_one,$record); 
+
+$fields_two = array('spch','saliva','swallow','eating','dress','hygiene','handwr','hobby','turn','trem','out_bed','walk','freeze'); 
+$scores['total_two'] = dosubtotal($fields_two,$record);
+
+$fields_four = array('time_dys','func_dys','motfluc_time_off','fluct_impact','fluct_complex','pain_off_dys');
+$scores['total_four'] = dosubtotal($fields_four,$record);
+
+// redundant, remove one of these at some point
+$scores['total_three'] = $scores['updrs_motor'];
+
+// Adding sections in 4.3-4.6:
+//((Total hours OFF/Total hours awake)*100)
+/*$mot_fluc_pct_off = ($record['motfluc_hrs_off'] / $record['motfluc_hrs_awake']) * 100;
+$scores['mot_fluc_pct_off'] = $mot_fluc_pct_off;
+
+$pct_off_dys = ($record['pain_hrs_off_dys'] / $record['pain_off_hrs']) * 100;
+$scores['pct_off_dys'] = $pct_off_dys;
+
+*/
+
+//save scores
+$result = $db->update('mdsupdrs', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

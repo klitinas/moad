@@ -1,0 +1,108 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-18 05:48:48
+         compiled from "/var/www/loris/modules/statistics/templates/form_stats_reliability.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:589057705550974308693e7-00526853%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'eac1c8c7b07dfb9833f8cd220eec5ebcfecfbb9f' => 
+    array (
+      0 => '/var/www/loris/modules/statistics/templates/form_stats_reliability.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '589057705550974308693e7-00526853',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'CurrentSite' => 0,
+    'Sites' => 0,
+    'Projects' => 0,
+    'CurrentProject' => 0,
+    'reliability_completion' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_550974308bf2a1_64439152',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_550974308bf2a1_64439152')) {function content_550974308bf2a1_64439152($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/xnat/Smarty/smarty3/plugins/function.html_options.php';
+?><?php echo '<script'; ?>
+ type="text/javascript" src="GetJS.php?Module=statistics&file=form_stats_reliability.js"><?php echo '</script'; ?>
+>
+<div id="reliability">
+    <h2 class="statsH2">Reliability Statistics<?php if ($_smarty_tpl->tpl_vars['CurrentSite']->value) {?> for <?php echo $_smarty_tpl->tpl_vars['CurrentSite']->value['Name'];
+}?></h2>
+        <div class="col-sm-2 col-xs-12 form-group">
+            <?php echo smarty_function_html_options(array('id'=>"ReliabilitySite",'options'=>$_smarty_tpl->tpl_vars['Sites']->value,'name'=>"ReliabilitySite",'selected'=>$_smarty_tpl->tpl_vars['CurrentSite']->value['ID'],'class'=>"form-control"),$_smarty_tpl);?>
+   
+        </div>
+        <div class="col-sm-2 col-xs-12 form-group">
+            <?php echo smarty_function_html_options(array('id'=>"ReliabilityProject",'options'=>$_smarty_tpl->tpl_vars['Projects']->value,'name'=>"ReliabilityProject",'selected'=>$_smarty_tpl->tpl_vars['CurrentProject']->value['ID'],'class'=>"form-control"),$_smarty_tpl);?>
+
+        </div>  
+        <div class="col-sm-3 col-xs-12 form-group"> 
+            <button onClick="updateReliabilityTab()" class="btn btn-primary btn-small col-xs-12">Submit Query</button>
+        </div>
+    <br><br>
+    <div class="row">
+    <div class="table-reponsive">
+        <table class="table table-primary table-bordered">
+            <thead>
+                <tr class="info">
+                    <th>Reliablity Module</th>
+                    <th>Total Flagged</th>
+                    <th>Total Complete</th>
+                    <th>Total Reliable</th>
+                    <th>Percent Complete</th>
+                    <th>Percent Reliable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['item'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['item']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['name'] = 'item';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['reliability_completion']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total']);
+?>
+                    <tr>
+                        <td><?php echo $_smarty_tpl->tpl_vars['reliability_completion']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['name'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['reliability_completion']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['total'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['reliability_completion']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['complete'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['reliability_completion']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['reliable'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['reliability_completion']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['percent_complete'];?>
+%</td>
+                        <td><?php echo $_smarty_tpl->tpl_vars['reliability_completion']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['percent_reliable'];?>
+%</td>
+                    </tr>
+                <?php endfor; endif; ?>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<?php }} ?>

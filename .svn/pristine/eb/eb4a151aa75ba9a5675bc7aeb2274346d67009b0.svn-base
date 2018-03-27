@@ -1,0 +1,296 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-19 08:05:08
+         compiled from "/var/www/loris/modules/data_team_helper/templates/form_data_team_helper.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1833569741550ae5a4cad244-12979767%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'a225866fb55b02d7f21d7831c66cb19cb069da07' => 
+    array (
+      0 => '/var/www/loris/modules/data_team_helper/templates/form_data_team_helper.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1833569741550ae5a4cad244-12979767',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'visitLabels' => 0,
+    'name' => 0,
+    'visit_label' => 0,
+    'form' => 0,
+    'test_name' => 0,
+    'percent_completed' => 0,
+    'error' => 0,
+    'elements_list_names' => 0,
+    'Visit_label_list' => 0,
+    'element' => 0,
+    'elements_array' => 0,
+    'completion_status' => 0,
+    'sent_to_dcc_status' => 0,
+    'FeedbackList' => 0,
+    'thread_list_data' => 0,
+    'Conflicts' => 0,
+    'conflict' => 0,
+    'show' => 0,
+    'Incomplete_candidates' => 0,
+    'incomp_cands' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_550ae5a4dd9b20_65229091',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_550ae5a4dd9b20_65229091')) {function content_550ae5a4dd9b20_65229091($_smarty_tpl) {?><div class="row">
+    <div class="col-sm-8 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading" onclick="hideFilter();">
+                Selection Filter
+            </div>
+            <div class="panel-body" id="panel-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <label class="col-sm-4">Visit_labels</label>
+                            <div class="col-sm-8">
+                                <select name="visit_label" onchange="changefieldOptions()" id="visit_label" class="form-control input-sm">
+                                    <?php  $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['name']->_loop = false;
+ $_smarty_tpl->tpl_vars['val'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['visitLabels']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['name']->key => $_smarty_tpl->tpl_vars['name']->value) {
+$_smarty_tpl->tpl_vars['name']->_loop = true;
+ $_smarty_tpl->tpl_vars['val']->value = $_smarty_tpl->tpl_vars['name']->key;
+?>
+                                       <?php if ($_smarty_tpl->tpl_vars['name']->value==$_smarty_tpl->tpl_vars['visit_label']->value) {?>
+                                           <option value="<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+" selected="selected"> <?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+</option>
+                                        <?php } else { ?>
+                                            <option value="<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+"> <?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+</option>
+                                        <?php }?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <label class="col-sm-4">Instruments:</label>
+                            <div class="col-sm-8">
+                                <select name="instrument" id="instrument" class="form-control input-sm"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <label class="col-sm-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['users']['label'];?>
+</label>
+                            <div class="col-sm-8">
+                                <?php echo $_smarty_tpl->tpl_vars['form']->value['users']['html'];?>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <div class="col-sm-8 col-sm-offset-4">
+                                <input type="submit" name="filter" value="Show Data" id="filter" class="btn btn-sm btn-primary col-xs-12"/>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="test_name" value="data_team_helper" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<?php if ($_smarty_tpl->tpl_vars['test_name']->value) {?>
+    <table border="1" valign="top" class="std">
+        <tr>
+            <td> Current Single Data_entry Completion Percentage (for <b><?php echo $_smarty_tpl->tpl_vars['visit_label']->value;?>
+</b> and instrument: <b><?php echo $_smarty_tpl->tpl_vars['test_name']->value;?>
+</b>)&nbsp&nbsp  </td>
+            <td> &nbsp&nbsp&nbsp<?php echo $_smarty_tpl->tpl_vars['percent_completed']->value;?>
+%</td>
+        </tr>
+        
+    </table>
+<?php }?>
+<table>
+  <tr>
+ 		<td>
+ 		<p style="font-family:arial;color:red;font-size:13px;">Currently only Behavioural Feedbacks tied to fields are shown</p>
+ </tr>
+</table>
+
+
+<form>
+<table class="table table-primary table-bordered dynamictable" border="0">
+    <?php if ($_smarty_tpl->tpl_vars['form']->value['total']['html']) {?>
+        <tr class="nohover">
+            <td colspan="7" align="right" style="border: none;" class="nohover">Showing <em><?php echo $_smarty_tpl->tpl_vars['form']->value['total']['html'];?>
+</em> results.</td>
+        </tr>
+    <?php }?>
+    <?php  $_smarty_tpl->tpl_vars['error'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['error']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['errors']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['error']->key => $_smarty_tpl->tpl_vars['error']->value) {
+$_smarty_tpl->tpl_vars['error']->_loop = true;
+?>
+        <tr>
+            <td nowrap="nowrap" colspan="7" class="error"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</td>
+        </tr>
+    <?php } ?>
+    <tr class="info">
+        <th>Visit label</th>
+        <th>Instrument</th>
+        <th>Names (Instrument_Fieldname)</th>
+        <th>Link to BVL feedback</th>
+        <th> Feedback Status</th>
+        <th> Conflict</th>
+        <th> Incomplete candidates</th>
+    </tr>
+    
+    <?php $_smarty_tpl->tpl_vars["show"] = new Smarty_variable("TRUE", null, 0);?>
+    <?php  $_smarty_tpl->tpl_vars['element'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['element']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['elements_list_names']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_smarty_tpl->tpl_vars['smarty']->value['foreach']['element_name']['index']=-1;
+foreach ($_from as $_smarty_tpl->tpl_vars['element']->key => $_smarty_tpl->tpl_vars['element']->value) {
+$_smarty_tpl->tpl_vars['element']->_loop = true;
+ $_smarty_tpl->tpl_vars['smarty']->value['foreach']['element_name']['index']++;
+?>
+        <?php $_smarty_tpl->tpl_vars["visit_label"] = new Smarty_variable($_smarty_tpl->tpl_vars['Visit_label_list']->value[$_smarty_tpl->getVariable('smarty')->value['foreach']['element_name']['index']], null, 0);?>
+        <tr>
+            
+            
+            <td nowrap="nowrap" valign="top"><?php echo $_smarty_tpl->tpl_vars['visit_label']->value;?>
+</td>
+            
+            
+            <td nowrap="nowrap" valign="top"><?php echo $_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['sourcefrom'];?>
+</td>
+            
+            <!---Create a hidden field to keep track of the visit_labels--->
+            <!--input type="hidden" name="<?php echo $_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['visit_label'];?>
+" value ="<?php echo $_smarty_tpl->tpl_vars['visit_label']->value;?>
+"/-->
+            
+            
+            
+            <?php $_smarty_tpl->tpl_vars["source_field"] = new Smarty_variable($_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['sourcefield'], null, 0);?>
+            <td nowrap="nowrap" valign="top"> <a href="AjaxHelper.php?Module=data_team_helper&script=get_csv.php&instrument=<?php echo $_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['sourcefrom'];?>
+&sourcefield=<?php echo $_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['sourcefield'];?>
+&completion_status=<?php echo $_smarty_tpl->tpl_vars['completion_status']->value;?>
+&sent_to_dcc_status=<?php echo $_smarty_tpl->tpl_vars['sent_to_dcc_status']->value;?>
+" target="_blank"> <span title = '<?php echo $_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['Description'];?>
+'> <?php echo $_smarty_tpl->tpl_vars['element']->value;?>
+</span></a></td>
+            
+            
+            
+            <?php if (isset($_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['FeedbackList'])) {?>
+        	    <td nowrap="nowrap" width="40" valign="top">
+        	       <?php  $_smarty_tpl->tpl_vars['FeedbackList'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['FeedbackList']->_loop = false;
+ $_smarty_tpl->tpl_vars['feedback'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['FeedbackList']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['FeedbackList']->key => $_smarty_tpl->tpl_vars['FeedbackList']->value) {
+$_smarty_tpl->tpl_vars['FeedbackList']->_loop = true;
+ $_smarty_tpl->tpl_vars['feedback']->value = $_smarty_tpl->tpl_vars['FeedbackList']->key;
+?>
+                       <a href="#" onClick="javascript:window.open('feedback_bvl_popup.php?test_name=<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['test_name'];?>
+&candID=<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['CandID'];?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['session_id'];?>
+&commentID=<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['commentid'];?>
+#<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['feedbackid'];?>
+','bvl_feedback','width=900,height=500,toolbar=no,location=no,status=yes,scrollbars=yes,resizable=yes')"><?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['PSCID'];?>
+_<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['visit_label'];?>
+</a>
+        	       <?php } ?>
+                </td>
+                
+                <td nowrap="nowrap" width="40" valign="top" bgcolor="<?php echo $_smarty_tpl->tpl_vars['thread_list_data']->value[$_smarty_tpl->getVariable('smarty')->value['section']['thread']['index']]['QC_color'];?>
+">
+                    <?php  $_smarty_tpl->tpl_vars['FeedbackList'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['FeedbackList']->_loop = false;
+ $_smarty_tpl->tpl_vars['feedback'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['FeedbackList']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['FeedbackList']->key => $_smarty_tpl->tpl_vars['FeedbackList']->value) {
+$_smarty_tpl->tpl_vars['FeedbackList']->_loop = true;
+ $_smarty_tpl->tpl_vars['feedback']->value = $_smarty_tpl->tpl_vars['FeedbackList']->key;
+?>
+        				 <!--font solid color="<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['QC_color'];?>
+"><b> <?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['Status'];?>
+</b> </font-->
+        				 <!--font solid color="<?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['QC_color'];?>
+"><b> <?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['Status'];?>
+</b> </font-->
+        				 <?php echo $_smarty_tpl->tpl_vars['FeedbackList']->value['Status'];?>
+
+        		    <?php } ?>
+        	    </td>
+            <?php } else { ?>
+        	    <td class="error" nowrap="nowrap" valign="top"> N/A </td>
+        	    <td class="error" nowrap="nowrap" valign="top"> N/A</td>
+            <?php }?>
+    
+            
+            <td nowrap="nowrap" valign="top">
+                <?php  $_smarty_tpl->tpl_vars['conflict'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['conflict']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['Conflicts']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['conflict']->key => $_smarty_tpl->tpl_vars['conflict']->value) {
+$_smarty_tpl->tpl_vars['conflict']->_loop = true;
+?>
+                    <?php if (($_smarty_tpl->tpl_vars['conflict']->value['FieldName']==$_smarty_tpl->tpl_vars['elements_array']->value[$_smarty_tpl->tpl_vars['element']->value][$_smarty_tpl->tpl_vars['visit_label']->value]['sourcefield'])&&$_smarty_tpl->tpl_vars['conflict']->value['visit_label']==$_smarty_tpl->tpl_vars['visit_label']->value) {?>
+                        <a href="main.php?Question=<?php echo $_smarty_tpl->tpl_vars['conflict']->value['FieldName'];?>
+&Instruments=<?php echo $_smarty_tpl->tpl_vars['conflict']->value['test_name_display'];?>
+&Visits=<?php echo $_smarty_tpl->tpl_vars['conflict']->value['visit_label'];?>
+&PSCID=<?php echo $_smarty_tpl->tpl_vars['conflict']->value['PSCID'];?>
+&site=all&test_name=conflict_resolver" target="_blank"><?php echo $_smarty_tpl->tpl_vars['conflict']->value['PSCID'];?>
+_<?php echo $_smarty_tpl->tpl_vars['conflict']->value['visit_label'];?>
+<BR></a>
+                    <?php }?>
+                <?php } ?>
+            </td>
+    
+            
+        
+            <?php if ($_smarty_tpl->tpl_vars['show']->value=='TRUE') {?>
+                <td valign="top" width="23%" nowrap="nowrap" rowspan="<?php echo $_smarty_tpl->tpl_vars['form']->value['total']['html'];?>
+">
+                    <?php  $_smarty_tpl->tpl_vars['incomp_cands'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['incomp_cands']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['Incomplete_candidates']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['incomp_cands']->key => $_smarty_tpl->tpl_vars['incomp_cands']->value) {
+$_smarty_tpl->tpl_vars['incomp_cands']->_loop = true;
+?>
+                        <a href="main.php?test_name=<?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['test_name'];?>
+&candID=<?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['candid'];?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['ID'];?>
+&commentID=<?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['commentid'];?>
+" target="_blank">
+                            <?php if (strpos($_smarty_tpl->tpl_vars['incomp_cands']->value['commentid'],"DDE")!==false) {?>
+                            DDE_<?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['PSCID'];?>
+_<?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['visit_label'];?>
+ <BR> <?php } else { ?> <?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['PSCID'];?>
+_<?php echo $_smarty_tpl->tpl_vars['incomp_cands']->value['visit_label'];?>
+ <BR><?php }?>
+                        </a>
+                    <?php } ?>
+                	<?php $_smarty_tpl->tpl_vars["show"] = new Smarty_variable("FALSE", null, 0);?>
+                </td>
+            <?php }?>
+        </tr>
+    <?php } ?>
+<tr>
+<td nowrap="nowrap" colspan="7">
+<!--input class="button" style="width: 100px" name="fire_away" value="Save" type="submit" /-->
+</td>
+</tr>
+</table>
+</form>
+
+<?php }} ?>

@@ -1,0 +1,102 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 10:12:24
+         compiled from "/var/www/loris/modules/next_stage/templates/form_next_stage.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:187395945755031a78183d73-67894407%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '2b16cacd37afa5493208ed3b74613c3c835e361b' => 
+    array (
+      0 => '/var/www/loris/modules/next_stage/templates/form_next_stage.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '187395945755031a78183d73-67894407',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'success' => 0,
+    'candID' => 0,
+    'sessionID' => 0,
+    'form' => 0,
+    'error' => 0,
+    'stage' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031a781e8aa5_94210195',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031a781e8aa5_94210195')) {function content_55031a781e8aa5_94210195($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['success']->value) {?>
+
+<p>Next stage started. <a href="main.php?test_name=instrument_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+">Click here to continue</a>.</p>
+
+<?php } else { ?>
+
+<br />
+<form method="post" name="next_stage" id="next_stage">
+    <?php  $_smarty_tpl->tpl_vars['error'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['error']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['errors']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['error']->key => $_smarty_tpl->tpl_vars['error']->value) {
+$_smarty_tpl->tpl_vars['error']->_loop = true;
+?>
+        <div class="col-sm-12">
+            <label class="error col-sm-12"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</label>
+        </div>
+    <?php } ?>
+    <div class="form-group row">
+        <label class="col-sm-2">Date of <?php echo $_smarty_tpl->tpl_vars['stage']->value;?>
+</label>
+        <div class="col-sm-4 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['date1']['html'];?>
+</div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2">Retype Date of <?php echo $_smarty_tpl->tpl_vars['stage']->value;?>
+</label>
+        <div class="col-sm-4 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['date2']['html'];?>
+</div>
+    </div>
+    <?php if ($_smarty_tpl->tpl_vars['form']->value['SubprojectID']['html']!='') {?>
+    <div class="form-group row">
+        <label class="col-sm-2">SubprojectID:</label>
+        <div class="col-sm-4 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['SubprojectID']['html'];?>
+</div>
+    </div>
+    <?php }?>
+
+    <?php if ($_smarty_tpl->tpl_vars['form']->value['scan_done']['html']!='') {?>
+    <div class="form-group row">
+        <label class="col-sm-2">Scan Done:</label>
+        <div class="col-sm-4 col-md-3"><?php echo $_smarty_tpl->tpl_vars['form']->value['scan_done']['html'];?>
+</div>
+    </div>
+    <?php }?>
+    <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-4 col-md-3"><input class="btn btn-primary col-xs-12" type="submit" name="fire_away" value="Start <?php echo $_smarty_tpl->tpl_vars['stage']->value;?>
+" /></div>
+    </div>
+
+    <?php echo $_smarty_tpl->tpl_vars['form']->value['hidden'];?>
+
+</form>
+<div class="row">
+    <?php if ($_smarty_tpl->tpl_vars['stage']->value=="Screening") {?>
+    <p>The date of <?php echo mb_strtolower($_smarty_tpl->tpl_vars['stage']->value, 'UTF-8');?>
+ is the <em>administration date of the first behavioural instrument</em>.</p>
+    <?php } elseif ($_smarty_tpl->tpl_vars['stage']->value=="Visit") {?>
+    <p>The date of <?php echo mb_strtolower($_smarty_tpl->tpl_vars['stage']->value, 'UTF-8');?>
+ is the <em>date of the first MR scan</em>.<br />
+    In case the scan was not done,<br />enter the date of the subject"s visit to the site.<br />
+    <em>Scan Done Field</em>: As per Scanning and Evaluation Report.</p>
+    <?php } else { ?>
+    <p>This is not a valid stage to start!</p>
+    <?php }?>
+</div>
+
+<?php }?>
+
+<?php }} ?>

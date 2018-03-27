@@ -1,0 +1,9 @@
+table{@}cdr
+title{@}CDR Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+textarea{@}notes{@}Notes: 
+select{@}Examiner{@}Examiner{@}NULL=>''
+numeric{@}cdr{@}Rating:
+select{@}cdr_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

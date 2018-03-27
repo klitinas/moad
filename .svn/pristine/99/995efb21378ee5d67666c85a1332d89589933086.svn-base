@@ -1,0 +1,210 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_smell extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "smell";           // test_names.Test_name
+        $this->table = 'smell';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Smell Assessment (UPSIT)");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<MY TITLE>");		
+		$notes = $this->form->addElement('text', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+
+
+		$sm01 = $this->form->addElement('text', 'sm01', 'SMELL 01:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm01', 'Value must be numeric', 'numeric', 'client');
+		
+		$sm02 = $this->form->addElement('text', 'sm02', 'SMELL 02:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm02', 'Value must be numeric', 'numeric', 'client');
+
+		$sm03 = $this->form->addElement('text', 'sm03', 'SMELL 03:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm03', 'Value must be numeric', 'numeric', 'client');
+
+		$sm04 = $this->form->addElement('text', 'sm04', 'SMELL 04:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm04', 'Value must be numeric', 'numeric', 'client');
+
+		$sm05 = $this->form->addElement('text', 'sm05', 'SMELL 05:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm05', 'Value must be numeric', 'numeric', 'client');
+
+		$sm06 = $this->form->addElement('text', 'sm06', 'SMELL 06:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm06', 'Value must be numeric', 'numeric', 'client');
+
+		$sm07 = $this->form->addElement('text', 'sm07', 'SMELL 07:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm07', 'Value must be numeric', 'numeric', 'client');
+
+		$sm08 = $this->form->addElement('text', 'sm08', 'SMELL 08:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm08', 'Value must be numeric', 'numeric', 'client');
+
+		$sm09 = $this->form->addElement('text', 'sm09', 'SMELL 09:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm09', 'Value must be numeric', 'numeric', 'client');
+
+		$sm10 = $this->form->addElement('text', 'sm10', 'SMELL 10:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm10', 'Value must be numeric', 'numeric', 'client');
+
+		$sm11 = $this->form->addElement('text', 'sm11', 'SMELL 11:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm11', 'Value must be numeric', 'numeric', 'client');
+		
+		$sm12 = $this->form->addElement('text', 'sm12', 'SMELL 12:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm12', 'Value must be numeric', 'numeric', 'client');
+
+		$sm13 = $this->form->addElement('text', 'sm13', 'SMELL 13:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm13', 'Value must be numeric', 'numeric', 'client');
+
+		$sm14 = $this->form->addElement('text', 'sm14', 'SMELL 14:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm14', 'Value must be numeric', 'numeric', 'client');
+
+		$sm15 = $this->form->addElement('text', 'sm15', 'SMELL 15:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm15', 'Value must be numeric', 'numeric', 'client');
+
+		$sm16 = $this->form->addElement('text', 'sm16', 'SMELL 16:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm16', 'Value must be numeric', 'numeric', 'client');
+
+		$sm17 = $this->form->addElement('text', 'sm17', 'SMELL 17:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm17', 'Value must be numeric', 'numeric', 'client');
+
+		$sm18 = $this->form->addElement('text', 'sm18', 'SMELL 18:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm18', 'Value must be numeric', 'numeric', 'client');
+
+		$sm19 = $this->form->addElement('text', 'sm19', 'SMELL 19:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm19', 'Value must be numeric', 'numeric', 'client');
+
+		$sm20 = $this->form->addElement('text', 'sm20', 'SMELL 20:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm20', 'Value must be numeric', 'numeric', 'client');
+
+		$sm21 = $this->form->addElement('text', 'sm21', 'SMELL 21:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm21', 'Value must be numeric', 'numeric', 'client');
+		
+		$sm22 = $this->form->addElement('text', 'sm22', 'SMELL 22:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm22', 'Value must be numeric', 'numeric', 'client');
+
+		$sm23 = $this->form->addElement('text', 'sm23', 'SMELL 23:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm23', 'Value must be numeric', 'numeric', 'client');
+
+		$sm24 = $this->form->addElement('text', 'sm24', 'SMELL 24:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm24', 'Value must be numeric', 'numeric', 'client');
+
+		$sm25 = $this->form->addElement('text', 'sm25', 'SMELL 25:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm25', 'Value must be numeric', 'numeric', 'client');
+
+		$sm26 = $this->form->addElement('text', 'sm26', 'SMELL 26:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm26', 'Value must be numeric', 'numeric', 'client');
+
+		$sm27 = $this->form->addElement('text', 'sm27', 'SMELL 27:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm27', 'Value must be numeric', 'numeric', 'client');
+
+		$sm28 = $this->form->addElement('text', 'sm28', 'SMELL 28:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm28', 'Value must be numeric', 'numeric', 'client');
+
+		$sm29 = $this->form->addElement('text', 'sm29', 'SMELL 29:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm29', 'Value must be numeric', 'numeric', 'client');
+
+		$sm30 = $this->form->addElement('text', 'sm30', 'SMELL 30:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm30', 'Value must be numeric', 'numeric', 'client');
+
+		$sm31 = $this->form->addElement('text', 'sm31', 'SMELL 31:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm31', 'Value must be numeric', 'numeric', 'client');
+		
+		$sm32 = $this->form->addElement('text', 'sm32', 'SMELL 32:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm32', 'Value must be numeric', 'numeric', 'client');
+
+		$sm33 = $this->form->addElement('text', 'sm33', 'SMELL 33:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm33', 'Value must be numeric', 'numeric', 'client');
+
+		$sm34 = $this->form->addElement('text', 'sm34', 'SMELL 34:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm34', 'Value must be numeric', 'numeric', 'client');
+
+		$sm35 = $this->form->addElement('text', 'sm35', 'SMELL 35:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm35', 'Value must be numeric', 'numeric', 'client');
+
+		$sm36 = $this->form->addElement('text', 'sm36', 'SMELL 36:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm36', 'Value must be numeric', 'numeric', 'client');
+
+		$sm37 = $this->form->addElement('text', 'sm37', 'SMELL 37:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm37', 'Value must be numeric', 'numeric', 'client');
+
+		$sm38 = $this->form->addElement('text', 'sm38', 'SMELL 38:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm38', 'Value must be numeric', 'numeric', 'client');
+
+		$sm39 = $this->form->addElement('text', 'sm39', 'SMELL 39:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm39', 'Value must be numeric', 'numeric', 'client');
+
+		$sm40 = $this->form->addElement('text', 'sm40', 'SMELL 40:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('sm40', 'Value must be numeric', 'numeric', 'client');
+		
+		$smell_pct = $this->form->addElement('text', 'smell_pct', 'SMELL PCT:', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('smell_pct', 'Value must be numeric', 'numeric', 'client');
+
+		$total_smell = $this->form->addElement('static','total_smell','Calculated total:'); 
+    }
+   
+   
+}
+?>

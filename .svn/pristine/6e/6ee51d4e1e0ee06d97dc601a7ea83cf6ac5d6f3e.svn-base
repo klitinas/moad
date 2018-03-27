@@ -1,0 +1,157 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+function recalc($inVal) {
+	switch ($inVal) {
+		case 1:
+			$calcVal = 4;
+			break;
+		case 2:
+			$calcVal = 3;
+			break;
+		case 3:
+			$calcVal = 2;
+			break;
+		case 4:
+			$calcVal = 1;
+			break;
+		}
+		
+		return $calcVal;
+		
+}		
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from berlin WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+
+$scores['bmi'] = ($record['weight_lb']*703) / ($record['height_in'] * $record['height_in']);
+
+
+if (strcasecmp($record['i01'],'a') == 0) {
+	$tmp_01 = 1;
+} else {
+	$tmp_01 = 0;
+}
+
+$a = array('c','d');
+
+if (in_array($record['i02'],array('c','d'))) {
+	$tmp_02 = 1;
+} else {
+	$tmp_02 = 0;
+}
+
+if (in_array(strtolower($record['i03']),array('a','b'))) {
+	$tmp_03 = 1;
+} else {
+	$tmp_03 = 0;
+}
+
+if (strcasecmp($record['i04'],'a') == 0) {
+	$tmp_04 = 1;
+} else {
+	$tmp_04 = 0;
+}
+
+if (in_array(strtolower($record['i05']),array('a','b'))) {
+	$tmp_05 = 2;
+} else {
+	$tmp_05 = 0;
+}
+
+$sum_01 = $tmp_01 + $tmp_02 + $tmp_03 + $tmp_04 + $tmp_05;
+if ($sum_01 >= 2) {
+	$scores['cat_1'] = 'POSITIVE';
+	$s1 = 1;
+} else {
+	$scores['cat_1'] = 'NEGATIVE';
+	$s1 = 0;
+}
+
+
+if (in_array(strtolower($record['i06']),array('a','b'))) {
+	$tmp_06 = 1;
+} else {
+	$tmp_06 = 0;
+}
+
+
+if (in_array(strtolower($record['i07']),array('a','b'))) {
+	$tmp_07 = 1;
+} else {
+	$tmp_07 = 0;
+}
+
+if (strcasecmp($record['i08'],'a') == 0) {
+	$tmp_08 = 1;
+} else {
+	$tmp_08 = 0;
+}
+
+$sum_02 = $tmp_06 + $tmp_07 + $tmp_08;
+if ($sum_02 >= 2) {
+	$scores['cat_2'] = 'POSITIVE';
+	$s2 = 1;
+} else {
+	$scores['cat_2'] = 'NEGATIVE';
+	$s2 = 0;
+}
+
+if ( (strcasecmp($record['i10'],'y')) || ($scores['bmi'] >= 30) ) {
+	$scores['cat_3'] = 'POSITIVE';
+	$s3 = 1;
+} else {
+	$s3 = 0;
+	$scores['cat_3'] = 'NEGATIVE';
+}
+
+$sum_cat = $s1 + $s2 + $s3;
+
+if ($sum_cat >= 2) {
+	$scores['risk'] = 'HI';
+		//$scores['cat_2'] = 'POSITIVE';
+
+} else {
+		$scores['risk'] = 'LO';
+
+//	$scores['risk'] = 'LO';
+}
+
+
+
+//save scores
+$result = $db->update('berlin', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

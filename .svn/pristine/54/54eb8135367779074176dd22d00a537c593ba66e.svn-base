@@ -1,0 +1,301 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from pdq WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_smell = '';
+   
+$total = 
+($record['i01']
++$record['i02']
++$record['i03']
++$record['i04']
++$record['i05']
++$record['i06']
++$record['i07']
++$record['i08']
++$record['i09']
++$record['i10']
++$record['i11']
++$record['i12']
++$record['i13']
++$record['i14']
++$record['i15']
++$record['i16']
++$record['i17']
++$record['i18']
++$record['i19']
++$record['i20']
++$record['i21']
++$record['i22']
++$record['i23']
++$record['i24']
++$record['i25']
++$record['i26']
++$record['i27']
++$record['i28']
++$record['i29']
++$record['i30']
++$record['i31']
++$record['i32']
++$record['i33']
++$record['i34']
++$record['i35']
++$record['i36']
++$record['i37']
++$record['i38']
++$record['i39'] )
+/ 156 * 100;
+
+
+$all = array(
+$record['i01'],
+$record['i02'],
+$record['i03'],
+$record['i04'],
+$record['i05'],
+$record['i06'],
+$record['i07'],
+$record['i08'],
+$record['i09'],
+$record['i10'],
+$record['i11'],
+$record['i12'],
+$record['i13'],
+$record['i14'],
+$record['i15'],
+$record['i16'],
+$record['i17'],
+$record['i18'],
+$record['i19'],
+$record['i20'],
+$record['i21'],
+$record['i22'],
+$record['i23'],
+$record['i24'],
+$record['i25'],
+$record['i26'],
+$record['i27'],
+$record['i28'],
+$record['i29'],
+$record['i30'],
+$record['i31'],
+$record['i32'],
+$record['i33'],
+$record['i34'],
+$record['i35'],
+$record['i36'],
+$record['i37'],
+$record['i38'],
+$record['i39'] );
+
+
+
+// --------------------------
+$scores['mobility'] = round(
+($record['i01']
++$record['i02']
++$record['i03']
++$record['i04']
++$record['i05']
++$record['i06']
++$record['i07']
++$record['i08']
++$record['i09']
++$record['i10'])
+/ 40 * 100 , 2);
+
+$moball = array(
+$record['i01'],
+$record['i02'],
+$record['i03'],
+$record['i04'],
+$record['i05'],
+$record['i06'],
+$record['i07'],
+$record['i08'],
+$record['i09'],
+$record['i10']);
+
+if (array_search('', $moball)!==false) {
+	$scores['mobility']=NULL;
+}
+
+// --------------------
+
+$scores['adl'] = round(
+($record['i11']
++$record['i12']
++$record['i13']
++$record['i14']
++$record['i15']
++$record['i16'] )
+/ 24 * 100, 2);
+
+$adlall = array(
+$record['i11'],
+$record['i12'],
+$record['i13'],
+$record['i14'],
+$record['i15'],
+$record['i16'] );
+
+if (array_search('', $adlall)!==false) {
+	$scores['adl']=NULL;
+}
+
+// -----------------------
+$scores['emotion'] = round(
+($record['i17']
++$record['i18']
++$record['i19']
++$record['i20']
++$record['i21']
++$record['i22'] )
+/ 24 * 100, 2);
+
+$emotionall = array(
+$record['i17'],
+$record['i18'],
+$record['i19'],
+$record['i20'],
+$record['i21'],
+$record['i22'] );
+
+if (array_search('', $emotionall)!==false) {
+	$scores['emotion']=NULL;
+}
+
+// -----------------------
+
+$scores['stigma'] = round(
+( $record['i23']
++$record['i24']
++$record['i25']
++$record['i26'] )
+/ 16 * 100, 2);
+
+$stigmaall = array(
+$record['i23'],
+$record['i24'],
+$record['i25'],
++$record['i26'] );
+
+if (array_search('', $stigmaall)!==false) {
+	$scores['stigma']=NULL;
+}
+
+// ------------------------------
+$scores['social_support'] = round(
+($record['i27']
++$record['i28']
++$record['i29'] )
+/ 12 * 100, 2);
+
+$ssall = array(
+$record['i27'],
+$record['i28'],
+$record['i29'] );
+
+if (array_search('', $ssall)!==false) {
+	$scores['social_support']=NULL;
+}
+
+// --------------------------
+$scores['cognitions'] = round(
+($record['i30']
++$record['i31']
++$record['i32']
++$record['i33'] )
+/ 16 * 100, 2);
+
+$cogall = array(
+$record['i30'],
+$record['i31'],
+$record['i32'],
+$record['i33'] );
+
+if (array_search('', $cogall)!==false) {
+	$scores['cognitions']=NULL;
+}
+
+// --------------------------------
+$scores['communication'] = round(
+($record['i34']
++$record['i35']
++$record['i36'] )
+/ 12 * 100, 2);
+
+$commall = array(
+$record['i34'],
+$record['i35'],
+$record['i36'] );
+
+if (array_search('', $commall)!==false) {
+	$scores['communication']=NULL;
+}
+
+// ---------------------------------
+$scores['bodily_discomfort'] = round(
+($record['i37']
++$record['i38']
++$record['i39'] )
+/ 12 * 100, 2);
+
+$bodall = array(
+$record['i37'],
+$record['i38'],
+$record['i39'] );
+
+if (array_search('', $bodall)!==false) {
+	$scores['bodily_discomfort']=NULL;
+}
+
+// -----------------------------------
+if(empty($total)) {
+    $scores['total']          = 'Unable to calculate';
+
+} else {
+    $scores['total']          = round($total, 2);
+
+}
+
+if (array_search('', $all)!==false) {
+	$scores['total']=NULL;
+}
+//save scores
+$result = $db->update('pdq', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

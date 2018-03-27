@@ -1,0 +1,101 @@
+table{@}smell
+title{@}Smell Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+text{@}study_list{@}STUDY LIST :
+numeric{@}mmse{@}MMSE :
+text{@}smoke_p{@}SMOKE PREVIOUSLY (Y/N):
+text{@}smoke_c{@}SMOKE CURRENTLY (Y/N) :
+numeric{@}sm01{@}SMELL 01 :
+numeric{@}sm02{@}SMELL 02 :
+numeric{@}sm03{@}SMELL 03 :
+numeric{@}sm04{@}SMELL 04 :
+numeric{@}sm05{@}SMELL 05 :
+numeric{@}sm06{@}SMELL 06 :
+numeric{@}sm07{@}SMELL 07 :
+numeric{@}sm08{@}SMELL 08 :
+numeric{@}sm09{@}SMELL 09 :
+numeric{@}sm10{@}SMELL 10 :
+numeric{@}sm11{@}SMELL 11 :
+numeric{@}sm12{@}SMELL 12 :
+numeric{@}sm13{@}SMELL 13 :
+numeric{@}sm14{@}SMELL 14 :
+numeric{@}sm15{@}SMELL 15 :
+numeric{@}sm16{@}SMELL 16 :
+numeric{@}sm17{@}SMELL 17 :
+numeric{@}sm18{@}SMELL 18 :
+numeric{@}sm19{@}SMELL 19 :
+numeric{@}sm20{@}SMELL 20 :
+numeric{@}sm21{@}SMELL 21 :
+numeric{@}sm22{@}SMELL 22 :
+numeric{@}sm23{@}SMELL 23 :
+numeric{@}sm24{@}SMELL 24 :
+numeric{@}sm25{@}SMELL 25 :
+numeric{@}sm26{@}SMELL 26 :
+numeric{@}sm27{@}SMELL 27 :
+numeric{@}sm28{@}SMELL 28 :
+numeric{@}sm29{@}SMELL 29 :
+numeric{@}sm30{@}SMELL 30 :
+numeric{@}sm31{@}SMELL 31 :
+numeric{@}sm32{@}SMELL 32 :
+numeric{@}sm33{@}SMELL 33 :
+numeric{@}sm34{@}SMELL 34 :
+numeric{@}sm35{@}SMELL 35 :
+numeric{@}sm36{@}SMELL 36 :
+numeric{@}sm37{@}SMELL 37 :
+numeric{@}sm38{@}SMELL 38 :
+numeric{@}sm39{@}SMELL 39 :
+numeric{@}sm40{@}SMELL 40 :
+numeric{@}smell_pct{@}SMELL PCT :
+text{@}allergies{@}ALLERGIES (Y/N):
+text{@}stuffy{@}STUFFY (Y/N) :
+static{@}total_smell{@}Total
+static{@}smell_pct_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}study_list_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}mmse_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}smoke_p_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}smoke_c_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm01_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm02_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm03_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm04_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm05_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm06_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm07_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm08_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm09_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm10_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm11_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm12_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm13_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm14_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm15_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm16_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm17_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm18_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm19_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm20_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm21_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm22_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm23_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm24_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm25_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm26_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm27_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm28_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm29_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm30_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm31_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm32_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm33_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm34_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm35_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm36_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm37_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm38_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm39_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sm40_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}allergies_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}stuffy_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

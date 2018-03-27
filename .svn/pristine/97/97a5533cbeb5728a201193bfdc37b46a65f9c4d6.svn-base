@@ -1,0 +1,189 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_cognition extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function droprange($field,$text,$vals) {
+		$opts = array(''=>'-Select an option-');
+		foreach ($vals as $val)	 {
+			$opts[$val] = $val;
+		}
+
+		
+		$element = $this->form->addElement('select', $field, $text,$opts);
+		//$this->addRule($field, 'This field is required.', 'required','client');
+		return $element; 
+	}
+
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "cognition";           // test_names.Test_name
+        $this->table = 'cognition';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+
+		// Need to query to get education thing
+		$db =& Database::singleton();
+		$cID = $this->commentID;
+		//$query = "select educ_year from demographics where commentID = '$cID'";
+		
+		// get corresponding CommentID
+		$r = array();
+		$db->select("select SessionID from flag where CommentID = '$cID'",$r);
+		$r = $r[0];
+		$sessionID = $r['SessionID'];
+		//print_r($sessionID);	
+		$stripCID = substr($cID, 0, 6);
+		$r = array();
+		$db->select("select CommentID from flag where Test_name='demographics' and SessionID = '$sessionID' and CommentID like '$stripCID%'",$r);
+		$r = $r[0];
+		$demoCID=$r['CommentID'];
+
+
+		$query = "select educ_year from demographics where commentID = '$demoCID'";
+        $result = array();
+		$db->select($query, $result);
+		$result=$result[0];
+		$educ_demo=$result['educ_year'];
+		//print_r($educ_demo);
+        // display test name
+
+
+        $this->addHeader("General Cognition");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		//$this->addHeader("<MY TITLE>");		
+
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:');
+		$this->form->addElement('static','hdr',' ');
+		//$cog_fluct = $this->form->addElement('text', 'cog_fluct', 'Cognitive Fluctuation (Y/N):');
+		//$this->addRule('cog_fluct', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+		$cog_fluct = $this->form->addElement('select', 'cog_fluct', 'Cognitive Fluctuation:',array(''=>'-Select an option-','yes'=>'Yes','no'=>'No','na'=>'Is not applicable'));
+		
+
+		$this->form->addElement('static','hdr','All Values below must be numeric:');
+		$this->form->addElement('static','hdr',' ');
+
+
+
+
+		//$moca = $this->form->addElement('text', 'moca', 'MOCA:');
+		$this->form->addElement('static', NULL, 'MOCA');
+		//$this->addRule('moca', 'Value must be numeric', 'numeric', 'client');
+
+		$this->droprange('moca_visual','------ Visual spatial/executive (0-5):',range(0,5));
+		$this->droprange('moca_naming','------ Naming (0-3):',range(0,3));
+		$this->droprange('moca_attention','------ Attention (0-6):',range(0,6));
+		$this->droprange('moca_language','------ Language (0-3):',range(0,3));
+		$this->droprange('moca_abstraction','------ Abstraction (0-2):',range(0,2));
+		$this->droprange('moca_delrecall','------ Delayed recall (0-5):',range(0,5));
+		$this->droprange('moca_orientation','------ Orientation (0-6):',range(0,6));
+
+
+		if($educ_demo == '') {
+			$temp_educ = $this->form->addElement('text','temp_educ','Highest year of school completed (1-23):');
+		}
+
+		$moca = $this->form->addElement('static', 'moca', 'Total MOCA:');
+
+		$this->form->addElement('static','hdr',' ');		
+		$mmse = $this->form->addElement('text', 'mmse', 'MMSE:');
+
+		$pdcrs = $this->form->addElement('text', 'pdcrs', 'PD-CRS:');
+		$this->form->registerRule('checkrange', 'callback', 'checkrange');
+		$this->form->addRule('pdcrs', 'Enter a value from 0 to 134', 'checkrange',array(0,134));
+
+		/*$cdr = $this->form->addElement('text', 'cdr', 'CDR:');
+		$this->addRule('cdr', 'Value must be numeric', 'numeric', 'client'); */
+		$opts = array(
+			'na'=>'-Select an option-',
+			'0'=>'0',
+			'0.5'=>'0.5',
+			'1'=>'1',
+			'2'=>'2',
+			'3'=>'3');
+
+		$this ->form->addElement('select','cdr','CDR:',$opts);
+		$this->form->addRule('mmse', 'Enter a value from 0 to 30', 'checkrange',array(0,30));
+
+
+    }
+   
+}
+
+	function checkrange($ve,$rng) {
+		$minVal = $rng[0];
+		$maxVal = $rng[1];
+		//$tmp= (float) $ve;
+		if (( $ve < $minVal) or ( $ve > $maxVal)) {
+			return false;
+
+		} else {
+			return true;
+		}
+	}
+?>

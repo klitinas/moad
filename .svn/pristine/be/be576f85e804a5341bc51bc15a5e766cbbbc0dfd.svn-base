@@ -1,0 +1,103 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+function getavg($valmin,$valmax) {
+	$tmp = array_filter(array($valmin,$valmax));
+	$valavg = ($valmin + $valmax ) / count($tmp);
+	
+	return $valavg;
+}
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from medical_led WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+
+$s = array($record['meds']);
+/*$record['ldopa'],
+//$record['dopa_a'],
+//$record['anti_dep'],
+//$record['chol'],
+$record['av_off_per24hr'],
+$record['av_awake_per24'],
+$record['w_dys'],
+$record['w_t_dys'],
+$record['pct_off'],
+$record['pct_dys']); */
+
+
+$ent_avg = getavg($record['ent_min'],$record['ent_max']);
+if (( $ent_avg > 1 )) {
+	$scores['ent'] = 1;
+} else {
+	$scores['ent'] = 0;
+}
+$scores['ent_avg'] = $ent_avg;
+
+$rop_avg = getavg($record['rop_min'],$record['rop_max']);
+$clir_avg = getavg($record['clir_min'],$record['clir_max']);
+$clsa_avg = getavg($record['clsa_min'],$record['clsa_max']);
+
+$scores['rop_avg'] = $rop_avg;
+$scores['clir_avg'] = $clir_avg;
+$scores['clsa_avg'] = $clsa_avg;
+
+// =BA + 0.75*(BD) + 0.33*(AX)*(BA) + 0.25*(AX)*(BD) + BJ*(20)+ L*(100) +S*(10) +R*(100) + O*(1)
+$scores['led'] = $clir_avg + 
+	0.75 * $clsa_avg +
+	0.33 * $scores['ent'] * $clir_avg +
+	0.25 * $scores['ent'] * $clsa_avg +
+	20 * $rop_avg +
+	100 * $record['mirapex'] + 
+	10 * $record['sel'] +
+	100 * $record['rasag'] +
+	$record['am'];
+
+if ((array_search('', $s)!==false) or (array_search('na', array_map('strtolower',$s))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+
+
+
+//save scores
+$result = $db->update('medical_led', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save scores: ". $result->getMessage();
+    exit(3);
+}
+exit(0);
+
+?>

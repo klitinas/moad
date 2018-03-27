@@ -1,0 +1,252 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-18 08:17:53
+         compiled from "/var/www/loris/modules/mri_violations/templates/menu_mri_violations.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:2115334466550997212ee586-20013582%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4e87897904679d7f6022920a837f040b911df65e' => 
+    array (
+      0 => '/var/www/loris/modules/mri_violations/templates/menu_mri_violations.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '2115334466550997212ee586-20013582',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'form' => 0,
+    'page_links' => 0,
+    'headers' => 0,
+    'items' => 0,
+    'series' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55099721388ed1_89668752',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55099721388ed1_89668752')) {function content_55099721388ed1_89668752($_smarty_tpl) {?><?php echo '<script'; ?>
+ src="js/filterControl.js" type="text/javascript"><?php echo '</script'; ?>
+>
+<div class="row">
+<div class="col-sm-12">
+    <div class="col-md-8 col-sm-8">
+        <form method="post" action="main.php?test_name=mri_violations">
+            <div class="panel panel-primary">
+                <div class="panel-heading" onclick="hideFilter();">
+                    Selection Filter
+                    <span class="glyphicon glyphicon-chevron-down pull-right" style="display:none" id="down"></span>
+                    <span class="glyphicon glyphicon-chevron-up pull-right" id="up"></span>
+                </div>
+                <div class="panel-body" id="panel-body">
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-12 col-md-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['PatientName']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['PatientName']['html'];?>
+</div>
+                            <label class="col-sm-12 col-md-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['TimeRun']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['TimeRun']['html'];?>
+</div>
+                        </div>
+                    </div>
+                    <div class="row">    
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-12 col-md-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['Filename']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Filename']['html'];?>
+</div>
+                            <label class="col-sm-12 col-md-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['ProblemType']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['ProblemType']['html'];?>
+</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-12 col-md-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['Description']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Description']['html'];?>
+</div>
+                            <label class="col-sm-12 col-md-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['SeriesUID']['label'];?>
+</label>
+                            <div class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['SeriesUID']['html'];?>
+</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-5 col-sm-offset-7 hidden-sm">
+                            <div class="col-sm-6 col-xs-12">
+                                <input type="submit" name="filter" value="Show Data" class="btn btn-sm btn-primary col-xs-12"/>
+                            </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="visible-xs col-xs-12"> </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <input type="button" name="reset" value="Clear Form" class="btn btn-sm btn-primary col-xs-12" onclick="location.href='main.php?test_name=mri_violations&reset=true'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row visible-sm">
+                        <div class="col-sm-6">
+                            <input type="submit" name="filter" value="Show Data" class="btn btn-sm btn-primary col-xs-12"/>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <input type="button" name="reset" value="Clear Form" class="btn btn-sm btn-primary col-xs-12" onclick="location.href='main.php?test_name=mri_violations&reset=true'">
+                        </div>
+                    </div>
+                    <input type="hidden" name="test_name" value="mri_violations" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="row">
+<!--  title table with pagination -->
+<table id="LogEntries" border="0" valign="bottom" width="100%">
+    <tr>
+        <!-- display pagination links -->
+        <td align="right"><?php echo $_smarty_tpl->tpl_vars['page_links']->value;?>
+</td>
+    </tr>
+</table>
+
+<div id="results" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="table-scroll" id="content">
+            <table class="table table-hover table-primary table-bordered" border="0">
+                <thead>
+                    <tr class="info">
+                        <th>No.</th>
+                        <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['header'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['header']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['name'] = 'header';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['headers']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total']);
+?>
+                            <?php if ($_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['name']!='SeriesUID') {?>
+                                <th nowrap="nowrap"><a href="main.php?test_name=mri_violations&filter[order][field]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['name'];?>
+&filter[order][fieldOrder]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['fieldOrder'];?>
+"><?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName'];?>
+</a></th>
+                            <?php }?>
+                        <?php endfor; endif; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['item'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['item']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['name'] = 'item';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['items']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total']);
+?>
+                        <tr>
+                        <!-- print out data rows -->
+                        <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['piece'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['name'] = 'piece';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total']);
+?>
+                        <?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]) {?>
+                            <?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value']=='Could not identify scan type') {?>
+                                <td nowrap="nowrap" bgcolor="<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['bgcolor'];?>
+">
+                                    <a href="#" class="mri_violations" id="mri_protocol_violations" data-PatientName="<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['PatientName'];?>
+" "<?php if ($_smarty_tpl->tpl_vars['series']->value) {?>"data-SeriesUID="<?php echo $_smarty_tpl->tpl_vars['series']->value;
+}?>"><?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+</a>
+                                </td>
+                            <?php } elseif ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value']=='Protocol Violation') {?>
+                            <td nowrap="nowrap" bgcolor="<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['bgcolor'];?>
+">
+                                <a href="#" class="mri_violations" id="mri_protocol_check_violations" data-PatientName="<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]['PatientName'];?>
+" "<?php if ($_smarty_tpl->tpl_vars['series']->value) {?>" data-SeriesUID="<?php echo $_smarty_tpl->tpl_vars['series']->value;
+}?>"><?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+</a>
+                            </td>
+                            <?php } else { ?>
+                                <td nowrap="nowrap" bgcolor="<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['bgcolor'];?>
+">
+                                    <?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+
+                                </td>
+                            <?php }?>
+                        <?php }?>
+                        <?php endfor; endif; ?>
+                        </tr>           
+                    <?php endfor; else: ?>
+                        <tr><td colspan="12">No data found</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+        <a class="left carousel-control"  id="scrollLeft" href="#results">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" id="scrollRight" href="#results" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>
+</div>
+<?php }} ?>

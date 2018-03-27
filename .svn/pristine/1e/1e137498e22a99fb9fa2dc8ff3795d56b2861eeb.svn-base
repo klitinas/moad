@@ -1,0 +1,106 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_sfes extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function additem($name,$text) {
+		$limits='/(?i)^(na|1|2|3|4)$/';
+		$element = $this->form->addElement('text', $name, $text);
+		$this->addRule($name, 'Acceptable values: 1,2,3,4, or NA', 'regex', $limits, 'client');	
+		return $element;
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "sfes";           // test_names.Test_name
+        $this->table = 'sfes';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Short Falls Efficacy Scale - International");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+
+		$this->addHeader("<MY TITLE>");		
+		$hdr = $this->form->addElement('static','hdr','Enter values of 1-4 for all fields below:');
+		$this->addHeader("<MY TITLE>");		
+
+		$i01 = $this->additem('i01','1. Getting dressed or undressed:');
+		$i02 = $this->additem('i02','2. Taking a bath or shower:');
+		$i03 = $this->additem('i03','3. Getting in or out of a chair:');
+		$i04 = $this->additem('i04','4. Going up or down stairs:');
+		$i05 = $this->additem('i05','5. Reaching for something above head / on the ground:');
+		$i06 = $this->additem('i06','6. Walking up or down a slope:');
+		$i07 = $this->additem('i07','7. Going out to a social event (e.g. religious service, family gathering, club meeting):');
+
+		$total = $this->form->addElement('static', 'total', 'Total:');
+    }
+   
+   
+}
+?>

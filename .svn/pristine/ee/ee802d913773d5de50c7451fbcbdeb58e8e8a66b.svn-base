@@ -1,0 +1,107 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from npi WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+
+
+$scores['a_total'] = $record['a_freq'] * $record['a_sev'];
+$scores['b_total'] = $record['b_freq'] * $record['b_sev'];
+$scores['c_total'] = $record['c_freq'] * $record['c_sev'];
+$scores['d_total'] = $record['d_freq'] * $record['d_sev'];
+$scores['e_total'] = $record['e_freq'] * $record['e_sev'];
+$scores['f_total'] = $record['f_freq'] * $record['f_sev'];
+$scores['g_total'] = $record['g_freq'] * $record['g_sev'];
+$scores['h_total'] = $record['h_freq'] * $record['h_sev'];
+$scores['i_total'] = $record['i_freq'] * $record['i_sev'];
+$scores['j_total'] = $record['j_freq'] * $record['j_sev'];
+$scores['k_total'] = $record['k_freq'] * $record['k_sev'];
+$scores['l_total'] = $record['l_freq'] * $record['l_sev'];
+
+
+$scores['total_10'] = 
+$scores['a_total'] +
+$scores['b_total'] +
+$scores['c_total'] +
+$scores['d_total'] +
+$scores['e_total'] +
+$scores['f_total'] +
+$scores['g_total'] +
+$scores['h_total'] +
+$scores['i_total'] +
+$scores['j_total'];
+
+
+$scores['total_12'] = 
+$scores['total_10'] +
+$scores['k_total'] +
+$scores['l_total'];
+
+$scores['dis_10'] = 
+$record['a_dis'] +
+$record['b_dis'] +
+$record['c_dis'] +
+$record['d_dis'] +
+$record['e_dis'] +
+$record['f_dis'] +
+$record['g_dis'] +
+$record['h_dis'] +
+$record['i_dis'] +
+$record['j_dis'];
+
+$scores['dis_12'] = 
+$scores['dis_10'] +
+$record['k_dis'] +
+$record['l_dis'];
+
+/*
+if ((array_search('', $s)!==false) or (array_search('na', array_map('strtolower',$s))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+*/
+
+
+//save scores
+$result = $db->update('npi', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

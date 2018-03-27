@@ -1,0 +1,64 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-08 03:10:43
+         compiled from "/var/www/loris/smarty/templates/table_session_header.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:6272080645524fea3eb3e10-93538502%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '4fa2d15aea45a732db0fb4392796160495692d77' => 
+    array (
+      0 => '/var/www/loris/smarty/templates/table_session_header.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '6272080645524fea3eb3e10-93538502',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'subject' => 0,
+    'outputType' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5524fea3f17af6_66983361',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5524fea3f17af6_66983361')) {function content_5524fea3f17af6_66983361($_smarty_tpl) {?><table class="table-mri-right-and-center" id='table-header-left'>
+    <tbody>
+        <tr>
+            <th>QC Status</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['mriqcstatus'];?>
+</td>
+            <th>PSCID</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['pscid'];?>
+</td>
+            <th>Site</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['site'];?>
+</td>
+        </tr>
+        <tr>
+            <th>QC Pending</th>
+            <td><?php if ($_smarty_tpl->tpl_vars['subject']->value['mriqcpending']=="Y") {?><img src="images/check_blue.gif" width="12" height="12"><?php } else { ?>&nbsp;<?php }?>
+            </td>
+            <th>DCCID</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['candid'];?>
+</td>
+            <th>Visit Label</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['visitLabel'];?>
+</td>
+        </tr>
+        <tr>
+            <th>DOB</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['dob'];?>
+</td>
+            <th>Gender</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['gender'];?>
+</td>
+            <th>Output Type</th><td><?php echo $_smarty_tpl->tpl_vars['outputType']->value;?>
+</td>
+        </tr>
+        <tr>
+            <th>Scanner</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['scanner'];?>
+</td>
+            <th>Subproject</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['SubprojectTitle'];?>
+</td>
+            <th>EDC</th><td><?php echo $_smarty_tpl->tpl_vars['subject']->value['edc'];?>
+</td>
+        </tr>
+    </tbody>
+</table>
+<?php }} ?>

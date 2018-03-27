@@ -1,0 +1,139 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 10:12:18
+         compiled from "/var/www/loris/modules/instrument_list/templates/menu_instrument_list.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:29038046455031a7219b756-71636015%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '2a9db84d71de50546ffaf08eebe7435d75620103' => 
+    array (
+      0 => '/var/www/loris/modules/instrument_list/templates/menu_instrument_list.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '29038046455031a7219b756-71636015',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'instruments' => 0,
+    'instrument_groups' => 0,
+    'candID' => 0,
+    'sessionID' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031a721f50b5_85609205',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031a721f50b5_85609205')) {function content_55031a721f50b5_85609205($_smarty_tpl) {?><!-- table title -->
+<br />
+<table border="0" valign="bottom" width="100%"><td class="controlPanelSection"><strong>Behavioral Battery of Instruments</strong></td></table>
+
+<!-- table with list of instruments and links to open them -->
+<table class="table table-hover table-bordered dynamictable" cellpadding="2">
+<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['group'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['group']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['name'] = 'group';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['instruments']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['group']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['group']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['group']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['group']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['group']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['group']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['group']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['group']['total']);
+?>
+    <!-- print the sub group header row -->
+    <thead>
+    <tr class="info">
+	    <th><?php echo $_smarty_tpl->tpl_vars['instrument_groups']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']]['title'];?>
+
+	       <!-- show the instruction only one time -->
+	       <?php if ($_smarty_tpl->getVariable('smarty')->value['section']['group']['iteration']==1) {?>
+	       <br />(Click To Open)
+	       <?php }?>
+	    </th>
+	    <th>Data Entry</th>
+	    <th>Administration</th>
+	    <th>Feedback</th>
+	    <th>Double Data Entry Form</th>
+	    <th>Double Data Entry Status</th>
+    </tr>
+    </thead>	
+	<?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['name'] = 'instrument';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']]) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['instrument']['total']);
+?>
+	<tbody>
+	   	<tr<?php if ($_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['isDirectEntry']) {?> class="directentry"<?php }?>>
+	    	<td>
+		    	<a href="main.php?test_name=<?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['testName'];?>
+&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&commentID=<?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['commentID'];?>
+">
+	            <?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['fullName'];?>
+</a></td>
+	    	<td><?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['dataEntryStatus'];?>
+</td>
+	    	<td><?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['administrationStatus'];?>
+</td>
+	    	<td bgcolor="<?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['feedbackColor'];?>
+">
+		    	<?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['feedbackStatus'];?>
+
+	        </td>
+			<td>
+				<?php if ($_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['isDdeEnabled']) {?>
+				    	<a href="main.php?test_name=<?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['testName'];?>
+&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&sessionID=<?php echo $_smarty_tpl->tpl_vars['sessionID']->value;?>
+&commentID=<?php echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['ddeCommentID'];?>
+">Double Data Entry</a>
+			   <?php }?>&nbsp;
+			</td>
+			<td><?php if ($_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['isDdeEnabled']) {
+echo $_smarty_tpl->tpl_vars['instruments']->value[$_smarty_tpl->getVariable('smarty')->value['section']['group']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['instrument']['index']]['ddeDataEntryStatus'];
+}?>&nbsp;</td>
+	   	</tr>
+	   </tbody>
+	<?php endfor; endif; ?>
+<?php endfor; else: ?>
+     <tr><td nowrap="nowrap">The battery has no registered instruments</td></tr>
+<?php endif; ?>
+</table>
+</div>
+<?php }} ?>

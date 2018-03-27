@@ -1,0 +1,176 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_modupdrs extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function additem($name,$text) {
+    	$limits='/(?i)^(na|0|1|2|3|4)$/';
+		$opts = array(
+			'na'=>'-Select an option-',
+			'0'=>'0',
+			'1'=>'1',
+			'2'=>'2',
+			'3'=>'3',
+			'4'=>'4');
+		$element = $this->form->addElement('select', $name, $text,$opts);
+    	/*$element = $this->form->addElement('text', $name, $text);
+    	$this->addRule($name, 'Acceptable values: 0,1,2,3,4, or NA', 'regex', $limits, 'client'); */
+    	return $element;
+        }
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "modupdrs";           // test_names.Test_name
+        $this->table = 'modupdrs';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("UPDRS");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+
+		$this->addHeader("<MY TITLE>");		
+		$this->form->addElement('static','hdr','For fields below enter values 0-4:');
+		$this->addHeader("Motor");		
+		$this->addHeader("<MY TITLE>");		
+
+
+		$motA = $this->additem('motA','A. Facial Expression:');
+		$motB = $this->additem('motB','B. Speech:');
+		$motC = $this->additem('motC','C. Arising from Chair:');
+		$motD = $this->additem('motD','D. Posture:');
+		$motE = $this->additem('motE','E. Gait:');
+		$motF = $this->additem('motF','F. Postural Stability:'); // Add option for 1a?
+		$this->form->addElement('static','hdr','G. Rigidity');
+		$motG_rue = $this->additem('motG_rue','................... RUE:');		
+		$motG_lue = $this->additem('motG_lue','................... LUE:');		
+		$motG_rle = $this->additem('motG_rle','................... RLE:');		
+		$motG_lle = $this->additem('motG_lle','................... LLE:');		
+		$this->form->addElement('static','hdr','H. Finger Taps');
+		$motH_l = $this->additem('motH_r','................... R:');		
+		$motH_r = $this->additem('motH_l','................... L:');
+		$this->form->addElement('static','hdr','I. Hand Movements');
+		$motI_l = $this->additem('motI_r','................... R:');		
+		$motI_r = $this->additem('motI_l','................... L:');
+		$this->form->addElement('static','hdr','J. Rapid Alternating Movements of Hands');
+		$motJ_l = $this->additem('motJ_r','................... R:');		
+		$motJ_r = $this->additem('motJ_l','................... L:');
+		$this->form->addElement('static','hdr','K. Foot Agility');
+		$motK_l = $this->additem('motK_r','................... R:');		
+		$motK_r = $this->additem('motK_l','................... L:');
+		$motL = $this->additem('motL','L. Body Bradykinesia and Hypokinesia:');
+		$this->form->addElement('static','hdr','M. Tremor at Rest');
+		$motM_rue = $this->additem('motM_rue','................... RUE:');		
+		$motM_lue = $this->additem('motM_lue','................... LUE:');		
+		$motM_rle = $this->additem('motM_rle','................... RLE:');		
+		$motM_lle = $this->additem('motM_lle','................... LLE:');	
+
+		$this->form->addElement('static','hdr','N. Action or Postural Tremor');
+		$motN_rue = $this->additem('motN_rue','................... RUE:');		
+		$motN_lue = $this->additem('motN_lue','................... LUE:');	
+
+		$this->form->addElement('static','hdr','X. Arm Swing Decrease');
+		$motX_rue = $this->additem('motX_rue','................... RUE:');		
+		$motX_lue = $this->additem('motX_lue','................... LUE:');	
+
+		$this->form->addElement('static','hdr','XX. Dyskinesias at time of examination');
+		$motXX_trunk = $this->additem('motXX_trunk','............... Trunk:');		
+		$motXX_rue = $this->additem('motXX_rue','................... RUE:');		
+		$motXX_lue = $this->additem('motXX_lue','................... LUE:');		
+		$motXX_rle = $this->additem('motXX_rle','................... RLE:');		
+		$motXX_lle = $this->additem('motXX_lle','................... LLE:');
+
+		$motXXX = $this->form->addElement('text','motXXX','XXX. Most affected body side (R/L/symm/na)?');
+    	$this->addRule('motXXX', 'Acceptable values: R,L,symm, or NA', 'regex', '/(?i)^(na|r|l|symm)$/', 'client');
+
+		$this->additem('motDYS','UPDRS IV DYSKINESIAS (average last month):');
+
+
+		$this->addHeader("Non-Motor");
+		$this->additem('nm_01','1. Intellectual Impairment:');
+		$this->additem('nm_02','2. Thought Disorder:');
+		$this->additem('nm_03','3. Depression:');
+		$this->additem('nm_04','4. Motivation/Initiative:');
+		$this->additem('nm_05','5. Speech:');
+		$this->additem('nm_06','6. Salivation:');
+		$this->additem('nm_07','7. Swallowing:');
+		$this->additem('nm_08','8. Handwriting:');
+		$this->additem('nm_09','9. Cutting Food and Handling Utensils:');
+		$this->additem('nm_10','10. Dressing:');
+		$this->additem('nm_11','11. Hygiene:');
+		$this->additem('nm_12','12. Turning in Bed and Adjusting Bed Clothes:');
+		$this->additem('nm_13','13. Falling (unrelated to freezing):');
+		$this->additem('nm_14','14. Freezing When Walking:');
+		$this->additem('nm_15','15. Walking:');
+		$this->additem('nm_16','16. Tremor:');
+		$this->additem('nm_17','17. Sensory Complaints Related to Parkinsonism:');
+		
+    }
+   
+   
+}
+?>

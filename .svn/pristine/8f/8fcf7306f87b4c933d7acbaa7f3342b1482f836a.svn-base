@@ -1,0 +1,99 @@
+table{@}clinical
+title{@}Clinical Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes:
+text{@}color_blind{@}color blind (y/n):
+select{@}color_blind_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered' 
+text{@}cancer{@}cancer (y/n):
+select{@}cancer_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}diabetes{@}diabetes (y/n):
+select{@}diabetes_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}asthma{@}asthma (y/n):
+select{@}asthma_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}mstroke{@}mstroke (y/n):
+select{@}mstroke_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}stroke{@}stroke (y/n):
+select{@}stroke_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}head_inj{@}head_inj (y/n):
+select{@}head_inj_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}bleed{@}bleed (y/n):
+select{@}bleed_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}encephalitis{@}encephalitis (y/n):
+select{@}encephalitis_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}seizure{@}seizure (y/n):
+select{@}seizure_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}liver{@}liver (y/n):
+select{@}liver_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}brain_sur{@}brain_sur (y/n):
+select{@}brain_sur_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}lupus{@}lupus (y/n):
+select{@}lupus_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}anxiety{@}anxiety (y/n):
+select{@}anxiety_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}depression{@}depression (y/n):
+select{@}depression_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}high_bp{@}high_bp (y/n):
+select{@}high_bp_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}prior_mi{@}prior_mi (y/n):
+select{@}prior_mi_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}headache{@}headache (y/n):
+select{@}headache_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}vet{@}vet (y/n):
+select{@}vet_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}hand_dom{@}hand_dom_(R/L/ambi):
+select{@}hand_dom_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}disease_dur{@}disease_dur:
+select{@}disease_dur_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}weight{@}weight_(lbs):
+select{@}weight_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}height{@}height:
+select{@}height_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}bmi{@}BMI:
+select{@}bmi_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}bp_s_sit{@}bp_s_sit:
+select{@}bp_s_sit_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}bp_s_sta{@}bp_s_sta:
+select{@}bp_s_sta_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}bp_d_sit{@}bp_d_sit:
+select{@}bp_d_sit_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}bp_d_sta{@}bp_d_sta:
+select{@}bp_d_sta_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pls_sit{@}pls_sit:
+select{@}pls_sit_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pls_sta{@}pls_sta:
+select{@}pls_sta_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vib_r{@}vib_r:
+select{@}vib_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vib_l{@}vib_l:
+select{@}vib_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cold_r{@}cold_r (y/n):
+select{@}cold_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cold_l{@}cold_l (y/n):
+select{@}cold_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}jerk_r{@}jerk_r:
+select{@}jerk_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}jerk_l{@}jerk_l:
+select{@}jerk_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}hy{@}H&Y:
+select{@}hy_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}mallampati{@}Mallampati:
+select{@}mallampati_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}smelltot{@}smelltot:
+select{@}smelltot_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}smell_pct{@}smell_pct:
+select{@}smell_pct_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fat_pct{@}fat_pct:
+select{@}fat_pct_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fat_rating{@}fat_rating:
+select{@}fat_rating_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}hx_smoke{@}hx_smoke:
+select{@}hx_smoke_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fall_house{@}fall_house:
+select{@}fall_house_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dog{@}dog:
+select{@}dog_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}age_imp{@}age_lmp:
+select{@}age_imp_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

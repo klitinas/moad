@@ -1,0 +1,169 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-26 03:16:51
+         compiled from "/var/www/loris/modules/instrument_manager/templates/menu_instrument_manager.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:12471448775513dc9344f287-30471040%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '159aa0c30ee6da6b107d5f8da1c5d83afec70ea0' => 
+    array (
+      0 => '/var/www/loris/modules/instrument_manager/templates/menu_instrument_manager.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '12471448775513dc9344f287-30471040',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'writeable' => 0,
+    'page_links' => 0,
+    'headers' => 0,
+    'items' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5513dc934b5b00_15203370',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5513dc934b5b00_15203370')) {function content_5513dc934b5b00_15203370($_smarty_tpl) {?><!-- start the selection table -->
+<?php if ($_smarty_tpl->tpl_vars['writeable']->value) {?>
+<div class="row">
+    <div class="col-xs-4">
+        <form method="post" action="main.php?test_name=instrument_manager" enctype="multipart/form-data">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Upload Instrument</div>
+                <div class="panel-body">
+                    <div class="col-xs-12">
+                        <input class="fileUpload" type="file" name="install_file">
+                        <br>
+                        <input class="btn btn-default" type="submit" name="install" value="Install Instrument" class="button">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<?php } else { ?>
+<div class="alert alert-warning">
+Instrument directory or tables_sql not writeable.
+Automatic uploading of instruments has been disabled.
+</div>
+<?php }?>
+
+<!--  title table with pagination -->
+
+<div id="pagelinks">
+<table border="0" valign="bottom" width="100%">
+<tr>
+    <!-- title -->
+    <!-- display pagination links -->
+    <td align="right"><?php echo $_smarty_tpl->tpl_vars['page_links']->value;?>
+</td>
+</tr>
+</table>
+</div>
+
+
+<!-- start data table -->
+<table border="0" class="dynamictable table table-hover table-primary table-bordered">
+    <thead>
+    <tr class="info">
+     <th nowrap="nowrap">No.</th>
+        <!-- print out column headings - quick & dirty hack -->
+        <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['header'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['header']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['name'] = 'header';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['headers']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total']);
+?>
+            <th nowrap="nowrap"><a href="main.php?test_name=instrument_manager&filter[order][field]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['name'];?>
+&filter[order][fieldOrder]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['fieldOrder'];?>
+"><?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName'];?>
+</a></th>
+        <?php endfor; endif; ?>
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['item'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['item']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['name'] = 'item';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['items']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total']);
+?>
+        <tr>
+        <!-- print out data rows -->
+        <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['piece'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['name'] = 'piece';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total']);
+?>
+            <?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]) {?>
+            <td nowrap="nowrap"><?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+</td>
+            <?php }?>
+        <?php endfor; endif; ?>
+        </tr>
+        <?php endfor; else: ?>
+            <tr><td colspan="8">Nothing found</td></tr>
+        <?php endif; ?>
+    </tbody>
+<!-- end data table -->
+</table>
+<?php }} ?>

@@ -1,0 +1,135 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_mayo extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "mayo";           // test_names.Test_name
+        $this->table = 'mayo';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("MAYO Sleep Questionnaire");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$notes = $this->form->addElement('text', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+
+		// $this->form->addElement('static','hdr','FOR ALL ENTRIES ANSWER 1,2,8, OR NA:');
+
+		$i01 = $this->form->addElement('text', 'i01', '1. Have you ever seen the patient appear to "act out his/her dreams" while sleeping (punched, flailed arms in the air, shouting, screaming)? (Y/N):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i01', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+		
+		$length = $this->form->addElement('text', 'length', 'Length of time (years)?', array('size' => 50, 'maxlength' => 255));
+		//$this->addRule('i02', 'Enter 1,2,8,or NA', 'regex', '/(?i)^(na|1|2|8)$/', 'client');
+
+		$i01a = $this->form->addElement('text', 'i01a', '1a. Has the patient ever been injured from these behaviors (bruises, cuts, broken bones)? (Y/N):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i01a', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i01b = $this->form->addElement('text', 'i01b', '1b. Has a bed partner ever been injured from these behaviors (bruises, blows, pulled hair)? (Y/N/NBP):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i01b', 'Enter y,n,nbp,or NA', 'regex', '/(?i)^(na|y|n|nbp)$/', 'client');
+
+		$i01c = $this->form->addElement('text', 'i01c', '1c. Has the patient told you about dreams of being chased, attacked or that involve defending himself/herself? (Y/N/NTD):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i01c', 'Enter y,n,ntd,or NA', 'regex', '/(?i)^(na|y|n|ntd)$/', 'client');
+
+		$i01d = $this->form->addElement('text', 'i01d', '1d. If the patient woke up and told you about a dream, did the details of the dream match the movements made while sleeping? (Y/N/NTD):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i01d', 'Enter y,n,ntd,or NA', 'regex', '/(?i)^(na|y|n|ntd)$/', 'client');
+
+		$i02 = $this->form->addElement('text', 'i02', "2. Do the patient's legs repeatedly jerk or twitch during sleep (not just when falling asleep)? (Y/N):", array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i02', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i03 = $this->form->addElement('text', 'i03', '3. Does the patient complain of a restless, nervous, tingly, or creepy-crawly feeling in his/her legs thta disrupts their ability to fall or stay asleep? (Y/N)', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i03', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i03a = $this->form->addElement('text', 'i03a', '3a. Does the patient tell you that these leg sensations decrease when he/she moves them or walks around? (Y/N):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i03a', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i03b = $this->form->addElement('text', 'i03b', '3b. When do these sensations seem to be the worst (before/after):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i03b', 'Enter before,after,or NA', 'regex', '/(?i)^(na|before|after)$/', 'client');
+
+		$i04 = $this->form->addElement('text', 'i04', '4. Has the patient ever walked around the bedroom/house while asleep (Y/N)?', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i04', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i05 = $this->form->addElement('text', 'i05', '5. Has the patient ever snorted or chocked him/herself awake (Y/N)?', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i05', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i06 = $this->form->addElement('text', 'i06', "6: Does the patient ever seem to stop breathing during sleep (Y/N)", array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i06', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i06a = $this->form->addElement('text', 'i06a', "6a: Is the patient currently being treated for this problem (Y/N)?", array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i06a', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i07 = $this->form->addElement('text', 'i07', '7. Does the patient have leg cramps at night (Y/N)?', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i07', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$i08 = $this->form->addElement('text', 'i08', "8. Patient's general level of awareness (0 - 10):", array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i08', 'Enter 0-10,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5|6|7|8|9|10)$/', 'client');
+
+
+    }
+   
+   
+}
+?>

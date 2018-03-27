@@ -1,0 +1,26 @@
+CREATE TABLE `rhino` (
+`CommentID` varchar(255) NOT NULL default '',
+                          `UserID` varchar(255) default NULL,
+                          `Examiner` varchar(255) default NULL,
+                          `Testdate` timestamp NOT NULL,
+                          `Data_entry_completion_status` enum('Incomplete','Complete') NOT NULL default 'Incomplete',
+`Date_taken` date default NULL,
+`Candidate_Age` varchar(255) default NULL,
+`Window_Difference` varchar(255) default NULL,
+`dec_smell` varchar(255) default NULL,
+`dec_smell_status` enum('not_answered') default NULL,
+`run_nose` varchar(255) default NULL,
+`run_nose_status` enum('not_answered') default NULL,
+`aller` varchar(255) default NULL,
+`aller_status` enum('not_answered') default NULL,
+`sinus` varchar(255) default NULL,
+`sinus_status` enum('not_answered') default NULL,
+`colds` varchar(255) default NULL,
+`colds_status` enum('not_answered') default NULL,
+`bef_aft` varchar(255) default NULL,
+`bef_aft_status` enum('not_answered') default NULL,
+`w_eat` varchar(255) default NULL,
+`w_eat_status` enum('not_answered') default NULL,
+PRIMARY KEY  (`CommentID`)
+);
+REPLACE INTO test_names (Test_name, Full_name, Sub_group) VALUES ('rhino', 'RHINO Assessment', 1);

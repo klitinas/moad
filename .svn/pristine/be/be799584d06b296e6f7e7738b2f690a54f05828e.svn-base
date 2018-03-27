@@ -1,0 +1,270 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-15 10:52:57
+         compiled from "/var/www/loris/modules/candidate_parameters/templates/form_candidate_parameters.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:14997637645505c6f9e90eb2-08679909%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'c80e8ed75204a7984950ab8be5041452a20af5c0' => 
+    array (
+      0 => '/var/www/loris/modules/candidate_parameters/templates/form_candidate_parameters.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '14997637645505c6f9e90eb2-08679909',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'candID' => 0,
+    'form' => 0,
+    'error' => 0,
+    'pscid' => 0,
+    'params_list' => 0,
+    'name' => 0,
+    'value' => 0,
+    'display_proband' => 0,
+    'proband_info' => 0,
+    'display_family' => 0,
+    'sibling_list' => 0,
+    'sibling' => 0,
+    'history_list' => 0,
+    'row' => 0,
+    'display_consent' => 0,
+    'consent_list' => 0,
+    'list' => 0,
+    'listname' => 0,
+    'consent' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5505c6fa01f455_60336306',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5505c6fa01f455_60336306')) {function content_5505c6fa01f455_60336306($_smarty_tpl) {?><form method="post" name="candidate_parameters" id="candidate_parameters">
+
+<input class="btn btn-sm btn-primary" onclick="location.href='main.php?test_name=timepoint_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'" value="Return to timepoint list" type="button" />
+<br><br>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Candidate Information
+    </div>
+    <div class="panel-body">
+        <?php  $_smarty_tpl->tpl_vars['error'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['error']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['errors']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['error']->key => $_smarty_tpl->tpl_vars['error']->value) {
+$_smarty_tpl->tpl_vars['error']->_loop = true;
+?>
+            <font class="error"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</font>
+        <?php } ?>
+        <?php if ($_smarty_tpl->tpl_vars['form']->value['dob_error']) {?>
+            <font class="error"><?php echo $_smarty_tpl->tpl_vars['form']->value['dob_error']['label'];?>
+</font>
+        <?php }?>
+        <div class="row">
+            <label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['pscid']['label'];?>
+</label>
+            <div class="col-sm-10" id="pscid">
+                <?php echo $_smarty_tpl->tpl_vars['pscid']->value;?>
+
+            </div>
+        </div>
+        <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
+ $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['params_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_vars['value']->value) {
+$_smarty_tpl->tpl_vars['value']->_loop = true;
+ $_smarty_tpl->tpl_vars['name']->value = $_smarty_tpl->tpl_vars['value']->key;
+?>
+            <div class="row">
+                <label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value[$_smarty_tpl->tpl_vars['name']->value]['label'];?>
+</label>
+                <div class="col-sm-10">
+                    <?php echo $_smarty_tpl->tpl_vars['value']->value;?>
+
+                </div>
+            </div>
+        <?php } ?>
+        <br>
+        <input class="btn btn-sm btn-primary col-sm-offset-2" onclick="location.href='main.php?test_name=candidate_parameters&subtest=update_candidate_info&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'" value="Update Candidate Info" type="button" />
+    </div>
+    <?php if ($_smarty_tpl->tpl_vars['display_proband']->value) {?>
+        <div class="panel-heading">
+            Proband Information
+        </div>
+        <div class="panel-body">
+            <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
+ $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['proband_info']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_vars['value']->value) {
+$_smarty_tpl->tpl_vars['value']->_loop = true;
+ $_smarty_tpl->tpl_vars['name']->value = $_smarty_tpl->tpl_vars['value']->key;
+?>
+                <div class="row">
+                    <label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value[$_smarty_tpl->tpl_vars['name']->value]['label'];?>
+</label>
+                    <div class="col-sm-10">
+                        <?php echo $_smarty_tpl->tpl_vars['value']->value;?>
+
+                    </div>
+                </div>
+            <?php } ?>
+            <div class="row">
+                <label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['Age_Difference']['label'];?>
+</label>
+                <div class="col-sm-8">
+                    <?php echo $_smarty_tpl->tpl_vars['form']->value['Age_Difference']['html'];?>
+
+                </div>
+            </div>
+            <br>
+            <input class="btn btn-sm btn-primary col-sm-offset-2" onclick="location.href='main.php?test_name=candidate_parameters&subtest=update_proband_info&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'" value="Update Proband Info" type="button" />
+        </div>
+    <?php }?>
+    <?php if ($_smarty_tpl->tpl_vars['display_family']->value) {?>
+        <div class="panel-heading">
+            Family Information
+        </div>
+        <div class="panel-body">
+            <?php  $_smarty_tpl->tpl_vars['sibling'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['sibling']->_loop = false;
+ $_smarty_tpl->tpl_vars['keyid'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['sibling_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['sibling']->key => $_smarty_tpl->tpl_vars['sibling']->value) {
+$_smarty_tpl->tpl_vars['sibling']->_loop = true;
+ $_smarty_tpl->tpl_vars['keyid']->value = $_smarty_tpl->tpl_vars['sibling']->key;
+?>
+                <div class="row">
+                    <label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['SiblingcID']['label'];?>
+</label>
+                    <div class="col-sm-10">
+                       <a href="main.php?test_name=candidate_parameters&candID=<?php echo $_smarty_tpl->tpl_vars['sibling']->value['CandID'];?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['sibling']->value['CandID'];?>
+"><?php echo $_smarty_tpl->tpl_vars['sibling']->value['CandID'];?>
+</a>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+        <br>
+        <input class="btn btn-sm btn-primary col-sm-offset-2" colspan="2" onclick="location.href='main.php?test_name=candidate_parameters&subtest=add_family&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'" value="Add Family Info" type="button" />
+        <br><br>
+    </td>
+    <?php }?>
+    <div class="panel-heading">
+        Participant Status
+    </div>
+    <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <td><b>Status</b></td>
+                <td><b>Details</b></td>
+                <td><b>Data Entry Staff</b></td>
+                <td><b>Date Updated</b></td>
+                <td><b>Comments</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['history_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
+$_smarty_tpl->tpl_vars['row']->_loop = true;
+?>
+                <tr>
+                    <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
+ $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['row']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_vars['value']->value) {
+$_smarty_tpl->tpl_vars['value']->_loop = true;
+ $_smarty_tpl->tpl_vars['name']->value = $_smarty_tpl->tpl_vars['value']->key;
+?>
+                        <td><?php echo $_smarty_tpl->tpl_vars['value']->value;?>
+</td>
+                    <?php } ?>
+                </tr>
+            <?php } ?>
+        </tbody>
+        
+    </table>
+    </div>
+    <div class="panel-body">
+        <input class="btn btn-sm btn-primary col-sm-offset-2" onclick="location.href='main.php?test_name=candidate_parameters&subtest=update_participant_status&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'" value="Update Participant Status" type="button" />
+    </div>
+    <?php if ($_smarty_tpl->tpl_vars['display_consent']->value) {?>
+        <div class="panel-heading">
+            Participation Consent Status
+        </div>
+        <div class="table-responsive">
+        <table class="table">
+            <?php  $_smarty_tpl->tpl_vars['list'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['list']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['consent_list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['list']->key => $_smarty_tpl->tpl_vars['list']->value) {
+$_smarty_tpl->tpl_vars['list']->_loop = true;
+?>
+                <?php  $_smarty_tpl->tpl_vars['consent'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['consent']->_loop = false;
+ $_smarty_tpl->tpl_vars['listname'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['list']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['consent']->key => $_smarty_tpl->tpl_vars['consent']->value) {
+$_smarty_tpl->tpl_vars['consent']->_loop = true;
+ $_smarty_tpl->tpl_vars['listname']->value = $_smarty_tpl->tpl_vars['consent']->key;
+?>
+                    <?php if ($_smarty_tpl->tpl_vars['listname']->value=='label') {?>
+                        <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['consent']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
+$_smarty_tpl->tpl_vars['row']->_loop = true;
+?>
+                            <td><b><?php echo $_smarty_tpl->tpl_vars['row']->value;?>
+</b></td>
+                        <?php } ?>
+                    <?php }?>
+                    <?php if ($_smarty_tpl->tpl_vars['listname']->value=='history') {?>
+                        <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['consent']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
+$_smarty_tpl->tpl_vars['row']->_loop = true;
+?>
+                            <tr>
+                                <?php  $_smarty_tpl->tpl_vars['value'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['value']->_loop = false;
+ $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['row']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['value']->key => $_smarty_tpl->tpl_vars['value']->value) {
+$_smarty_tpl->tpl_vars['value']->_loop = true;
+ $_smarty_tpl->tpl_vars['name']->value = $_smarty_tpl->tpl_vars['value']->key;
+?>
+                                    <td><?php echo $_smarty_tpl->tpl_vars['value']->value;?>
+</td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    <?php }?>
+                <?php } ?>
+            <?php } ?>
+        </table>
+        </div>
+        <div class="panel-body">
+            <?php if ($_smarty_tpl->tpl_vars['form']->value[$_smarty_tpl->tpl_vars['row']->value]['error']) {?>
+                <span class="error"><?php echo $_smarty_tpl->tpl_vars['form']->value[$_smarty_tpl->tpl_vars['row']->value]['error'];?>
+</span>
+            <?php }?>
+            <input class="btn btn-sm btn-primary col-sm-offset-2" onclick="location.href='main.php?test_name=candidate_parameters&subtest=update_consent_info&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+&identifier=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+'" value="Update Consent Info" type="button" />
+        </div>
+    <?php }?>
+</div>
+
+<?php echo $_smarty_tpl->tpl_vars['form']->value['hidden'];?>
+
+</form>
+<?php }} ?>

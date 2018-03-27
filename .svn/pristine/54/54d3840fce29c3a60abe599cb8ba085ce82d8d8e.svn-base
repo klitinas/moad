@@ -1,0 +1,147 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-18 05:48:42
+         compiled from "/var/www/loris/modules/statistics/templates/form_stats_demographic.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:8545308725509742a54a609-06804634%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '09ba98e1afdcfc4529998d1ec67c9dd8f13929d0' => 
+    array (
+      0 => '/var/www/loris/modules/statistics/templates/form_stats_demographic.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '8545308725509742a54a609-06804634',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'CurrentSite' => 0,
+    'CurrentProject' => 0,
+    'Sites' => 0,
+    'Projects' => 0,
+    'Subprojects' => 0,
+    'name' => 0,
+    'registered' => 0,
+    'keyid' => 0,
+    'edi' => 0,
+    'scanned' => 0,
+    'RecruitsTable' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_5509742a5a0d55_65855406',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5509742a5a0d55_65855406')) {function content_5509742a5a0d55_65855406($_smarty_tpl) {?><?php if (!is_callable('smarty_function_html_options')) include '/home/xnat/Smarty/smarty3/plugins/function.html_options.php';
+?><div id="demographics">
+<h2 class="statsH2">General statistics<?php if ($_smarty_tpl->tpl_vars['CurrentSite']->value) {?> for <?php echo $_smarty_tpl->tpl_vars['CurrentSite']->value['Name'];
+}?>
+<?php if ($_smarty_tpl->tpl_vars['CurrentProject']->value) {?> for <?php echo $_smarty_tpl->tpl_vars['CurrentProject']->value['Name'];?>
+ <?php }?></h2>
+
+<div class="col-sm-2">
+<?php echo smarty_function_html_options(array('id'=>"DemographicSite",'options'=>$_smarty_tpl->tpl_vars['Sites']->value,'name'=>"DemographicSite",'selected'=>$_smarty_tpl->tpl_vars['CurrentSite']->value['ID'],'class'=>"form-control"),$_smarty_tpl);?>
+
+</div>
+<div class="col-sm-3">
+<?php echo smarty_function_html_options(array('id'=>"DemographicProject",'options'=>$_smarty_tpl->tpl_vars['Projects']->value,'name'=>"DemographicProject",'selected'=>$_smarty_tpl->tpl_vars['CurrentProject']->value['ID'],'class'=>"form-control"),$_smarty_tpl);?>
+
+</div>
+
+<?php echo '<script'; ?>
+ type="text/javascript" src="GetJS.php?Module=statistics&file=form_stats_demographic.js"><?php echo '</script'; ?>
+>
+<button  onClick="updateDemographicTab()" class="btn btn-primary btn-small">Submit Query</button>
+<br><br>
+<table class="data generalStats table table-primary table-bordered">
+<thead>
+<tr>
+<th></th>
+<th>Undefined Yet</th>
+<?php  $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['name']->_loop = false;
+ $_smarty_tpl->tpl_vars['proj'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Subprojects']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['name']->key => $_smarty_tpl->tpl_vars['name']->value) {
+$_smarty_tpl->tpl_vars['name']->_loop = true;
+ $_smarty_tpl->tpl_vars['proj']->value = $_smarty_tpl->tpl_vars['name']->key;
+?>
+<th><?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+</th>
+<?php } ?>
+<th class="data">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Registered candidates</td>
+<td><?php echo $_smarty_tpl->tpl_vars['registered']->value[$_smarty_tpl->getVariable('smarty')->value['section']['NULL']['index']]['total'];?>
+</td>
+<?php  $_smarty_tpl->tpl_vars['proj'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['proj']->_loop = false;
+ $_smarty_tpl->tpl_vars['keyid'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Subprojects']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['proj']->key => $_smarty_tpl->tpl_vars['proj']->value) {
+$_smarty_tpl->tpl_vars['proj']->_loop = true;
+ $_smarty_tpl->tpl_vars['keyid']->value = $_smarty_tpl->tpl_vars['proj']->key;
+?>
+<td><?php echo $_smarty_tpl->tpl_vars['registered']->value[$_smarty_tpl->tpl_vars['keyid']->value]['total'];?>
+</td>
+<?php } ?>
+
+
+    <td class="total"><?php echo $_smarty_tpl->tpl_vars['registered']->value['total'];?>
+</td>
+    </tr>
+    <tr>
+    <td colspan="2">Registered candidates currently in or passed screening</td>
+<?php  $_smarty_tpl->tpl_vars['proj'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['proj']->_loop = false;
+ $_smarty_tpl->tpl_vars['keyid'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Subprojects']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['proj']->key => $_smarty_tpl->tpl_vars['proj']->value) {
+$_smarty_tpl->tpl_vars['proj']->_loop = true;
+ $_smarty_tpl->tpl_vars['keyid']->value = $_smarty_tpl->tpl_vars['proj']->key;
+?>
+<td><?php echo $_smarty_tpl->tpl_vars['registered']->value[$_smarty_tpl->tpl_vars['keyid']->value]['visit'];?>
+</td>
+<?php } ?>
+<td class="total"><?php echo $_smarty_tpl->tpl_vars['registered']->value['visittotal'];?>
+</td>
+</tr>
+<tr>
+<td colspan="2">Registered candidates who have come in for a visit</td>
+<?php  $_smarty_tpl->tpl_vars['proj'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['proj']->_loop = false;
+ $_smarty_tpl->tpl_vars['keyid'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Subprojects']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['proj']->key => $_smarty_tpl->tpl_vars['proj']->value) {
+$_smarty_tpl->tpl_vars['proj']->_loop = true;
+ $_smarty_tpl->tpl_vars['keyid']->value = $_smarty_tpl->tpl_vars['proj']->key;
+?>
+<td><?php echo $_smarty_tpl->tpl_vars['edi']->value[$_smarty_tpl->tpl_vars['keyid']->value]['complete'];?>
+</td>
+<?php } ?>
+<td class="total"><?php echo $_smarty_tpl->tpl_vars['edi']->value['complete'];?>
+</td>
+</tr>
+<tr>
+<td colspan="2">Registered candidates with T1 acquired</td>
+<?php  $_smarty_tpl->tpl_vars['proj'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['proj']->_loop = false;
+ $_smarty_tpl->tpl_vars['keyid'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['Subprojects']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['proj']->key => $_smarty_tpl->tpl_vars['proj']->value) {
+$_smarty_tpl->tpl_vars['proj']->_loop = true;
+ $_smarty_tpl->tpl_vars['keyid']->value = $_smarty_tpl->tpl_vars['proj']->key;
+?>
+<td><?php echo $_smarty_tpl->tpl_vars['scanned']->value[$_smarty_tpl->tpl_vars['keyid']->value]['complete'];?>
+</td>
+<?php } ?>
+<td class="total"><?php echo $_smarty_tpl->tpl_vars['scanned']->value['complete'];?>
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<?php echo $_smarty_tpl->tpl_vars['RecruitsTable']->value;?>
+
+</div>
+<?php }} ?>

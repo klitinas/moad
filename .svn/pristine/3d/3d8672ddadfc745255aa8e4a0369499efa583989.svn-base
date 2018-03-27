@@ -1,0 +1,22 @@
+CREATE TABLE `cognition` (
+`CommentID` varchar(255) NOT NULL default '',
+                          `UserID` varchar(255) default NULL,
+                          `Examiner` varchar(255) default NULL,
+                          `Testdate` timestamp NOT NULL,
+                          `Data_entry_completion_status` enum('Incomplete','Complete') NOT NULL default 'Incomplete',
+`Date_taken` date default NULL,
+`Candidate_Age` varchar(255) default NULL,
+`Window_Difference` varchar(255) default NULL,
+`notes` varchar(255) default NULL,
+`notes_status` enum('not_answered') default NULL,
+`moca` numeric default NULL,
+`moca_status` enum('not_answered') default NULL,
+`mmse` numeric default NULL,
+`mmse_status` enum('not_answered') default NULL,
+`pdcrs` numeric default NULL,
+`pdcrs_status` enum('not_answered') default NULL,
+`cdr` numeric default NULL,
+`cdr_status` enum('not_answered') default NULL,
+PRIMARY KEY  (`CommentID`)
+);
+REPLACE INTO test_names (Test_name, Full_name, Sub_group) VALUES ('cognition', 'General cognition', 1);

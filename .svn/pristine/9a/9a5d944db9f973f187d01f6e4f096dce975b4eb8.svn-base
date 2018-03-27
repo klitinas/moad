@@ -1,0 +1,423 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-04-14 04:40:51
+         compiled from "/var/www/loris/modules/reliability/templates/menu_reliability.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:1051809224552cfcc391cc94-98350588%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'fc23b9eb0f854f4edba6d90010a62fc5dde2ae75' => 
+    array (
+      0 => '/var/www/loris/modules/reliability/templates/menu_reliability.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '1051809224552cfcc391cc94-98350588',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'form' => 0,
+    'reliability_swap_candidates' => 0,
+    'EARLI_Reliability' => 0,
+    'page_links' => 0,
+    'headers' => 0,
+    'items' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_552cfcc3a74447_09993663',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_552cfcc3a74447_09993663')) {function content_552cfcc3a74447_09993663($_smarty_tpl) {?><div class="row">
+<div class="col-sm-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading" onclick="hideFilter();">
+            Selection Filter  
+            <label id="advanced-label" style="display:none">(Advanced Options)</label>
+            <span class="glyphicon glyphicon-chevron-down pull-right" style="display:none" id="down"></span>
+            <span class="glyphicon glyphicon-chevron-up pull-right" id="up"></span>
+        </div>
+        <div class="panel-body" id="panel-body">
+            <form method="post" action="main.php?test_name=reliability">
+            <!-- start the selection table -->
+                <?php if ($_smarty_tpl->tpl_vars['form']->value['error']) {?>
+                <div class="error"><?php echo $_smarty_tpl->tpl_vars['form']->value['error']['label'];?>
+</div>
+                <?php }?>
+                <?php if ($_smarty_tpl->tpl_vars['form']->value['message']) {?>
+                <div class="error"><?php echo $_smarty_tpl->tpl_vars['form']->value['message']['label'];?>
+</div>
+                <?php }?>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                    
+                        <label class="col-sm-12 col-md-4">Subproject:</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['SubprojectID']['html'];?>
+</div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['DCCID']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['DCCID']['html'];?>
+</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                    <!--  -->
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['CenterID']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['CenterID']['html'];?>
+</div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['PSCID']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['PSCID']['html'];?>
+</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Instrument']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Instrument']['html'];?>
+</div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['reliability_center_id']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['reliability_center_id']['html'];?>
+</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Gender']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Gender']['html'];?>
+</div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Visit_label']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Visit_label']['html'];?>
+</div>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4 label-control"><?php echo $_smarty_tpl->tpl_vars['form']->value['Invalid']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Invalid']['html'];?>
+</div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['ProjectID']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['ProjectID']['html'];?>
+</div>
+                    </div>
+                </div>
+
+                    <!-- <tr>
+                        <td colspan="12" align="right"><input type="submit" name="filter" value="Show Data" class="button" />&nbsp;<input type="button" name="reset" value="Clear Form" class="button" onclick="location.href='main.php?test_name=reliability&reset=true'" /></td>
+                      </tr> -->
+                <div class="row">
+                    <div class="col-sm-4 col-md-3 col-xs-12 col-md-offset-5 col-sm-offset-4">
+                        <input type="submit" name="filter" value="Show Data" class="btn btn-sm btn-primary col-xs-12" />
+                    </div>
+
+                    <div class="visible-xs col-xs-12"> </div>
+                    <div class="visible-xs col-xs-12"> </div>
+                    <div class="visible-xs col-xs-12"> </div>
+                    <div class="visible-xs col-xs-12"> </div>
+                    
+                    <div class="col-sm-4 col-md-3 col-xs-12">
+                        <input type="button" name="reset" value="Clear Form" class="btn btn-sm btn-primary col-xs-12" onclick="location.href='main.php?test_name=reliability&reset=true'" />
+                    </div>
+                </div> 
+                <!--        <td><input type="button" name="button" value="Add Instrument" class="button" onclick="location.href='main.php?test_name=csbs_reliability&subtest=csbs_reliability'"/></td> -->
+               
+            </form>
+        </div>
+    </div>
+</div>    
+
+
+
+<?php if ($_smarty_tpl->tpl_vars['reliability_swap_candidates']->value) {?>
+    <div class="col-sm-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading" onclick="hideSwap();">
+                Swap Candidates
+                <span class="glyphicon glyphicon-chevron-down pull-right" id="swapDown"></span>
+                <span class="glyphicon glyphicon-chevron-up pull-right" style="display:none" id="swapUp"></span>
+            </div>
+            <div class="panel-body" style="display:none" id="swap-body">
+                <form method="post" action="main.php?test_name=reliability">
+                    <input type="hidden" name="swap" value="swap"/>
+                    <h5>Original Candidate</h5>
+                    <div class="row">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand1PSCID']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand1PSCID']['html'];?>
+</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand1Visit_label']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand1Visit_label']['html'];?>
+</div>
+                    </div>
+                    <h5>Replacement Candidate</h5>
+                    <div class="row">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand2PSCID']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand2PSCID']['html'];?>
+</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand2Visit_label']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['Cand2Visit_label']['html'];?>
+</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <label class="col-sm-12 col-md-4"><?php echo $_smarty_tpl->tpl_vars['form']->value['SwapInstrument']['label'];?>
+</label>
+                        <div class="col-sm-12 col-md-8"><?php echo $_smarty_tpl->tpl_vars['form']->value['SwapInstrument']['html'];?>
+</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="visible-xs visible-sm col-xs-12"> </div>
+                        <div class="visible-xs visible-sm col-xs-12"> </div>
+                        <div class="visible-xs visible-sm col-xs-12"> </div>
+                        <div class="visible-xs visible-sm col-xs-12"> </div>
+                        <div class="col-md-6 col-xs-12 col-md-offset-6">
+                            <input type="submit" name="swap" value="Swap Candidates" class="btn btn-sm btn-primary col-xs-12" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>   
+</div>
+<?php }?>
+<?php if ($_smarty_tpl->tpl_vars['EARLI_Reliability']->value) {?>
+<form method="post" action="main.php?test_name=reliability">
+    <table border="0" valign="top" class="hideable" id="addcandidate">
+    <thead>
+    <tr>
+        <th colspan="4" class="button">Add EARLI Candidate</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--tr colspan="4">
+        <td>Candidate</td>
+    </tr-->
+    <tr>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddPSCID']['label'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddPSCID']['html'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddVisit_label']['label'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddVisit_label']['html'];?>
+</td>
+    </tr>
+    <!--tr colspan="4">
+        <td>Instrument</td>
+    </tr-->
+    <tr>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddInstrument']['label'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddInstrument']['html'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddReliabilityCenter']['label'];?>
+</td>
+        <td><?php echo $_smarty_tpl->tpl_vars['form']->value['AddReliabilityCenter']['html'];?>
+</td>
+    </tr>
+    <tr>
+        <td colspan="4" align="right"><input type="submit" name="swap" value="Add Candidate" class="button" /></td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+<?php }?>
+</div>
+<!-- <h2><font color="red">Note: Phase 2 reliability forms are unavailable at the moment as the system is being upgraded.</font></h2> -->
+
+<!--  title table with pagination -->
+<table id="LogEntries" border="0" valign="bottom" width="100%">
+<tr>
+    <!-- title -->
+    <td class="controlPanelSection">List of candidates flagged for reliability</td>
+
+    <!-- display pagination links -->
+    <td align="right"><?php echo $_smarty_tpl->tpl_vars['page_links']->value;?>
+</td>
+</tr>
+</table>
+
+<!-- start data table -->
+    <table border="0" width="100%" class ="table table-hover table-primary table-bordered dynamictable">
+        <thead>
+            <tr class="info">
+             <th>No.</th>
+                <!-- print out column headings - quick & dirty hack -->
+                <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['header'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['header']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['name'] = 'header';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['headers']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['header']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['header']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['header']['total']);
+?>
+                    <th>
+                      <?php if ($_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName']!="Reliable") {?>
+                        <a href="main.php?test_name=reliability&filter[order][field]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['name'];?>
+&filter[order][fieldOrder]=<?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['fieldOrder'];?>
+">
+                          <?php if ($_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName']=="Reliability Center Id") {?>
+                            Site of Reliability Test
+                          <?php } else { ?>
+                            <?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName'];?>
+
+                          <?php }?>
+                        </a>
+                      <?php } else { ?>
+                        <?php echo $_smarty_tpl->tpl_vars['headers']->value[$_smarty_tpl->getVariable('smarty')->value['section']['header']['index']]['displayName'];?>
+
+                      <?php }?>
+                    </th>
+                <?php endfor; endif; ?>
+            </tr>
+        </thead>
+
+    <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['item'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['item']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['name'] = 'item';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['items']->value) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['item']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['item']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['item']['total']);
+?>
+        <tr>
+        <!-- print out data rows -->
+        <?php if (isset($_smarty_tpl->tpl_vars['smarty']->value['section']['piece'])) unset($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['name'] = 'piece';
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'] = is_array($_loop=$_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']]) ? count($_loop) : max(0, (int) $_loop); unset($_loop);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show'] = true;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['max'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'] = 1;
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['start'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'] > 0 ? 0 : $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop']-1;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show']) {
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['loop'];
+    if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] == 0)
+        $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show'] = false;
+} else
+    $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'] = 0;
+if ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['show']):
+
+            for ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['start'], $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] = 1;
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] <= $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total'];
+                 $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] += $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'], $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration']++):
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['rownum'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index_prev'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] - $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index_next'] = $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['index'] + $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['step'];
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['first']      = ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] == 1);
+$_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['last']       = ($_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['iteration'] == $_smarty_tpl->tpl_vars['smarty']->value['section']['piece']['total']);
+?>
+        
+
+    	<?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['name']=="PSCID") {?>
+    	   <td>
+    	   <?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['Current_stage']=='Recycling Bin') {?>
+            <?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+ <font color="red">(Recycling Bin)</font>
+         <?php } elseif ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['invalid']=="yes") {?>
+            <?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+ <font color="red">(Invalid)</font>
+         <?php } else { ?>     
+              <a href="main.php?test_name=<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['Instrument'];?>
+_reliability&subtest=<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['Instrument'];?>
+_reliability&identifier=<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['CommentID'];?>
+&reliability_center_id=<?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['SiteID'];?>
+"><?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+</a> 
+           <?php }?>
+            <?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['manual']=="yes") {?>
+                <font color="red">(Manual)</font>
+            <?php }?>
+          </td>
+    	<?php } elseif ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['name']=="Cohort") {?>
+    	      <td>
+      	    <?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value']=="1") {?>
+          					6 month
+          	<?php } elseif ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value']=="2") {?>
+          					12 month
+          	<?php } elseif ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value']=="3") {?>
+          					Control
+          		<?php }?></td>
+      	<?php } elseif ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['name']=="Reliability") {?>
+      	  <?php if ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value']=="Yes") {?>
+      	  <td style="background-color:#86BC78;"><?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+</td>
+      	  <?php } elseif ($_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value']=="No") {?>
+      	  <td style="background-color:#C43120;color:white"><?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+</td>
+      	  <?php } else { ?>
+      	  <td></td>
+      	  <?php }?>
+    	  <?php } else { ?>
+    	     <td><?php echo $_smarty_tpl->tpl_vars['items']->value[$_smarty_tpl->getVariable('smarty')->value['section']['item']['index']][$_smarty_tpl->getVariable('smarty')->value['section']['piece']['index']]['value'];?>
+</td>
+        <?php }?>
+       </td>
+        <?php endfor; endif; ?>
+        </tr>           
+    <?php endfor; else: ?>
+        <tr><td colspan="15">No reliability entries found</td></tr>
+    <?php endif; ?>
+                        
+    <!-- end data table -->
+    </table>
+
+<?php }} ?>

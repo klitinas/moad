@@ -1,0 +1,155 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from pdq WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_smell = '';
+   
+$total = 
+($record['i01']
++$record['i02']
++$record['i03']
++$record['i04']
++$record['i05']
++$record['i06']
++$record['i07']
++$record['i08']
++$record['i09']
++$record['i10']
++$record['i11']
++$record['i12']
++$record['i13']
++$record['i14']
++$record['i15']
++$record['i16']
++$record['i17']
++$record['i18']
++$record['i19']
++$record['i20']
++$record['i21']
++$record['i22']
++$record['i23']
++$record['i24']
++$record['i25']
++$record['i26']
++$record['i27']
++$record['i28']
++$record['i29']
++$record['i30']
++$record['i31']
++$record['i32']
++$record['i33']
++$record['i34']
++$record['i35']
++$record['i36']
++$record['i37']
++$record['i38']
++$record['i39'] )
+/ 156 * 100;
+
+$scores['mobility'] = round(
+($record['i01']
++$record['i02']
++$record['i03']
++$record['i04']
++$record['i05']
++$record['i06']
++$record['i07']
++$record['i08']
++$record['i09']
++$record['i10'])
+/ 40 * 100 , 2);
+
+$scores['adl'] = round(
+($record['i11']
++$record['i12']
++$record['i13']
++$record['i14']
++$record['i15']
++$record['i16'] )
+/ 24 * 100, 2);
+
+$scores['emotion'] = round(
+($record['i17']
++$record['i18']
++$record['i19']
++$record['i20']
++$record['i21']
++$record['i22'] )
+/ 24 * 100, 2);
+
+$scores['stigma'] = round(
+( $record['i23']
++$record['i24']
++$record['i25']
++$record['i26'] )
+/ 16 * 100, 2);
+
+$scores['social_support'] = round(
+($record['i27']
++$record['i28']
++$record['i29'] )
+/ 12 * 100, 2);
+
+$scores['cognitions'] = round(
+($record['i30']
++$record['i31']
++$record['i32']
++$record['i33'] )
+/ 16 * 100, 2);
+
+$scores['communication'] = round(
+($record['i34']
++$record['i35']
++$record['i36'] )
+/ 12 * 100, 2);
+
+$scores['bodily_discomfort'] = round(
+($record['i37']
++$record['i38']
++$record['i39'] )
+/ 12 * 100, 2);
+
+if(empty($total)) {
+    $scores['total']          = 'Unable to calculate';
+
+} else {
+    $scores['total']          = round($total, 2);
+
+}
+//save scores
+$result = $db->update('pdq', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

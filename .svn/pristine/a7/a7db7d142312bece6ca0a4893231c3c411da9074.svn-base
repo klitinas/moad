@@ -1,0 +1,36 @@
+table{@}berg
+title{@}Berg Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes:
+numeric{@}sit_to_stand{@}SIT TO STAND :
+numeric{@}stand_uns{@}STAND UNS :
+numeric{@}sit_uns{@}SIT UNS :
+numeric{@}stand_to_sit{@}STAND TO SIT :
+numeric{@}trans{@}TRANS :
+numeric{@}stand_close{@}STAND CLOSE :
+numeric{@}stand_ft{@}STAND FT :
+numeric{@}reach{@}REACH :
+numeric{@}object{@}OBJECT :
+numeric{@}turn_behind{@}TURN BEHIND :
+numeric{@}turn_360{@}TURN 360 :
+numeric{@}alt_stool{@}ALT STOOL :
+numeric{@}foot_front{@}FOOT FRONT :
+numeric{@}stand_one{@}STAND ONE :
+static{@}total_berg{@}Total
+select{@}trans_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}stand_close_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}stand_ft_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}reach_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}object_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}turn_behind_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}turn_360_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}alt_stool_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}foot_front_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}stand_one_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sit_to_stand_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}stand_uns_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}sit_uns_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+select{@}stand_to_sit_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

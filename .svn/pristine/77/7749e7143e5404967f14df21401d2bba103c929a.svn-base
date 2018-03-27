@@ -1,0 +1,169 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from neuropsych WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_berg = '';
+ 
+ 
+$scores['moca_z'] = round(($record['moca'] - 27.4)/2.2,2);   
+$scores['dig_for_z'] = round(($record['dig_for']-10.96)/1.91 , 2);
+$scores['dig_back_z'] = round(($record['dig_back']-6.98)/2.03 , 2);
+$scores['digit_sc'] = round(($record['digit_total']-17.95)/3.08 , 2);
+$scores['cvltavg_z'] = ($record['cvlt1'] + $record['cvlt2'] + $record['cvlt3'] + $record['cvlt4'] +$record['cvlt5']) / 5;
+$scores['jolo_sc'] = round(($record['jolo']-25.21)/2.89 , 2);
+$scores['str1_z'] = round(($record['str1']-48.02)/9.45 , 2);
+$scores['str2_z'] = round(($record['str2']-63.97)/16.45 , 2);
+$scores['str3_z'] = round(($record['str3']-123.2)/36.23 , 2);
+$scores['str4_z'] = round(($record['str4']-141.03)/39.44 , 2);
+$scores['stravg_z'] = ($record['str1'] + $record['str2'] + $record['str3'] + $record['str4']) / 4;
+$scores['str_1_2'] = ($record['str1'] + $record['str2']) / 2;
+$scores['str_z_1_2'] = round(($record['str_1_2']-55.99)/11.47, 2);
+$scores['str3m2'] = $record['str3'] - $record['str2'];
+$scores['str3m2_z'] = round(($record['str3m2'] - 59.24)/30.72, 2);
+$scores['str4m_1_2'] = $record['str4'] - $record['str_1_2'];
+$scores['str4m_1_2_z'] = round(($record['str4m_1_2']- 85.04)/36.2 , 2);
+$scores['str4m3'] = $record['str4'] - $record['str3'];
+$scores['str4m3_z'] = round(($record['str4m3'] - 17.83)/23.98, 2);
+$scores['str3m_1_2'] = $record['str3'] - $record['str_1_2'];
+$scores['str3m_1_2_z'] = round(($record['str3m_1_2'] - 67.2) / 31.36, 2);
+$scores['sort1_z'] = round(($record['sort1'] - 20.5)/4.05 , 2);
+$scores['sort2_z'] = round(($record['sort2']-21.73)/4.57 , 2);
+$scores['s_rec1_z'] = round(($record['s_rec1'] - 20.76)/5.48 , 2);
+$scores['s_rec2_z'] = round(($record['s_rec2'] - 23.89)/5.12 , 2);
+$scores['tmt1_sc'] = round(($record['tmt1'] - 22.33)/4.46 , 2);
+$scores['tmt2_sc'] = round(($record['tmt2'] - 39.4)/13.71 , 2);
+$scores['tmt3_sc'] = round(($record['tmt3'] - 38.39)/12.3 , 2);
+$scores['tmt4_sc'] = round(($record['tmt4'] - 79.87)/24.88 , 2);
+$scores['tmt5_sc'] = round(($record['tmt5'] - 30.11)/12.68 , 2);
+$scores['tmtavg_z'] = ($record['tmt1']+$record['tmt2']+$record['tmt3']+$record['tmt4']+$record['tmt5']) / 5;
+$scores['tmt_2_3_avg'] = ($record['tmt2']+$record['tmt3']) / 2;
+$scores['tmt_2_3_sum'] = $record['tmt2']+$record['tmt3'];
+$scores['tmt4m_2_3'] = $record['tmt4'] - $scores['tmt_2_3_avg'];
+$scores['tmt4m_2_3_sum'] = $record['tmt4'] - $scores['tmt_2_3_sum'];
+$scores['tmt4m_2_3_z'] = round(($scores['tmt4m_2_3'] - 40.98)/19.23 , 2);
+$scores['tmt4m_2_3sum_z'] = round(($scores['tmt4m_2_3_sum'] - 2.03)/19.98 , 2);
+$scores['b_rt_m_z'] = round(($record['b_rt_m'] - 367.27)/119.51 , 2);
+$scores['ch_rt_m_z'] = round(($record['ch_rt_m'] - 513.59)/110.45 , 2);
+$scores['co_rt_m_z'] = round(($record['co_rt_m'] - 1223.32)/358.66 , 2);
+$scores['chmb'] = $record['ch_rt_m'] - $record['b_rt_m'];
+$scores['chmb_z'] = round(($scores['chmb'] - 146.32)/62.59 , 2);
+$scores['comb'] = $record['co_rt_m'] - $record['b_rt_m'];
+$scores['comb_z'] = round(($scores['comb'] - 856.05)/327.67 , 2);
+
+$c=$record;
+$s = array(
+$c['dig_sym'],
+$c['matrix'],
+$c['dig_for'],
+$c['dig_back'],
+$c['digit_total'],
+$c['info'],
+$c['cvlt1'],
+$c['cvlt2'],
+$c['cvlt3'],
+$c['cvlt4'],
+$c['cvlt5'],
+$c['cvtltm'],
+$c['cvltrec'],
+$c['b_rt_m'],
+$c['rx_sd'],
+$c['ch_rt_m'],
+$c['ch_sd'],
+$c['co_rt_m'],
+$c['co_sd'],
+$c['str1'],
+$c['str2'],
+$c['str3'],
+$c['str4'],
+$c['sort1'],
+$c['sort2'],
+$c['s_rec1'],
+$c['s_rec2'],
+$c['dkvf_f'],
+$c['dkvf_a'],
+$c['dkvf_s'],
+$c['dk_anim'],
+$c['fas_raw'],
+$c['fas_sc'],
+$c['tmt1'],
+$c['tmt2'],
+$c['tmt3'],
+$c['tmt4'],
+$c['tmt5'],
+$c['vr_1'],
+$c['vr_2'],
+$c['vr_3'],
+$c['vr_4'],
+$c['vr_5'],
+$c['t_vr'],
+$c['t_vr_sc'],
+$c['drs_att'],
+$c['d_att_am'],
+$c['d_att_per'],
+$c['drs_ip'],
+$c['d_iam'],
+$c['d_iper'],
+$c['drs_con'],
+$c['d_co_am'],
+$c['d_co_per'],
+$c['drs_cept'],
+$c['d_ce_am'],
+$c['d_ce_per'],
+$c['drs_mem'],
+$c['d_m_am'],
+$c['d_m_per'],
+$c['t_raw'],
+$c['t_amss'],
+$c['aemss'],
+$c['t_amss_per'] );
+
+if ((array_search('', $s)!==false) or (array_search('na', array_map('strtolower',$s))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+
+//save scores
+$result = $db->update('neuropsych', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

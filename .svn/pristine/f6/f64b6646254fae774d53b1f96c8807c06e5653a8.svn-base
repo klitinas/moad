@@ -1,0 +1,10 @@
+table{@}visit
+title{@}Visit info
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+text{@}codelist{@}Applicable studies for visit:
+select{@}codelist_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+textarea{@}notes{@}Notes:
+select{@}notes_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

@@ -1,0 +1,71 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from motor WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+
+$c = $record;
+
+$s = array($c['eq_1'],$c['str_1'],$c['cog_1a'],$c['cog_1b']
+,$c['eq_2'],$c['str_2'],$c['cog_2a'],$c['cog_2b']
+,$c['eq_3'],$c['str_3'],$c['cog_3a'],$c['cog_3b']
+,$c['eq_4'],$c['str_4'],$c['cog_4a'],$c['cog_4b']
+,$c['eq_5'],$c['str_5'],$c['cog_5a'],$c['cog_5b']
+,$c['eq_6'],$c['str_6'],$c['cog_6a'],$c['cog_6b']
+,$c['peg2r_off'],$c['peg5r_off'],$c['peg2l_off'],$c['peg5l_off']
+,$c['fgtap_r'],$c['fgtap_l'],$c['fttap_resp'],$c['fttap_err']
+,$c['vib_r'],$c['vib_l'],$c['fap']
+,$c['peg2r_on'],$c['peg5r_on'],$c['peg2l_on'],$c['peg5l_on']
+,$c['a_vib_r'],$c['a_vib_l'],$c['cold_r'],$c['cold_l']
+,$c['jerk_r'],$c['jerk_l'],$c['hy']
+,$c['pullbacktest'],$c['chairtest'],$c['time_up_from_chair'],$c['time_motor_walking']);
+if ((array_search('', $s)!==false) or (array_search('na', array_map('strtolower',$s))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+
+
+
+//save scores
+$result = $db->update('motor', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save scores: ". $result->getMessage();
+    exit(3);
+}
+exit(0);
+
+?>

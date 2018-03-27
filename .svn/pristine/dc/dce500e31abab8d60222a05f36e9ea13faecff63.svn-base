@@ -1,0 +1,266 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_motor extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "motor";           // test_names.Test_name
+        $this->table = 'motor';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Motor Assessment");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<HDR>");
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+		$this->addHeader("<HDR>");
+
+		$this->addHeader("Sensory Organization Test");		
+
+
+		$hdr = $this->form->addElement('static','hdr','TRIAL 1');
+
+		$eq_1 = $this->form->addElement('text', 'eq_1', '-- Equilibrium :');
+		//$this->addRule('eq_1', 'Enter numeric value', 'numeric', 'client');
+
+		$str_1 = $this->form->addElement('text', 'str_1', '-- Strategy :');
+		$this->addRule('str_1', 'Enter numeric value', 'numeric', 'client');
+
+		$cog_1a = $this->form->addElement('text', 'cog_1a', '-- COG Alignment (a) :');
+		$this->addRule('cog_1a', 'Enter numeric value', 'numeric', 'client');	
+
+		$cog_1b = $this->form->addElement('text', 'cog_1b', '-- COG Alignment (b) :');
+		$this->addRule('cog_1b', 'Enter numeric value', 'numeric', 'client');	
+
+		$this->addHeader("<MY TITLE");		
+		$hdr = $this->form->addElement('static','hdr','TRIAL 2');
+
+		$eq_2 = $this->form->addElement('text', 'eq_2', '-- Equilibrium :');
+		//$this->addRule('eq_2', 'Enter numeric value', 'numeric', 'client');
+
+		$str_2 = $this->form->addElement('text', 'str_2', '-- Strategy :');
+		$this->addRule('str_2', 'Enter numeric value', 'numeric', 'client');
+
+		$cog_2a = $this->form->addElement('text', 'cog_2a', '-- COG Alignment (a) :');
+		$this->addRule('cog_2a', 'Enter numeric value', 'numeric', 'client');	
+
+		$cog_2b = $this->form->addElement('text', 'cog_2b', '-- COG Alignment (b) :');
+		$this->addRule('cog_2b', 'Enter numeric value', 'numeric', 'client');	
+
+		$this->addHeader("<MY TITLE");		
+		$hdr = $this->form->addElement('static','hdr','TRIAL 3');
+
+		$eq_3 = $this->form->addElement('text', 'eq_3', '-- Equilibrium :');
+		//$this->addRule('eq_3', 'Enter numeric value', 'numeric', 'client');
+
+		$str_3 = $this->form->addElement('text', 'str_3', '-- Strategy :');
+		$this->addRule('str_3', 'Enter numeric value', 'numeric', 'client');
+
+		$cog_3a = $this->form->addElement('text', 'cog_3a', '-- COG Alignment (a) :');
+		$this->addRule('cog_3a', 'Enter numeric value', 'numeric', 'client');	
+
+		$cog_3b = $this->form->addElement('text', 'cog_3b', '-- COG Alignment (b) :');
+		$this->addRule('cog_3b', 'Enter numeric value', 'numeric', 'client');	
+
+
+		$this->addHeader("<MY TITLE");		
+		$hdr = $this->form->addElement('static','hdr','TRIAL 4');
+
+		$eq_4 = $this->form->addElement('text', 'eq_4', '-- Equilibrium :');
+		//$this->addRule('eq_4', 'Enter numeric value', 'numeric', 'client');
+
+		$str_4 = $this->form->addElement('text', 'str_4', '-- Strategy :');
+		$this->addRule('str_4', 'Enter numeric value', 'numeric', 'client');
+
+		$cog_4a = $this->form->addElement('text', 'cog_4a', '-- COG Alignment (a) :');
+		$this->addRule('cog_4a', 'Enter numeric value', 'numeric', 'client');	
+
+		$cog_4b = $this->form->addElement('text', 'cog_4b', '-- COG Alignment (b) :');
+		$this->addRule('cog_4b', 'Enter numeric value', 'numeric', 'client');	
+
+		$this->addHeader("<MY TITLE");		
+		$hdr = $this->form->addElement('static','hdr','TRIAL 5');
+
+		$eq_5 = $this->form->addElement('text', 'eq_5', '-- Equilibrium :');
+		//$this->addRule('eq_5', 'Enter numeric value', 'numeric', 'client');
+
+		$str_5 = $this->form->addElement('text', 'str_5', '-- Strategy :');
+		$this->addRule('str_5', 'Enter numeric value', 'numeric', 'client');
+
+		$cog_5a = $this->form->addElement('text', 'cog_5a', '-- COG Alignment (a) :');
+		$this->addRule('cog_5a', 'Enter numeric value', 'numeric', 'client');	
+
+		$cog_5b = $this->form->addElement('text', 'cog_5b', '-- COG Alignment (b) :');
+		$this->addRule('cog_5b', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("<MY TITLE");		
+		$hdr = $this->form->addElement('static','hdr','TRIAL 6');
+
+		$eq_6 = $this->form->addElement('text', 'eq_6', '-- Equilibrium :');
+		//$this->addRule('eq_6', 'Enter numeric value', 'numeric', 'client');
+
+		$str_6 = $this->form->addElement('text', 'str_6', '-- Strategy :');
+		$this->addRule('str_6', 'Enter numeric value', 'numeric', 'client');
+
+		$cog_6a = $this->form->addElement('text', 'cog_6a', '-- COG Alignment (a) :');
+		$this->addRule('cog_6a', 'Enter numeric value', 'numeric', 'client');	
+
+		$cog_6b = $this->form->addElement('text', 'cog_6b', '-- COG Alignment (b) :');
+		$this->addRule('cog_6b', 'Enter numeric value', 'numeric', 'client');		
+
+
+		$this->addHeader("Pegboard OFF");
+		$hdr = $this->form->addElement('static','hdr','---All units in seconds---');		
+		$hdr = $this->form->addElement('static','hdr','RIGHT');		
+		$peg2r_off = $this->form->addElement('text', 'peg2r_off', '-- 2 ROWS :');
+		$peg5r_off = $this->form->addElement('text', 'peg5r_off', '-- 5 ROWS :');
+		$hdr = $this->form->addElement('static','hdr','LEFT');		
+		$peg2l_off = $this->form->addElement('text', 'peg2l_off', '-- 2 ROWS :');
+		$peg5l_off = $this->form->addElement('text', 'peg5l_off', '-- 5 ROWS :');
+		$this->addRule('peg2r_off', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('peg5r_off', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('peg2l_off', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('peg5l_off', 'Enter numeric value', 'numeric', 'client');
+
+	$this->addHeader("Pegboard ON");
+		$hdr = $this->form->addElement('static','hdr','---All units in seconds---');		
+		$hdr = $this->form->addElement('static','hdr','RIGHT');		
+		$peg2r_on = $this->form->addElement('text', 'peg2r_on', '-- 2 ROWS :');
+		$peg5r_on = $this->form->addElement('text', 'peg5r_on', '-- 5 ROWS :');
+		$hdr = $this->form->addElement('static','hdr','LEFT');		
+		$peg2l_on = $this->form->addElement('text', 'peg2l_on', '-- 2 ROWS :');
+		$peg5l_on = $this->form->addElement('text', 'peg5l_on', '-- 5 ROWS :');
+		$this->addRule('peg2r_on', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('peg5r_on', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('peg2l_on', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('peg5l_on', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("Finger Tap OFF");
+		$fgtap_r = $this->form->addElement('text', 'fgtap_r', 'Right :');
+		$fgtap_l = $this->form->addElement('text', 'fgtap_l', 'Left :');
+		$this->addRule('fgtap_r', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('fgtap_l', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("Foot Tapper");
+		$fttap_resp = $this->form->addElement('text', 'fttap_resp', 'Alt 2 foottapper responses :');
+		$fttap_err = $this->form->addElement('text', 'fttap_err', 'Alt 2 foottapper response errors :');
+		$this->addRule('fttap_resp', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('fttap_err', 'Enter numeric value', 'numeric', 'client');
+
+		$this->addHeader("Biothesiometer");
+		$vib_r = $this->form->addElement('text', 'vib_r', 'Right :');
+		$vib_l = $this->form->addElement('text', 'vib_l', 'Left :');	
+		$this->addRule('vib_r', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('vib_l', 'Enter numeric value', 'numeric', 'client');	
+
+
+		$this->addHeader("GAIT");		
+		$fap = $this->form->addElement('text', 'fap', 'Functional Ambulation Profile (FAP) :');
+		$this->addRule('fap', 'Enter numeric value', 'numeric', 'client');
+
+	
+
+		$this->addHeader("Other");
+
+		$hdr = $this->form->addElement('static','hdr','Vibration (tuning fork) at ankle:');	// fmly vib_r/l from clinical	
+		$a_vib_r = $this->form->addElement('text', 'a_vib_r', '-- Right :');	
+		$a_vib_l = $this->form->addElement('text', 'a_vib_l', '-- Left  :');	
+		$hdr = $this->form->addElement('static','hdr','');	
+		$hdr = $this->form->addElement('static','hdr','Cold Gradient - Legs (Y/N):');		
+		$cold_r = $this->form->addElement('text', 'cold_r', '-- Right :');	
+		$cold_l = $this->form->addElement('text', 'cold_l', '-- Left  :');	
+		$hdr = $this->form->addElement('static','hdr','');	
+		$hdr = $this->form->addElement('static','hdr','Ankle Jerk Reflexes (0-3):');		
+		$jerk_r = $this->form->addElement('text', 'jerk_r', '-- Right :');	
+		$jerk_l = $this->form->addElement('text', 'jerk_l', '-- Left  :');	
+		$hdr = $this->form->addElement('static','hdr','');			
+		$hy = $this->form->addElement('text', 'hy', 'Modified Hoehn & Yahr :');	
+		
+		// from old updrs
+		$chairtest = $this->form->addElement('text', 'chairtest', 'Chair test (0-3) :');	
+		$pullbacktest = $this->form->addElement('text', 'pullbacktest', 'Pull backward test (0-4) :');	
+		$time_up_from_chair = $this->form->addElement('text', 'time_up_from_chair', 'Timed getting up from chair & walk 3m and sit back down in chair (sec) :');	
+		$time_motor_walking = $this->form->addElement('text', 'time_motor_walking', 'Timed motor walking (from right side main office to door halfway hallway (sec) :');
+
+		// rules
+		$this->addRule('a_vib_r', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('a_vib_l', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('cold_r', 'Enter Y,N,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+		$this->addRule('cold_l', 'Enter Y,N,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+		$this->addRule('jerk_r', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+		$this->addRule('jerk_l', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+		$this->addRule('hy', 'Enter 0,1,1.5,2,2.5,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|1.5|2|2.5|3|4|5)$/', 'client');
+		$this->addRule('chairtest', 'Enter 0,1,2,3,or NA', 'regex', '/(?i)^(na|0|1|2|3)$/', 'client');
+		$this->addRule('pullbacktest', 'Enter 0,1,2,3,4,or NA', 'regex', '/(?i)^(na|0|1|2|3|4)$/', 'client');
+		$this->addRule('time_up_from_chair', 'Enter numeric value', 'numeric', 'client');
+		$this->addRule('time_motor_walking', 'Enter numeric value', 'numeric', 'client');
+    }
+   
+   
+}
+?>

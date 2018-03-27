@@ -1,0 +1,123 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 09:46:25
+         compiled from "/var/www/loris/modules/new_profile/templates/form_new_profile.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:63848244855031461b89ce6-25645918%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '92855fb2568b9b7e91eecddf1f35b2df78a8dadf' => 
+    array (
+      0 => '/var/www/loris/modules/new_profile/templates/form_new_profile.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '63848244855031461b89ce6-25645918',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'success' => 0,
+    'candID' => 0,
+    'PSCID' => 0,
+    'form' => 0,
+    'error' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031461c11d62_53497600',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031461c11d62_53497600')) {function content_55031461c11d62_53497600($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['success']->value) {?>
+
+<p>New candidate created. DCCID: <?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+ PSCID: <?php echo $_smarty_tpl->tpl_vars['PSCID']->value;?>
+<br />
+<a href="main.php?test_name=timepoint_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+">Access this candidate</a><br />
+<a href="main.php?test_name=new_profile">Recruit another candidate</a></p>
+
+<?php } else { ?>
+
+<br />
+<form method="post" name="new_profile" id="new_profile" class="form-inline">
+
+    <?php  $_smarty_tpl->tpl_vars['error'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['error']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['errors']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['error']->key => $_smarty_tpl->tpl_vars['error']->value) {
+$_smarty_tpl->tpl_vars['error']->_loop = true;
+?>
+    <div class="col-sm-12">
+        <label class="error col-sm-12"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</label>
+    </div>
+    <?php } ?>
+
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['dob1']['label'];?>
+</label>
+		<div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['form']->value['dob1']['html'];?>
+</div>
+	</div>
+	<br><br>
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['dob2']['label'];?>
+</label>
+		<div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['form']->value['dob2']['html'];?>
+</div>
+	</div>
+	
+    <?php if ($_smarty_tpl->tpl_vars['form']->value['edc1']['html']!='') {?>
+    <br><br>
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['edc1']['label'];?>
+</label>
+		<div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['form']->value['edc1']['html'];?>
+</div>
+	</div>
+	<br><br>
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['edc2']['label'];?>
+</label>
+		<div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['form']->value['edc2']['html'];?>
+</div>
+	</div>
+
+    <?php }?>
+	<br><br>
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['gender']['label'];?>
+</label>
+		<div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['form']->value['gender']['html'];?>
+</div>
+	</div>
+	<br><br>
+    <?php if ($_smarty_tpl->tpl_vars['form']->value['PSCID']['html']!='') {?>
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['PSCID']['label'];?>
+</label>
+		<div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['form']->value['PSCID']['html'];?>
+</div>
+	</div>
+	<br><br>
+    <?php }?>
+
+    <?php if ($_smarty_tpl->tpl_vars['form']->value['ProjectID']['html']!='') {?>
+    <div class="form-group col-sm-12">
+        <label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['ProjectID']['label'];?>
+</label>
+        <div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['form']->value['ProjectID']['html'];?>
+</div>
+    </div>
+    <br><br>
+    <?php }?>
+
+	<div class="form-group col-sm-12">
+		<div class="col-sm-12"><input class="btn btn-primary col-sm-offset-2 col-sm-2" name="fire_away" value="Create" type="submit" /></div>
+	</div>
+</table>
+<?php echo $_smarty_tpl->tpl_vars['form']->value['hidden'];?>
+
+</form>
+
+<?php }?>
+<?php }} ?>

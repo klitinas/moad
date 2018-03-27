@@ -1,0 +1,79 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 10:12:02
+         compiled from "/var/www/loris/modules/create_timepoint/templates/form_create_timepoint.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:189994512655031a6218a681-62004073%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '7aa14b2a5e46b4f7cd7781fc06a3dc8a660ca5e8' => 
+    array (
+      0 => '/var/www/loris/modules/create_timepoint/templates/form_create_timepoint.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '189994512655031a6218a681-62004073',
+  'function' => 
+  array (
+  ),
+  'variables' => 
+  array (
+    'success' => 0,
+    'candID' => 0,
+    'form' => 0,
+    'error' => 0,
+  ),
+  'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031a621ce158_06448216',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031a621ce158_06448216')) {function content_55031a621ce158_06448216($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['success']->value) {?>
+
+<p>New time point successfully registered. <a href="main.php?test_name=timepoint_list&candID=<?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+">Click here to continue.</a></p>
+
+<?php } else { ?>
+
+<form method="post" name="create_timepoint" id="create_timepoint">
+
+    <h3>Create Time Point</h3>
+    <br>
+
+    <?php  $_smarty_tpl->tpl_vars['error'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['error']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['form']->value['errors']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['error']->key => $_smarty_tpl->tpl_vars['error']->value) {
+$_smarty_tpl->tpl_vars['error']->_loop = true;
+?>
+    <div class="col-sm-12">
+        <label class="error col-sm-12"><?php echo $_smarty_tpl->tpl_vars['error']->value;?>
+</label>
+    </div>
+    <?php } ?>
+
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2">DCCID</label>
+		<div class="col-sm-10"><?php echo $_smarty_tpl->tpl_vars['candID']->value;?>
+</div>
+	</div>
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['subprojectID']['label'];?>
+</label>
+		<div class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['subprojectID']['html'];?>
+</div>
+	</div>
+	<div class="form-group col-sm-12">
+		<label class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['visitLabel']['label'];?>
+</label>
+		<div class="col-sm-2"><?php echo $_smarty_tpl->tpl_vars['form']->value['visitLabel']['html'];?>
+</div>
+	</div>
+
+	<div class="form-group col-sm-12">
+		<div class="col-sm-2 col-sm-offset-2"><input class="btn btn-primary col-sm-12" name="fire_away" value="Create Time Point" type="submit" /></div>
+	</div>
+</table>
+<?php echo $_smarty_tpl->tpl_vars['form']->value['hidden'];?>
+
+</form>
+
+<?php }?>
+<?php }} ?>

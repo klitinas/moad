@@ -1,0 +1,38 @@
+#!/bin/bash
+
+COMMENTID=$1
+CANDID=$(echo $COMMENTID | cut -c1-6)
+
+INSTDIR=$(dirname $0)
+PROJDIR=$(dirname $INSTDIR)
+PROJDIR="/var/www/loris/project"
+
+CONFIGFILE="${PROJDIR}/config.xml"
+DB=$(grep "<database>" $CONFIGFILE | grep loris | sed 's/<database>//g' | sed 's/<\/database>//g' | sed 's/ //g')
+
+# Aggregate cumulative list of codes
+CMD="select value from ${DB}.parameter_candidate where CandID='${CANDID}';"
+AGGLIST=$(mysql -ulorisuser -plorisuser -s -e "${CMD}")
+
+# Input for codes for just this visit
+#VISITCODE=$(mysql -ulorisuser -plorisuser -s -e "select codelist from ${DB}.visit where CommentID=${COMMENTID};")
+VISITCODE=$2
+
+
+
+python << EOF
+
+a_split = "$AGGLIST".split(',');	
+v_split = "$VISITCODE".split(' ');	
+
+OK=1
+for v in v_split:
+	if v not in a_split:
+		OK=0;
+		break
+
+print OK
+
+EOF
+
+

@@ -1,0 +1,27 @@
+[2015-04-02 03:22:22] Setting up variables 
+
+
+[2015-04-02 03:25:15] Processing files 
+
+
+[2015-04-02 03:25:16] Setting up variables 
+
+
+[2015-04-02 03:25:16] file-name : uploadtest.tar, and sourcelocation/data/incoming/uploadtest.tar.gz
+
+[2015-04-02 03:25:16]  visitlabel V1 pscid: 0001and candid: 961680
+
+[2015-04-02 03:25:16] The File /data/incoming/uploadtest.tar.gz is nowuntarred into /data/incoming/ 
+
+
+[2015-04-02 03:25:16] The Environment Variables are now set 
+
+
+[2015-04-02 03:25:16] Running DICOM 
+
+
+[2015-04-02 03:25:16] cmd : perl /data/loris/data/dicom-archive/dicomTar.pl /data/incoming//uploadtest /data/loris/data/tarchive -clobber -database -profile prod 
+
+
+[2015-04-02 03:25:16] 
+

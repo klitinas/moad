@@ -1,0 +1,28 @@
+table{@}medical
+title{@}Medical Summary
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}meds{@}meds:
+select{@}meds_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}ldopa{@}L-dopa_(y/n):
+select{@}ldopa_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}dopa_a{@}Dopa-a_(y/n):
+select{@}dopa_a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}anti_dep{@}anti_dep_(y/n):
+select{@}anti_dep_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}chol{@}chol_(y/n):
+select{@}chol_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}av_off_per24hr{@}av_off/24hr:
+select{@}av_off_per24hr_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}av_awake_per24{@}av_awake/24:
+select{@}av_awake_per24_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}w_dys{@}w/dys:
+select{@}w_dys_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}w_t_dys{@}w/T/dys:
+select{@}w_t_dys_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pct_off{@}pct_off:
+select{@}pct_off_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pct_dys{@}pct_dys:
+select{@}pct_dys_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

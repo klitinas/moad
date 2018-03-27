@@ -1,0 +1,170 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_clinical extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function yesno($name,$text) {
+		$opts = array(''=>'-Select an option-','yes'=>'Yes','no'=>'No');		
+		$element = $this->form->addElement('select', $name, $text,$opts);
+		return $element;
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "clinical";           // test_names.Test_name
+        $this->table = 'clinical';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Clinical Summary");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<MY TITLE>");		
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+		//$color_blind = $this->form->addElement('text', 'color_blind', 'Color blind:');
+		//$this->addRule('color_blind', 'Enter y,n,or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$this->addHeader("History");	
+		$this->form->addElement('static','hdr','Has the participant had or currently have any of the following?');	
+		$this->form->addElement('static','hdr','--- Answer Yes/No for this section ---');
+		$this->yesno('cancer','Cancer:');
+		//$cancer = $this->form->addElement('text', 'cancer', 'Cancer:');
+		$this->yesno('diabetes', 'Diabetes:');
+		$this->yesno('asthma', 'Asthma:');		
+		$this->yesno('stroke', 'Stroke:');
+		$this->yesno('mstroke', 'Mini stroke:');
+		$this->yesno('head_inj', 'Head injury:');
+		$this->yesno('bleed', 'Bleeding disorder/excessive bleeding:');
+		$this->yesno('encephalitis', 'Encephalitis:');
+		$this->yesno('seizure', 'Seizure:');
+		$this->yesno('liver', 'Liver or kidney problems:');
+		$this->yesno('brain_sur', 'Brain surgery:');
+		$this->yesno('lupus', 'Lupus:');
+		$this->yesno('depression', 'Depression:');
+		$this->yesno('anxiety', 'Anxiety:');
+		$this->yesno('high_bp', 'High blood pressure/hypertension:');
+		$this->yesno('prior_mi', 'Heart attack/problems:');
+		$this->yesno('headache', 'Headaches/migraines:');
+
+
+
+		$this->addHeader("<MY TITLE>");		
+		$this->addHeader("<MY TITLE>");		
+		$this->addHeader("<MY TITLE>");		
+		$duration = $this->form->addElement('text', 'duration', 'Disease duration (years):');
+		$mallampati = $this->form->addElement('text', 'mallampati', 'Mallampati Score:');
+		//$hand_dom = $this->form->addElement('text', 'hand_dom', 'Hand dominance (R/L):');
+		$dom_hnd = $this->form->addElement('select', 'dom_hnd', 'Hand dominance (Right/Left):',array(''=>'-Select an option-','R'=>'Right','L'=>'Left'));
+		$this->addRule('duration', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('mallampati', 'Value must be numeric', 'numeric', 'client');
+		//$this->addRule('hand_dom', 'Enter R,L,or NA', 'regex', '/(?i)^(na|r|l)$/', 'client');
+
+		$height = $this->form->addElement('text', 'height', 'Height (in):');
+		$weight = $this->form->addElement('text', 'weight', 'Weight (lbs):');		
+		$fat_pct = $this->form->addElement('text', 'fat_pct', 'Fat %:');
+		$fat_rating = $this->form->addElement('text', 'fat_rating', 'Fat Rating:');
+		$this->addRule('height', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('weight', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('fat_pct', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('fat_rating', 'Value must be numeric', 'numeric', 'client');
+
+
+		$hx_smoke = $this->form->addElement('text', 'hx_smoke', 'Smoking history (0/1):');
+		$fall_house = $this->form->addElement('text', 'fall_house', 'History of falling in the house (0/1):');
+		$dog = $this->form->addElement('text', 'dog', 'Own a dog (0/1):');
+		$age_lmp = $this->form->addElement('text', 'age_lmp', 'Age LMP	:');
+
+		$this->addRule('hx_smoke', 'Enter 0,1,or NA', 'regex', '/(?i)^(na|1|0)$/', 'client');
+		$this->addRule('fall_house', 'Enter 0,1,or NA', 'regex', '/(?i)^(na|1|0)$/', 'client');
+		$this->addRule('dog', 'Enter 0,1,or NA', 'regex', '/(?i)^(na|1|0)$/', 'client');
+		$this->addRule('age_lmp', 'Value must be numeric', 'numeric', 'client');
+
+		//$this->addHeader("Blood Pressure");
+		$this->addHeader("<MY TITLE>");		
+		$this->addHeader("<MY TITLE>");				
+		$bp_s_sit = $this->form->addElement('text', 'bp_s_sit', 'Blood Pressure - Systolic (sit):');
+		$bp_s_sta = $this->form->addElement('text', 'bp_s_sta', 'Blood Pressure - Systolic (stand):');
+
+		$bp_d_sit = $this->form->addElement('text', 'bp_d_sit', 'Blood Pressure - Diastolic (sit):');
+		$bp_d_sta = $this->form->addElement('text', 'bp_d_sta', 'Blood Pressure - Diastolic (stand):');
+
+		$pls_sit = $this->form->addElement('text', 'pls_sit', 'Pulse (sit):');
+		$pls_sta = $this->form->addElement('text', 'pls_sta', 'Pulse (stand):');
+
+		$this->addRule('bp_s_sit', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('bp_s_sta', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('bp_d_sit', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('bp_d_sta', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('pls_sit', 'Value must be numeric', 'numeric', 'client');
+		$this->addRule('pls_sta', 'Value must be numeric', 'numeric', 'client');
+
+		$bmi = $this->form->addElement('static','bmi','Calculated BMI:'); 
+    }
+   
+   
+}
+?>

@@ -1,0 +1,151 @@
+table{@}updrs
+title{@}UPDRS Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes: 
+numeric{@}cog{@}cog:
+select{@}cog_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}hal_psy{@}hal_psy:
+select{@}hal_psy_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dep{@}dep:
+select{@}dep_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}anxious{@}anxious:
+select{@}anxious_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}apathy{@}apathy:
+select{@}apathy_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dds{@}dds:
+select{@}dds_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}sleep{@}sleep:
+select{@}sleep_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}day_sleep{@}day_sleep:
+select{@}day_sleep_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pain{@}pain:
+select{@}pain_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}urine{@}urine:
+select{@}urine_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}constip{@}constip:
+select{@}constip_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}light_head{@}light_head:
+select{@}light_head_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fatigue{@}fatigue:
+select{@}fatigue_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}spch{@}spch:
+select{@}spch_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}saliva{@}saliva:
+select{@}saliva_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}swallow{@}swallow:
+select{@}swallow_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}eating{@}eating:
+select{@}eating_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dress{@}dress:
+select{@}dress_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}hygiene{@}hygiene:
+select{@}hygiene_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}handwr{@}handwr:
+select{@}handwr_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}hobby{@}hobby:
+select{@}hobby_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}turn{@}turn:
+select{@}turn_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}trem{@}trem:
+select{@}trem_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}out_bed{@}out_bed:
+select{@}out_bed_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}walk{@}walk:
+select{@}walk_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}freeze{@}freeze:
+select{@}freeze_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}spch_motor{@}spch_motor:
+select{@}spch_motor_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}face_exp{@}face_exp:
+select{@}face_exp_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rig_neck{@}rig_neck:
+select{@}rig_neck_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rig_rue{@}rig_rue:
+select{@}rig_rue_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rig_lue{@}rig_lue:
+select{@}rig_lue_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rig_rle{@}rig_rle:
+select{@}rig_rle_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rig_lle{@}rig_lle:
+select{@}rig_lle_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fngtp_r{@}fngtp_r:
+select{@}fngtp_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fngtp_l{@}fngtp_l:
+select{@}fngtp_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}hndmv_r{@}hndmv_r:
+select{@}hndmv_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}hndmv_l{@}hndmv_l:
+select{@}hndmv_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pro_r{@}pro_r:
+select{@}pro_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pro_l{@}pro_l:
+select{@}pro_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}toe_r{@}toe_r:
+select{@}toe_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}toe_l{@}toe_l:
+select{@}toe_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}leg_r{@}leg_r:
+select{@}leg_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}leg_l{@}leg_l:
+select{@}leg_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}chair{@}chair:
+select{@}chair_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}gait{@}gait:
+select{@}gait_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}freez{@}freez:
+select{@}freez_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pos_stab{@}pos_stab:
+select{@}pos_stab_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}posture{@}posture:
+select{@}posture_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}mvmnt{@}mvmnt:
+select{@}mvmnt_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}postrem_r{@}postrem_r:
+select{@}postrem_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}postrem_l{@}postrem_l:
+select{@}postrem_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}kintrem_r{@}kintrem_r:
+select{@}kintrem_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}kintrem_l{@}kintrem_l:
+select{@}kintrem_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}trem_rue{@}trem_rue:
+select{@}trem_rue_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}trem_lue{@}trem_lue:
+select{@}trem_lue_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}trem_rle{@}trem_rle:
+select{@}trem_rle_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}trem_lle{@}trem_lle:
+select{@}trem_lle_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}trem_lip{@}trem_lip:
+select{@}trem_lip_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}const_trem{@}const_trem:
+select{@}const_trem_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}dys_imp{@}dys_imp:
+select{@}dys_imp_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}body{@}body:
+select{@}body_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}swing_rue{@}swing_rue:
+select{@}swing_rue_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}swing_lue{@}swing_lue:
+select{@}swing_lue_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}time_dys{@}time_dys:
+select{@}time_dys_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}func_dys{@}func_dys:
+select{@}func_dys_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fall{@}FALL:
+select{@}fall_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}tug{@}tug:
+select{@}tug_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}t_walk{@}t_walk:
+select{@}t_walk_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}updrs_total{@}UPDRS_total:
+select{@}updrs_total_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}updrs_motor{@}UPDRS_motor:
+select{@}updrs_motor_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}updrs_trem{@}UPDRS_trem:
+select{@}updrs_trem_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}updrs_pigd{@}UPDRS_PIGD:
+select{@}updrs_pigd_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

@@ -1,0 +1,56 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from smell WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_smell = '';
+   
+$total_smell = $record['sm01']+$record['sm02']+$record['sm03']+$record['sm04']+$record['sm05']+$record['sm06']+$record['sm07']+$record['sm08']+$record['sm09']+$record['sm10'] 
+   			 + $record['sm11']+$record['sm12']+$record['sm13']+$record['sm14']+$record['sm15']+$record['sm16']+$record['sm17']+$record['sm18']+$record['sm19']+$record['sm20']
+   			 + $record['sm21']+$record['sm22']+$record['sm23']+$record['sm24']+$record['sm25']+$record['sm26']+$record['sm27']+$record['sm28']+$record['sm29']+$record['sm30']
+   			 + $record['sm31']+$record['sm32']+$record['sm33']+$record['sm34']+$record['sm35']+$record['sm36']+$record['sm37']+$record['sm38']+$record['sm39']+$record['sm40'];
+
+
+if(empty($total_smell)) {
+    $scores['total_smell']          = 'Unable to calculate';
+
+} else {
+    $scores['total_smell']          = round($total_smell, 2);
+
+}
+//save scores
+$result = $db->update('smell', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

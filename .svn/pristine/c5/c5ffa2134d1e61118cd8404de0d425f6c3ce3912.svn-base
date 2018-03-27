@@ -1,0 +1,235 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_npi extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "npi";           // test_names.Test_name
+        $this->table = 'npi';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Neuropsychiatric Inventory (NPI)");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<MY TITLE>");		
+
+		$notes = $this->form->addElement('text', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+
+		//$this->form->addElement('static','hdr','FOR ALL ENTRIES ANSWER 1,2,3,4 OR NA:');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','A. DELUSIONS');
+
+		$a_freq = $this->form->addElement('text', 'a_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('a_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$a_sev = $this->form->addElement('text', 'a_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('a_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$a_dis = $this->form->addElement('text', 'a_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('a_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+	
+		$this->form->addElement('static','hdr','B. HALLUCINATIONS');
+
+		$a_freq = $this->form->addElement('text', 'b_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('b_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$a_sev = $this->form->addElement('text', 'b_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('b_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$a_dis = $this->form->addElement('text', 'b_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('b_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+		$this->form->addElement('static','hdr','C. AGITATION/AGGRESSION');
+
+		$c_freq = $this->form->addElement('text', 'c_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('c_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$c_sev = $this->form->addElement('text', 'c_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('c_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$c_dis = $this->form->addElement('text', 'c_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('c_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','D. DEPRESSION/DYSPHORIA');
+
+		$d_freq = $this->form->addElement('text', 'd_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$d_sev = $this->form->addElement('text', 'd_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$d_dis = $this->form->addElement('text', 'd_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('d_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','E. ANXIETY');
+
+		$e_freq = $this->form->addElement('text', 'e_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('e_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$e_sev = $this->form->addElement('text', 'e_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('e_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$e_dis = $this->form->addElement('text', 'e_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('e_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','F. ELATION/EUPHORIA');
+
+		$f_freq = $this->form->addElement('text', 'f_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('f_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$f_sev = $this->form->addElement('text', 'f_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('f_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$f_dis = $this->form->addElement('text', 'f_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('f_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','G. APATHY/INDIFFERENCE');
+
+		$g_freq = $this->form->addElement('text', 'g_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('g_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$g_sev = $this->form->addElement('text', 'g_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('g_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$g_dis = $this->form->addElement('text', 'g_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('g_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','H. DISINHIBITION');
+
+		$h_freq = $this->form->addElement('text', 'h_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('h_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$h_sev = $this->form->addElement('text', 'h_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('h_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$h_dis = $this->form->addElement('text', 'h_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('h_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','I. IRRITABILITY/LABILITY');
+
+		$i_freq = $this->form->addElement('text', 'i_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$i_sev = $this->form->addElement('text', 'i_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$i_dis = $this->form->addElement('text', 'i_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('i_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','J. ABERRANT MOTOR BEHAVIOR');
+
+		$j_freq = $this->form->addElement('text', 'j_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('j_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$j_sev = $this->form->addElement('text', 'j_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('j_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$j_dis = $this->form->addElement('text', 'j_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('j_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','K. SLEEP AND NIGHTTIME BEHAVIOR DISORDERS');
+
+		$k_freq = $this->form->addElement('text', 'k_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('k_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$k_sev = $this->form->addElement('text', 'k_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('k_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$k_dis = $this->form->addElement('text', 'k_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('k_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','L. APPETITE AND EATING DISORDERS');
+
+		$l_freq = $this->form->addElement('text', 'l_freq', '- Frequency (1-4):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('l_freq', 'Enter 1,2,3,4,or NA', 'regex', '/(?i)^(na|1|2|3|4)$/', 'client');
+		
+		$l_sev = $this->form->addElement('text', 'l_sev', '- Severity (1-3):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('l_sev', 'Enter 1,2,3,or NA', 'regex', '/(?i)^(na|1|2|3)$/', 'client');
+
+		$l_dis = $this->form->addElement('text', 'l_dis', '- Distress (0-5):', array('size' => 50, 'maxlength' => 255));
+		$this->addRule('l_dis', 'Enter 0,1,2,3,4,5,or NA', 'regex', '/(?i)^(na|0|1|2|3|4|5)$/', 'client');
+
+
+
+		$total = $this->form->addElement('static','total','Calculated total:');
+
+    }
+   
+   
+}
+?>

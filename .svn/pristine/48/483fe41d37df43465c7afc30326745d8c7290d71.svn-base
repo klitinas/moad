@@ -1,0 +1,177 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_champs extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function additem($name,$text) {
+
+		$opts = array_merge(array(''=>'-Select an option-'),range(0,6),array('na'=>'Not applicable'));
+		$element = $this->form->addElement('select', $name, $text,$opts);
+		$this->addRule($name,'This field is required','required');
+		return $element;
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "champs";           // test_names.Test_name
+        $this->table = 'champs';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+
+		// Need to query to get body weight
+		$db =& Database::singleton();
+		$cID = $this->commentID;
+		//$query = "select educ_year from demographics where commentID = '$cID'";
+		
+		// get corresponding CommentID
+		$r = array();
+		$db->select("select SessionID from flag where CommentID = '$cID'",$r);
+		$r = $r[0];
+		$sessionID = $r['SessionID'];
+		$stripCID = substr($cID, 0, 6);
+		$r = array();
+		$db->select("select CommentID from flag where Test_name='clinical' and SessionID = '$sessionID' and CommentID like '$stripCID%'",$r);
+		$r = $r[0];
+		$clinCID=$r['CommentID'];
+
+		$query = "select weight from clinical where commentID = '$clinCID'";
+        $result = array();
+		$db->select($query, $result);
+		$result=$result[0];
+		$weight_clin=$result['weight'];
+
+
+        // display test name
+        $this->addHeader("CHAMPS");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+
+		if($weight_clin == '') {
+			$weight_temp = $this->form->addElement('text','weight_temp','Weight (lbs):');
+		}
+
+		$this->addHeader("<MY TITLE>");		
+		$hdr = $this->form->addElement('static','hdr','Enter values of 0-6 for all fields below:');
+		$this->addHeader("<MY TITLE>");	
+
+
+	
+
+		$this->additem('i01','1. Visit with friends or family (other than those you live with)?');
+		$this->additem('i02','2. Go to the senior center?');
+		$this->additem('i03','3. Do volunteer work? ');
+		$this->additem('i04','4. Attend church or take part in church activities?');
+		$this->additem('i05','5. Attend other club or group meetings?');
+		$this->additem('i06','6. Use a computer?');
+		$this->additem('i07','7. Dance (such as square, folk, line, ballroom) (do not count aerobic dance here)?');
+		$this->additem('i08','8. Do woodworking, needlework, drawing, or other arts or crafts?');
+		$this->additem('i09','9. Play golf, carrying or pulling your equipment (count walking time only)?');
+		$this->additem('i10','10. Play golf, riding a cart (count walking time only)?');
+		$this->additem('i11','11. Attend a concert, movie, lecture, or sport event?');
+		$this->additem('i12','12. Play cards, bingo, or board games with other people?');
+		$this->additem('i13','13. Shoot pool or billiards?');
+		$this->additem('i14','14. Play singles tennis (do not count doubles)?');
+		$this->additem('i15','15. Play doubles tennis (do not count singles)?');
+		$this->additem('i16','16. Skate (ice, roller, in-line)?');
+		$this->additem('i17','17. Play a musical instrument?');
+		$this->additem('i18','18. Read? ');
+		$this->additem('i19','19. Do heavy work around the house (such as washing windows, cleaning gutters)?');
+		$this->additem('i20','20. Do light work around the house (such as sweeping or vacuuming)?');
+		$this->additem('i21','21. Do heavy gardening (such as spading, raking)?');
+		$this->additem('i22','22. Do light gardening (such as watering plants)?');
+		$this->additem('i23','23. Work on your car, truck, lawn mower, or other machinery?');
+		$this->additem('i24','24. Jog or run?');
+		$this->additem('i25','25. Walk uphill or hike uphill (count only uphill part)?');
+		$this->additem('i26','26. Walk fast or briskly for exercise (do not count walking leisurely or uphill)?');
+		$this->additem('i27','27. Walk to do errands (such as to/from a store or to take children to school (count walk time only)? ');
+		$this->additem('i28','28. Walk leisurely for exercise or pleasure?');
+		$this->additem('i29','29. Ride a bicycle or stationary cycle?');
+		$this->additem('i30','30. Do other aerobic machines such as rowing, or step machines (do not count treadmill or stationary cycle)?');
+		$this->additem('i31','31. Do water exercises (do not count other swimming)?');
+		$this->additem('i32','32. Swim moderately or fast?');
+		$this->additem('i33','33. Swim gently?');
+		$this->additem('i34','34. Do stretching or flexibility exercises (do not count yoga or Tai-chi)?');
+		$this->additem('i35','35. Do yoga or Tai-chi?');
+		$this->additem('i36','36. Do aerobics or aerobic dancing?');
+		$this->additem('i37','37. Do moderate to heavy strength training (such as hand-held weights of more than 5 lbs., weight machines, or push-ups)?');
+		$this->additem('i38','38. Do light strength training (such as hand-held weights of 5 lbs. or less or elastic bands)?');
+		$this->additem('i39','39. Do general conditioning exercises, such as light calisthenics or chair exercises (do not count strength training)?');
+		$this->additem('i40','40. Play basketball, soccer, or racquetball (do not count time on sidelines)?');
+		$this->additem('i41','41. Do other types of physical activity not previously mentioned  (please specify below)?');
+
+		$this->form->addElement('text','other','Other activities:');
+
+		$this->form->addElement('static', 'tot_cal_wk', 'Total Cal/Week:');
+		$this->form->addElement('static', 'cal_wk_mod', 'CAL/WK/MOD:');
+		$this->form->addElement('static', 'fq_wk', 'Frequency / week:');
+		$this->form->addElement('static', 'fq_wk_mod', 'FQ/WK/MOD:');
+    }
+   
+   
+}
+?>

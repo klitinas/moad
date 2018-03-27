@@ -1,0 +1,274 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_updrs extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function additem($name,$text) {
+
+		$vals = array_combine(range(0,4),range(0,4));
+		$opts = array(''=>'-Select an option-') + $vals;
+		
+		$element = $this->form->addElement('select', $name, $text,$opts);
+		return $element;
+	}
+
+	function additem_disc($name,$text) {
+
+		$vals = array_combine(range(0,4,0.5),range(0,4,0.5));
+		$opts = array(''=>'-Select an option-') + $vals;
+		
+		$element = $this->form->addElement('select', $name, $text,$opts);
+		return $element;
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "updrs";           // test_names.Test_name
+        $this->table = 'updrs';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("MDS-UPDRS");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		//$this->addHeader("<MY TITLE>");		
+
+		$this->addHeader("<MY TITLE>");		
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 150, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+		$this->addHeader("<MY TITLE>");
+
+		$this->addHeader("Part I: Non-Motor Aspects of Experiences of Daily Living");
+		$this->form->addElement('static','hdr','Part 1A: Complex Behaviors (Enter 0-4 for all)');
+
+		$this->additem_disc('cog', '1.1 Cognitive Impairment:');
+		$this->additem_disc('hal_psy', '1.2 Hallucinations and Psychosis:');
+		$this->additem_disc('dep', '1.3 Depressed Mood:');
+		$this->additem_disc('anxious', '1.4 Anxious Mood:');
+		$this->additem_disc('apathy', '1.5 Apathy:');
+		$this->additem_disc('dds', '1.6 Features of Dopamine Dysregulation Syndrome:');
+
+		$this->addHeader("Part I-II: Patient Questionnaire");
+		$this->form->addElement('static','hdr','ENTER VALUES 0-4 FOR ALL FIELDS');
+		$this->form->addElement('static','hdr','');
+		$this->form->addElement('static','hdr','Part 1: Non-motor Aspects of Experiences of Daily Living');
+
+		$this->additem_disc('sleep', '1.7 Sleep Problems:');
+		$this->additem_disc('day_sleep', '1.8 Daytime Sleepiness:');
+		$this->additem_disc('pain', '1.9 Pain and other Sensations:');
+		$this->additem_disc('urine', '1.10 Urinary Problems:');
+		$this->additem_disc('constip', '1.11 Constipation Problems:');
+		$this->additem_disc('light_head', '1.12 Light Headedness on Standing:');
+		$this->additem_disc('fatigue', '1.13 Fatigue:');
+
+		$this->form->addElement('static','hdr','');
+		$this->form->addElement('static','hdr','Part II: Motor Aspects of Experiences of Daily Living');
+
+		$this->additem_disc('spch', '2.1 Speech:');
+		$this->additem_disc('saliva', '2.2 Saliva and Drooling:');
+		$this->additem_disc('swallow', '2.3 Speech:');
+		$this->additem_disc('eating', '2.4 Eating Tasks:');
+		$this->additem_disc('dress', '2.5 Dressing:');
+		$this->additem_disc('hygiene', '2.6 Hygiene:');
+		$this->additem_disc('handwr', '2.7 Handwriting:');
+		$this->additem_disc('hobby', '2.8 Doing Hobbies/other Activities:');
+		$this->additem_disc('turn', '2.9 Turning in Bed:');
+		$this->additem_disc('trem', '2.10 Tremor:');
+		$this->additem_disc('out_bed', '2.11 Getting out of a Bed/Car/Deep Chair:');
+		$this->additem_disc('walk', '2.12 Walking and Balance:');
+		$this->additem_disc('freeze', '2.13 Freezing:');
+
+		$this->addHeader("Part III: Motor Examination");
+
+		//$this->additem('taking_pdmeds', 'Taking PD medications? (Y/N):');		
+		$this->form->addElement('select','taking_pdmeds','Taking PD medications?', array(''=>'-Select an option','yes'=>'Yes','no'=>'No'));
+
+		//$this->additem('offstate', 'Currently in an OFF state? (Y/N):');	
+		$this->form->addElement('select','offstate','Currently in an OFF state?',array(''=>'-Select an option','yes'=>'Yes','no'=>'No'));
+
+		//$this->form->addElement('date', 'test_cur_time', 'Current time:',array('format'=>'hiA','addEmptyOption'=>'true'));//, $options, $attr);
+		//$this->form->addElement('date', 'last_med_time', 'Last medication time:',array('format'=>'hiA','addEmptyOption'=>'true'));//, $options, $attr);
+		$this->form->addElement('text', 'test_cur_time', 'Current time (e.g. 1:20 PM):');
+		$this->form->addElement('text', 'last_med_time', 'Last medication time (e.g. 11:00 AM):');
+
+		//$last_med_day = $this->form->addElement('text', 'last_med_day', '--------- Yesterday / Today / Other :');	
+		$this->form->addElement('select', 'last_med_day', '--------- Yesterday / Today / Other :',
+			array(''=>'-Select an option','yesterday'=>'Yesterday','today'=>'Today','other'=>'Other','na'=>'Is not applicable'));
+
+		 /*$this->addRule('last_med_day', 'Enter yesterday, today, other, or NA', 'regex', '/(?i)^(na|today|yesterday|other)$/', 'client');
+		 $this->addRule('offstate', 'Enter Y, N, or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+		 $this->addRule('taking_pdmeds', 'Enter Y, N, or NA', 'regex', '/(?i)^(na|y|n)$/', 'client'); */
+
+		$this->addHeader("<MY TITLE>");	
+
+		$this->additem_disc('spch_motor', '3.1 Motor:');
+		$this->additem_disc('face_exp', '3.2 Facial Expression:');
+		$this->form->addElement('static','hdr','3.3 Rigidity');
+		$this->additem_disc('rig_neck', '-------- Neck:');
+		$this->additem_disc('rig_rue', '-------- RUE:');
+		$this->additem_disc('rig_lue', '-------- LUE:');
+		$this->additem_disc('rig_rle', '-------- RLE:');
+		$this->additem_disc('rig_lle', '-------- LLE:');
+
+		$this->form->addElement('static','hdr','3.4 Finger Tapping');
+		$this->additem_disc('fngtp_r', '-------- R:');
+		$this->additem_disc('fngtp_l', '-------- L:');
+
+		$this->form->addElement('static','hdr','3.5 Hand Movements');
+		$this->additem_disc('hndmv_r', '-------- R:');
+		$this->additem_disc('hndmv_l', '-------- L:');
+
+		$this->form->addElement('static','hdr','3.6 Pronation-Supination Movements');
+		$this->additem_disc('pro_r', '-------- R:');
+		$this->additem_disc('pro_l', '-------- L:');
+
+		$this->form->addElement('static','hdr','3.7 Toe Tapping');
+		$this->additem_disc('toe_r', '-------- R:');
+		$this->additem_disc('toe_l', '-------- L:');
+
+		$this->form->addElement('static','hdr','3.8 Leg Agility');
+		$this->additem_disc('leg_r', '-------- R:');
+		$this->additem_disc('leg_l', '-------- L:');
+
+		$this->additem_disc('chair', '3.9 Arising From Chair:');
+		$this->additem_disc('gait', '3.10 Gait:');
+		$this->additem_disc('freez', '3.11 Freezing of Gait:');
+		$this->additem_disc('pos_stab', '3.12 Postural Stability:');
+		$this->additem_disc('posture', '3.13 Posture:');
+		$this->additem_disc('mvmnt', '3.14 Global Spontaneity or Movement:');
+
+		$this->form->addElement('static','hdr','3.15 Postural Tremor of the Hands');
+		$this->additem_disc('postrem_r', '-------- R:');
+		$this->additem_disc('postrem_l', '-------- L:');
+
+		$this->form->addElement('static','hdr','3.16 Kinetic Tremor of the Hands');
+		$this->additem_disc('kintrem_r', '-------- R:');
+		$this->additem_disc('kintrem_l', '-------- L:');
+
+		$this->form->addElement('static','hdr','3.17 Rest Tremor Amplitude');
+		$this->additem_disc('trem_rue', '-------- RUE:');
+		$this->additem_disc('trem_lue', '-------- LUE:');
+		$this->additem_disc('trem_rle', '-------- RLE:');
+		$this->additem_disc('trem_lle', '-------- LLE:');
+		$this->additem_disc('trem_lip', '-------- Lip/Jaw:');
+
+		$this->additem('const_trem', '3.18 Constancy of Rest Tremor:');
+
+		$this->form->addElement('static','hdr','Dyskinesia Impact on Part III ratings');
+		$dys_imp = $this->form->addElement('text', 'dys_imp', '-------- A. Dyskinesias present during exam (Y/N):');
+		$this->addRule('dys_imp', 'Enter Y,N, or NA', 'regex', '/(?i)^(na|y|n)$/', 'client');
+
+		$this->form->addElement('static','hdr','X. Arm swing decrease');
+		$this->additem_disc('swing_rue', '-------- R:');
+		$this->additem_disc('swing_lue', '-------- L:');
+
+		$body = $this->form->addElement('text', 'body', 'XXX. Most affected body side (R/L/symm):');
+		$this->addRule('body', 'Enter R,L, or symm', 'regex', '/(?i)^(na|r|l|symm)$/', 'client');
+
+		// ----------------------------------------------------------------------------------------
+		$this->addHeader("Part IV: Motor Complications");
+		$this->additem('time_dys', '4.1 Time Spent with Dyskinesias:');
+		$this->additem('func_dys', '4.2 Functional Impact of Dyskinesias:');
+		$this->additem('motfluc_time_off', '4.3 Motor Fluctuations: Time spent in OFF state:');
+
+		/*$motfluc_hrs_awake = $this->form->addElement('text', 'motfluc_hrs_awake', '-------- 4.3a Total hours awake:');
+		$this->addRule('motfluc_hrs_awake', 'Value must be numeric', 'numeric', 'client');
+
+		$motfluc_hrs_off = $this->form->addElement('text', 'motfluc_hrs_off', '-------- 4.3b Total hours OFF:');
+		$this->addRule('motfluc_hrs_off', 'Value must be numeric', 'numeric', 'client');
+
+		$mot_fluc_pct_off = $this->form->addElement('static','mot_fluc_pct_off','-------- 4.3c % OFF:'); */
+
+		$this->additem('fluct_impact', '4.4 Functional Impact of Fluctuations:');
+		$this->additem('fluct_complex', '4.5 Complexity of Motor Fluctuations:');
+		$this->additem('pain_off_dys', '4.6 Painful OFF-state Dystonia:');
+
+		/*$pain_off_hrs = $this->form->addElement('text', 'pain_off_hrs', '-------- 4.6a Total hours OFF:');
+		$this->addRule('pain_off_hrs', 'Value must be numeric', 'numeric', 'client');
+
+		$pain_hrs_off_dys = $this->form->addElement('text', 'pain_hrs_off_dys', '-------- 4.6b Total OFF hours with Dystonia:');
+		$this->addRule('pain_hrs_off_dys', 'Value must be numeric', 'numeric', 'client');
+
+		$pct_off_dys = $this->form->addElement('static','pct_off_dys','-------- 4.6c % OFF Dystonia:'); */
+
+		// static calculated fields
+		$this->addHeader("Calculations");
+
+		//$motor = $this->form->addElement('static','updrs_motor','Motor:');
+		$total_one = $this->form->addElement('static','total_one','Subtotal - Part I:');
+		$total_two = $this->form->addElement('static','total_two','Subtotal - Part II:');
+		//$total_three = $this->form->addElement('static','updrs_motor','Subtotal - Part III (Motor):');
+		$total_three = $this->form->addElement('static','updrs_motor','Subtotal - Part III:');
+		$total_four = $this->form->addElement('static','total_four','Subtotal - Part IV:');
+		//$total = $this->form->addElement('static','updrs_total','Total:');
+		// $trem = $this->form->addElement('static','updrs_trem','Tremor:');
+		// $pigd = $this->form->addElement('static','updrs_pigd','Pigd:');
+
+    }
+   
+   
+}
+?>

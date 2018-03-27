@@ -1,0 +1,191 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+//require_once 'instrument_utils.php';
+class NDB_BVL_Instrument_medical extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function drop_yn($field,$text) {
+		$opts = array(
+			''=>'-Select an option-',
+			'yes'=>'Yes',
+			'no'=>'No');
+		$element = $this->form->addElement('select', $field, $text,$opts);
+		$this->addRule($field, 'This field is required.', 'required','client');
+		return $element; 
+	}
+
+	function drop_ynna($field,$text) {
+		$opts = array(
+			''=>'-Select an option-',
+			'yes'=>'Yes',
+			'no'=>'No',
+			'na'=>'Is Not Applicable');
+		$element = $this->form->addElement('select', $field, $text,$opts);
+		$this->addRule($field, 'This field is required.', 'required','client');
+		return $element; 
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "medical";           // test_names.Test_name
+        $this->table = 'medical';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Medications");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<HDR>");
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 200));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+		$this->addHeader("<HDR>");
+
+
+		// $this->form->addElement('static','hdr','ALL VALUES MUST BE NUMERIC:');
+
+		$meds = $this->form->addElement('textarea', 'meds', 'List of Medications:', array('size' => 150, 'maxlength' => 255,'cols' => 50));
+
+		$daben = $this->drop_ynna('da_ben','Do medications help tremor or motor symptoms?');
+
+		$this->addHeader("Parkinsons Meds");
+		$sinemet=$this->drop_yn('sinemet',"Carbidopa/Levodopa [Sinemet]:");
+
+		$this->form->addElement('header',null,'');
+
+		//$this->form->addElement('header',null,'For Carbidopa/Levodopa Instant and Extended, add min and max dosages.  If only one value, enter in min field and leave max blank.',array('style' =>'font-family:arial,verdana,helvetica,sans-serif; font-size:12px'));
+		$this->form->addElement('static','hdr','**For Carbidopa/Levodopa Instant and Extended, add min and max dosages.  If only one value, enter in min field and leave max blank.**');
+		$clir_min = $this->form->addElement('text', 'clir_min', 'Carbidopa/Levodopa Instant Release (total daily dosage) - min:');
+		$clir_max = $this->form->addElement('text', 'clir_max', 'Carbidopa/Levodopa Instant Release (total daily dosage) - max:');
+
+		$clsa_min = $this->form->addElement('text', 'clsa_min', 'Carbidopa/Levodopa Extended Release (total daily dosage) - min:');
+		$clsa_max = $this->form->addElement('text', 'clsa_max', 'Carbidopa/Levodopa Extended Release (total daily dosage) - max:');
+
+		$this->form->addElement('header',null,'');
+
+		$sinemet=$this->drop_yn('stalevo', 'Carbidopa/Levodopa/Entacapone [Stalevo]:');
+		$this->form->addElement('header',null,'');
+		$this->form->addElement('static','hdr','**For Entacapone, add min and max dosages.  If only one value, enter in min field and leave max blank.**');
+		$ent_min = $this->form->addElement('text', 'ent_min', 'Entacapone (total daily dosage) - min:');
+		$ent_max = $this->form->addElement('text', 'ent_max', 'Entacapone (total daily dosage) - max:');
+		$this->form->addElement('header',null,'');
+
+		$ent = $this->form->addElement('static', 'ent', 'ENT:');
+
+		$da_agon = $this->drop_yn('da_agon', 'Dopamine Agonist:');
+
+		$this->form->addElement('header',null,'');
+		$this->form->addElement('static','hdr','**For Ropinirole, add min and max dosages.  If only one value, enter in min field and leave max blank.**');
+		$rop_min = $this->form->addElement('text', 'rop_min', 'Ropinirole [requip] (total daily dosage) - min:');
+		$rop_max = $this->form->addElement('text', 'rop_max', 'Ropinirole [requip] (total daily dosage) - max:');
+		$this->form->addElement('header',null,'');
+
+		$mirapex = $this->form->addElement('text', 'mirapex', 'Pramipexole [Mirapex] (total daily dosage):');
+		$rotigotine = $this->form->addElement('text', 'rotigotine', 'Rotigotine [neupro] (total daily dosage):');
+
+		$antivirals = $this->drop_yn('antivirals', 'Anti-virals:');
+
+		$am = $this->form->addElement('text', 'am', 'Amantadine [symmetrel] (total daily dosage):');
+		$rimantadine = $this->form->addElement('text', 'rimantadine', 'Rimantadine [flumadine] (total daily dosage):');
+
+		$mao_i = $this->drop_yn('mao_i', 'Monoamine oxidase inhabitors [MAO-I]:');
+
+		$rasag = $this->form->addElement('text', 'rasag', 'Rasagiline [azilect] (total daily dosage):');
+		$sel = $this->form->addElement('text', 'sel', 'Selegiline (total daily dosage):');
+		$led = $this->form->addElement('static', 'led', 'LED:');
+		$this->addHeader("Depression Meds");
+
+		$this->drop_yn('a_depr', 'Anti-depressants:');
+		$ssri = $this->form->addElement('text', 'ssri', 'SSRI:');
+		$tca = $this->form->addElement('text', 'tca', 'TCA:');
+		$teca = $this->form->addElement('text', 'teca', 'TeCA:');
+		$sari = $this->form->addElement('text', 'sari', 'SARI:');
+		$snri = $this->form->addElement('text', 'snri', 'SNRI:');
+		$bupropion = $this->form->addElement('text', 'bupropion', 'Bupropion:');
+		$benzo = $this->form->addElement('text', 'benzo', 'Benzodiazepine:');
+
+		$this->addHeader("Other Meds");
+		$a_hyp = $this->drop_yn('a_hyp', 'Antihypertensive:');
+		$a_lip = $this->drop_yn('a_lip', 'Antilipophilic:');
+		$warfarin = $this->drop_yn('warfarin', 'warfarin:');
+		$asa_plavix = $this->drop_yn('asa_plavix', 'Aspirin / Plavix:');
+		$n_leptic = $this->drop_yn('n_leptic', 'Neuroleptic:');
+		$chol = $this->drop_yn('chol', 'Cholinergic:');
+		$anti_dop = $this->drop_yn('anti_dop', 'Antidopaminergic:');
+		$lithium = $this->drop_yn('lithium', 'lithium:');
+		$gabapentin = $this->drop_yn('gabapentin', 'gabapentin:');
+		$stimulant = $this->drop_yn('stimulant', 'Stimulant:');
+		$anticonvulsant = $this->drop_yn('anticonvulsant', 'Anticonvulsant:');
+		$hypnotic = $this->drop_yn('hypnotic', 'hypnotic:');
+		$o_analgesic = $this->drop_yn('o_analgesic', 'Opiod analgesic:');
+		$a_chol = $this->drop_yn('a_chol', 'Anticholinergic:');
+		$a_psych = $this->drop_yn('a_psych', 'Antipsychotic:');
+
+    }
+		
+     
+   
+}
+?>

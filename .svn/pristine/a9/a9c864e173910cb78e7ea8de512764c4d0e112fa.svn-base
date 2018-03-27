@@ -1,0 +1,354 @@
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-03-13 09:46:55
+         compiled from "/var/www/loris/modules/configuration/templates/form_configuration.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:9230768395503147fe5e8a8-00484081%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'a1f09e470d865a7f21ba6a456ac49a52d3880844' => 
+    array (
+      0 => '/var/www/loris/modules/configuration/templates/form_configuration.tpl',
+      1 => 1425329183,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '9230768395503147fe5e8a8-00484081',
+  'function' => 
+  array (
+    'createRadio' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+    'createInstrument' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+    'createEmail' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+    'createTextArea' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+    'createText' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+    'printConfigItem' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+    'printForm' => 
+    array (
+      'parameter' => 
+      array (
+      ),
+      'compiled' => '',
+    ),
+  ),
+  'variables' => 
+  array (
+    'v' => 0,
+    'k' => 0,
+    'instruments' => 0,
+    'name' => 0,
+    'label' => 0,
+    'node' => 0,
+    'sandbox' => 0,
+    'id' => 0,
+    'parentMenuItems' => 0,
+    'menuItem' => 0,
+    'config' => 0,
+    'topItem' => 0,
+    'configChild' => 0,
+  ),
+  'has_nocache_code' => 0,
+  'version' => 'Smarty-3.1.21-dev',
+  'unifunc' => 'content_55031480060d23_67513713',
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_55031480060d23_67513713')) {function content_55031480060d23_67513713($_smarty_tpl) {?><?php if (!function_exists('smarty_template_function_createRadio')) {
+    function smarty_template_function_createRadio($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['createRadio']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+    <?php if ($_smarty_tpl->tpl_vars['v']->value=="1"||$_smarty_tpl->tpl_vars['v']->value=="0") {?>
+    <label class="radio-inline">
+        <input type="radio" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" value="1" <?php if ($_smarty_tpl->tpl_vars['v']->value=="1") {?>checked<?php }?>>Yes
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" value="0" <?php if ($_smarty_tpl->tpl_vars['v']->value=="0") {?>checked<?php }?>>No
+    </label>
+    <?php } elseif ($_smarty_tpl->tpl_vars['v']->value=="true"||$_smarty_tpl->tpl_vars['v']->value=="false") {?>
+    <label class="radio-inline">
+        <input type="radio" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" value="true" <?php if ($_smarty_tpl->tpl_vars['v']->value=="true") {?>checked<?php }?>>Yes
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" value="false" <?php if ($_smarty_tpl->tpl_vars['v']->value=="false") {?>checked<?php }?>>No
+    </label>
+    <?php }?>
+<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+
+<?php if (!function_exists('smarty_template_function_createInstrument')) {
+    function smarty_template_function_createInstrument($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['createInstrument']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+    <select class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+">
+        <?php  $_smarty_tpl->tpl_vars['label'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['label']->_loop = false;
+ $_smarty_tpl->tpl_vars['name'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['instruments']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['label']->key => $_smarty_tpl->tpl_vars['label']->value) {
+$_smarty_tpl->tpl_vars['label']->_loop = true;
+ $_smarty_tpl->tpl_vars['name']->value = $_smarty_tpl->tpl_vars['label']->key;
+?>
+            <option <?php if ($_smarty_tpl->tpl_vars['v']->value==$_smarty_tpl->tpl_vars['name']->value) {?>selected<?php }?> value="<?php echo $_smarty_tpl->tpl_vars['name']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['label']->value;?>
+</option>
+        <?php } ?>
+    </select>
+<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+
+<?php if (!function_exists('smarty_template_function_createEmail')) {
+    function smarty_template_function_createEmail($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['createEmail']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+    <input class="form-control" type="email" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+">
+<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+
+<?php if (!function_exists('smarty_template_function_createTextArea')) {
+    function smarty_template_function_createTextArea($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['createTextArea']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+    <textarea class="form-control" rows="4" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+</textarea>
+<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+
+<?php if (!function_exists('smarty_template_function_createText')) {
+    function smarty_template_function_createText($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['createText']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+    <input type="text" class="form-control" name="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+" value="<?php echo $_smarty_tpl->tpl_vars['v']->value;?>
+">
+<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+
+<?php if (!function_exists('smarty_template_function_printConfigItem')) {
+    function smarty_template_function_printConfigItem($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['printConfigItem']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+<div class="form-group">
+    <div class="col-sm-3" data-toggle="tooltip" data-placement="right" title="<?php echo $_smarty_tpl->tpl_vars['node']->value['Description'];?>
+">
+        <label class="col-sm-12 control-label config-name"><?php echo $_smarty_tpl->tpl_vars['node']->value['Label'];?>
+</label>
+        <?php if ($_smarty_tpl->tpl_vars['sandbox']->value) {?><div class="config-dev-name pull-right"><i><?php echo $_smarty_tpl->tpl_vars['node']->value['Name'];?>
+</i></div><?php }?>
+    </div>
+    <div class="col-sm-9">
+        <?php if (isset($_smarty_tpl->tpl_vars['node']->value['Children'])&&$_smarty_tpl->tpl_vars['node']->value['Children']) {?>
+            Child nodes go here
+            <?php smarty_template_function_printConfigItem($_smarty_tpl,array('node'=>$_smarty_tpl->tpl_vars['node']->value['Children']));?>
+
+        <?php } else { ?>
+            <?php smarty_template_function_printForm($_smarty_tpl,array('node'=>$_smarty_tpl->tpl_vars['node']->value));?>
+
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['AllowMultiple']==1) {?>
+            <button class="btn btn-success add" id="<?php echo $_smarty_tpl->tpl_vars['node']->value['ID'];?>
+" type="button">
+                <span class="glyphicon glyphicon-plus"></span> Add field
+            </button>
+        <?php }?>
+    </div>
+</div>
+<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+
+<?php if (!function_exists('smarty_template_function_printForm')) {
+    function smarty_template_function_printForm($_smarty_tpl,$params) {
+    $saved_tpl_vars = $_smarty_tpl->tpl_vars;
+    foreach ($_smarty_tpl->smarty->template_functions['printForm']['parameter'] as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);};
+    foreach ($params as $key => $value) {$_smarty_tpl->tpl_vars[$key] = new Smarty_variable($value);}?>
+    <div class="config-form-group" id="<?php echo $_smarty_tpl->tpl_vars['node']->value['ID'];?>
+">
+    <?php  $_smarty_tpl->tpl_vars['v'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['v']->_loop = false;
+ $_smarty_tpl->tpl_vars['k'] = new Smarty_Variable;
+ $_from = $_smarty_tpl->tpl_vars['node']->value['Value']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['v']->key => $_smarty_tpl->tpl_vars['v']->value) {
+$_smarty_tpl->tpl_vars['v']->_loop = true;
+ $_smarty_tpl->tpl_vars['k']->value = $_smarty_tpl->tpl_vars['v']->key;
+?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['AllowMultiple']==1) {?><div class="input-group entry"><?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['DataType']=='boolean') {?>
+            <?php smarty_template_function_createRadio($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['k']->value,'v'=>$_smarty_tpl->tpl_vars['v']->value));?>
+
+        <?php } elseif ($_smarty_tpl->tpl_vars['node']->value['DataType']=='instrument') {?>
+            <?php smarty_template_function_createInstrument($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['k']->value,'v'=>$_smarty_tpl->tpl_vars['v']->value));?>
+
+        <?php } elseif ($_smarty_tpl->tpl_vars['node']->value['DataType']=='email') {?>
+            <?php smarty_template_function_createEmail($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['k']->value,'v'=>$_smarty_tpl->tpl_vars['v']->value));?>
+
+        <?php } elseif ($_smarty_tpl->tpl_vars['node']->value['DataType']=='textarea') {?>
+            <?php smarty_template_function_createTextArea($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['k']->value,'v'=>$_smarty_tpl->tpl_vars['v']->value));?>
+
+        <?php } else { ?>
+            <?php smarty_template_function_createText($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['k']->value,'v'=>$_smarty_tpl->tpl_vars['v']->value));?>
+
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['AllowMultiple']==1) {?>
+            <div class="input-group-btn">
+                <button class="btn btn-danger btn-remove" type="button" name="remove-<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+">
+                    <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                </button>
+            </div>
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['AllowMultiple']==1) {?></div><?php }?>
+    <?php }
+if (!$_smarty_tpl->tpl_vars['v']->_loop) {
+?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['AllowMultiple']==1) {?><div class="input-group entry"><?php }?>
+        <?php ob_start();?><?php echo ("add-").($_smarty_tpl->tpl_vars['node']->value['ID']);?>
+<?php $_tmp1=ob_get_clean();?><?php $_smarty_tpl->tpl_vars['id'] = new Smarty_variable($_tmp1, null, 0);?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['DataType']=='instrument') {?>
+            <?php smarty_template_function_createInstrument($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['id']->value));?>
+
+        <?php } elseif ($_smarty_tpl->tpl_vars['node']->value['DataType']=='email') {?>
+            <?php smarty_template_function_createEmail($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['id']->value));?>
+
+        <?php } elseif ($_smarty_tpl->tpl_vars['node']->value['DataType']=='textarea') {?>
+            <?php smarty_template_function_createTextArea($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['id']->value));?>
+
+        <?php } else { ?>
+            <?php smarty_template_function_createText($_smarty_tpl,array('k'=>$_smarty_tpl->tpl_vars['id']->value));?>
+
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['AllowMultiple']==1) {?>
+            <div class="input-group-btn">
+                <button class="btn btn-danger btn-remove remove-new" type="button">
+                    <span class="glyphicon glyphicon-remove"></span>&nbsp;
+                </button>
+            </div>
+        <?php }?>
+        <?php if ($_smarty_tpl->tpl_vars['node']->value['AllowMultiple']==1) {?></div><?php }?>
+    <?php } ?>
+    </div>
+<?php $_smarty_tpl->tpl_vars = $saved_tpl_vars;
+foreach (Smarty::$global_tpl_vars as $key => $value) if(!isset($_smarty_tpl->tpl_vars[$key])) $_smarty_tpl->tpl_vars[$key] = $value;}}?>
+
+
+<p>Please enter the various configuration variables into the fields below. For information on how to configure LORIS, please refer to the Help section and/or the Developer's guide.</p>
+<br>
+
+<div class="col-md-3">
+<ul class="nav nav-pills nav-stacked" role="tablist" data-tabs="tabs">
+    <?php  $_smarty_tpl->tpl_vars['menuItem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['menuItem']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['parentMenuItems']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_smarty_tpl->tpl_vars['menuItem']->index=-1;
+foreach ($_from as $_smarty_tpl->tpl_vars['menuItem']->key => $_smarty_tpl->tpl_vars['menuItem']->value) {
+$_smarty_tpl->tpl_vars['menuItem']->_loop = true;
+ $_smarty_tpl->tpl_vars['menuItem']->index++;
+ $_smarty_tpl->tpl_vars['menuItem']->first = $_smarty_tpl->tpl_vars['menuItem']->index === 0;
+ $_smarty_tpl->tpl_vars['smarty']->value['foreach']['tabnav']['first'] = $_smarty_tpl->tpl_vars['menuItem']->first;
+?>
+        <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['tabnav']['first']) {?>
+        <li class="active"><a href="#<?php echo $_smarty_tpl->tpl_vars['menuItem']->value['Name'];?>
+" data-toggle="tab"><?php echo $_smarty_tpl->tpl_vars['menuItem']->value['Label'];?>
+</a></li>
+        <?php } else { ?>
+        <li><a href="#<?php echo $_smarty_tpl->tpl_vars['menuItem']->value['Name'];?>
+" data-toggle="tab"><?php echo $_smarty_tpl->tpl_vars['menuItem']->value['Label'];?>
+</a></li>
+        <?php }?>
+    <?php } ?>
+</ul>
+</div>
+
+<div class="col-md-9">
+    <div class="tab-content">
+    <?php  $_smarty_tpl->tpl_vars['topItem'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['topItem']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['config']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_smarty_tpl->tpl_vars['topItem']->index=-1;
+foreach ($_from as $_smarty_tpl->tpl_vars['topItem']->key => $_smarty_tpl->tpl_vars['topItem']->value) {
+$_smarty_tpl->tpl_vars['topItem']->_loop = true;
+ $_smarty_tpl->tpl_vars['topItem']->index++;
+ $_smarty_tpl->tpl_vars['topItem']->first = $_smarty_tpl->tpl_vars['topItem']->index === 0;
+ $_smarty_tpl->tpl_vars['smarty']->value['foreach']['configContent']['first'] = $_smarty_tpl->tpl_vars['topItem']->first;
+?>
+        <?php if ($_smarty_tpl->getVariable('smarty')->value['foreach']['configContent']['first']) {?>
+        <div class="tab-pane active" id="<?php echo $_smarty_tpl->tpl_vars['topItem']->value['Name'];?>
+">
+
+        <?php } else { ?>
+        <div class="tab-pane" id="<?php echo $_smarty_tpl->tpl_vars['topItem']->value['Name'];?>
+">
+
+        <?php }?>
+            <h3><?php echo $_smarty_tpl->tpl_vars['topItem']->value['Label'];?>
+</h3>
+            <p><?php echo $_smarty_tpl->tpl_vars['topItem']->value['Description'];?>
+</p>
+            <hr>
+            <div class="col-md-11">
+            <form class="form-horizontal" role="form" method="post">
+            <?php  $_smarty_tpl->tpl_vars['configChild'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['configChild']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['topItem']->value['Children']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['configChild']->key => $_smarty_tpl->tpl_vars['configChild']->value) {
+$_smarty_tpl->tpl_vars['configChild']->_loop = true;
+?>
+                <?php smarty_template_function_printConfigItem($_smarty_tpl,array('node'=>$_smarty_tpl->tpl_vars['configChild']->value));?>
+
+            <?php } ?>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9 submit-area">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-default">Reset</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    <?php } ?>
+    </div>
+</div><?php }} ?>

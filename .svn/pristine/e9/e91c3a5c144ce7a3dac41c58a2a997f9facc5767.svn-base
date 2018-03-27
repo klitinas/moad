@@ -1,0 +1,16 @@
+table{@}cognition
+title{@}General cognition
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}notes:
+select{@}notes_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}moca{@}MOCA:
+select{@}moca_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}mmse{@}MMSE:
+select{@}mmse_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pdcrs{@}PD-CRS:
+select{@}pdcrs_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cdr{@}CDR:
+select{@}cdr_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

@@ -1,0 +1,21 @@
+table{@}rhino
+title{@}RHINO Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes: 
+text{@}dec_smell{@}SMELL:
+select{@}dec_smell_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}run_nose{@}RUN.NOSE:
+select{@}run_nose_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}aller{@}ALLER:
+select{@}aller_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}sinus{@}SINUS:
+select{@}sinus_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}colds{@}COLDS:
+select{@}colds_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}bef_aft{@}BEF/AFT:
+select{@}bef_aft_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}w_eat{@}EAT:
+select{@}w_eat_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

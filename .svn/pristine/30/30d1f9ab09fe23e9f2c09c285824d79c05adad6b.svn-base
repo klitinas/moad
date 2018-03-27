@@ -1,0 +1,95 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from modupdrs WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+   
+$s = array(
+$record['motA'],
+$record['motB'],
+$record['motC'],
+$record['motD'],
+$record['motE'],
+$record['motF'],
+$record['motG_rue'],$record['motG_lue'],$record['motG_rle'],$record['motG_lle'],
+$record['motH_l'],$record['motH_r'],
+$record['motI_l'],$record['motI_r'],
+$record['motJ_l'],$record['motJ_r'],
+$record['motK_l'],$record['motK_r'],
+$record['motL'],
+$record['motM_rue'],$record['motM_lue'],$record['motM_rle'],$record['motM_lle'],
+$record['motN_rue'],$record['motN_lue'],
+$record['motX_rue'],$record['motX_lue'],
+$record['motXX_rue'],$record['motXX_lue'],$record['motXX_rle'],$record['motXX_lle'],
+$record['motXXX'],
+$record['motDYS'],
+$record['nm_01'],
+$record['nm_02'],
+$record['nm_03'],
+$record['nm_04'],
+$record['nm_05'],
+$record['nm_06'],
+$record['nm_07'],
+$record['nm_08'],
+$record['nm_09'],
+$record['nm_10'],
+$record['nm_11'],
+$record['nm_12'],
+$record['nm_13'],
+$record['nm_14'],
+$record['nm_15'],
+$record['nm_16'],
+$record['nm_17']
+);
+
+
+if ((array_search('', $s)!==false) or (array_search('na', array_map('strtolower',$s))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+
+
+
+//save scores
+$result = $db->update('modupdrs', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+exit(0);
+
+?>

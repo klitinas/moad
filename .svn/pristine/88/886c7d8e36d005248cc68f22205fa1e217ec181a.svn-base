@@ -1,0 +1,14 @@
+table{@}demographics
+title{@}Demographics
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+text{@}gender{@}Gender (M/F):
+select{@}gender_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}educ{@}Education:
+select{@}educ_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}veteran{@}Veteran (Y/N):
+select{@}veteran_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}group{@}Group (PD/NC/MCI/PSP/MSA/SWEDD/OTHER):
+select{@}group_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

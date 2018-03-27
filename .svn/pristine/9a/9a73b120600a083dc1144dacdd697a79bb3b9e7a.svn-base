@@ -1,0 +1,74 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from clinical WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+//$total_smell = '';
+   
+$bmi = 
+$record['weight'] * 703 / ($record['height']*$record['height']);
+
+
+if(empty($bmi)) {
+    $scores['bmi']          = NULL;
+
+} else {
+    $scores['bmi']          = round($bmi, 2);
+
+}
+
+$c = $record;
+$s= array($c['cancer'],$c['diabetes'],$c['asthma'],$c['stroke'],$c['mstroke'],$c['head_inj']
+,$c['bleed'],$c['encephalitis'],$c['seizure'],$c['liver'],$c['brain_sur'],$c['lupus']
+,$c['depression'],$c['anxiety'],$c['high_bp'],$c['prior_mi'],$c['headache']
+,$c['disease_dur'],$c['mallampati'],$c['hand_dom'],$c['weight'],$c['height'],$c['fat_rating'],$c['fat_pct']
+,$c['bp_s_sit'],$c['bp_s_sta'],$c['bp_d_sit'],$c['bp_d_sta'],$c['pls_sit'],$c['pls_sta']);	
+
+if ((array_search('', $s)!==false) or (array_search('na', array_map('strtolower',$s))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['warnings'] = "Warning:  Blank entries found!";
+} else {
+
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+//save scores
+$result = $db->update('clinical', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+
+exit(0);
+
+?>

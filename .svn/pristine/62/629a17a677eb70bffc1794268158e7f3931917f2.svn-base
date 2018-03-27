@@ -1,0 +1,129 @@
+LORIS Installation Script starting at 2015-03-13T07:40:07
+The log for this session will be stored in file /var/www/loris/tools/logs/install-2015-03-13T07:40:07.log
+
+---------------------------------------------------------------------
+                   LORIS Installation Script
+---------------------------------------------------------------------
+
+
+PHP appears to be installed.
+
+PEAR appears to be installed.
+
+Please answer the following questions. You'll be asked:
+
+  1) Your project directory name from section A) of the Installation Guide.
+     (Will be used to modify the paths for Imaging data in the generated
+     config.xml file for LORIS, and may also be used to automatically
+     create/install apache config files.)
+
+  2) A name for the MySQL Database. This should be
+     a simple identifier such as "Loris" or "Abc_Def".
+     This database will be created later on so please make sure
+     a database with the same name does not already exist.
+
+  3) The hostname for the machine where the MySQL server will run on
+     (this is where we'll create the database).
+
+  4) The MySQL username that the Loris system will use to connect
+     to this server and database; this MySQL account will be
+     created later on so please make sure a user with the same name
+     does not already exist.
+
+  5) The password for this username (it will be set later on).
+
+  6) Another password for the 'admin' account of the Loris DB
+     (it will also be set later on).
+
+  7) Credentials of an existing root MySQL account to install the
+     default schema. This will only be used once, to create and
+     populate the default tables, and to grant privileges to the
+     newly created MySQL user in part 3).
+
+Ready to continue? [yn] y
+
+Enter project name: loris
+What is the database name? lorisdb
+Database host? localhost
+What MySQL user will Loris connect as? lorisuser
+What is the password for MySQL user 'lorisuser'? 
+Re-enter the password to check for accuracy: 
+Enter the front-end Loris 'admin' user's password: 
+Re-enter the password to check for accuracy: 
+Existing root MySQL username: root
+MySQL password for user 'root': 
+Re-enter the password to check for accuracy: 
+
+Attempting to create the MySQL database 'lorisdb' ...
+
+Attempting to create and grant privileges to MySQL user 'lorisuser'@'localhost' ...
+
+Creating/populuating database tables from schema.
+
+Updating Loris admin user's password.
+
+Creating config file.
+
+Populating database config.
+
+Would you like to install PEAR libraries (affects system files)? [yn] y
+Installing PEAR libraries (may prompt for sudo password).
+
+Upgrading PEAR...
+Will upgrade channel://pear.php.net/structures_graph
+Will upgrade channel://pear.php.net/archive_tar
+Will upgrade channel://pear.php.net/console_getopt
+Will upgrade channel://pear.php.net/xml_util
+pear/console_getopt is already installed and is the same as the released version 1.3.1
+pear/pear dependency package "pear/Structures_Graph" downloaded version 1.1.0 is not the recommended version 1.0.4, but may be compatible, use --force to install
+pear/Structures_Graph cannot be installed, conflicts with installed packages
+pear/pear dependency package "pear/XML_Util" downloaded version 1.3.0 is not the recommended version 1.2.3, but may be compatible, use --force to install
+pear/XML_Util cannot be installed, conflicts with installed packages
+downloading Archive_Tar-1.3.15.tgz ...
+Starting to download Archive_Tar-1.3.15.tgz (19,985 bytes)
+.......done: 19,985 bytes
+upgrade-all ok: channel://pear.php.net/Archive_Tar-1.3.15
+Installing PEAR Benchmark...
+downloading Benchmark-1.2.9.tgz ...
+Starting to download Benchmark-1.2.9.tgz (8,696 bytes)
+.....done: 8,696 bytes
+install ok: channel://pear.php.net/Benchmark-1.2.9
+Installing PEAR HTML_Common...
+WARNING: "pear/HTML_Common" is deprecated in favor of "pear/HTML_Common2"
+downloading HTML_Common-1.2.5.tgz ...
+Starting to download HTML_Common-1.2.5.tgz (4,585 bytes)
+.....done: 4,585 bytes
+install ok: channel://pear.php.net/HTML_Common-1.2.5
+Installing PEAR HTML_QuickForm...
+WARNING: "pear/HTML_QuickForm" is deprecated in favor of "pear/HTML_QuickForm2"
+WARNING: "pear/HTML_Common" is deprecated in favor of "pear/HTML_Common2"
+downloading HTML_QuickForm-3.2.14.tgz ...
+Starting to download HTML_QuickForm-3.2.14.tgz (102,600 bytes)
+.................done: 102,600 bytes
+install ok: channel://pear.php.net/HTML_QuickForm-3.2.14
+Configuring PEAR preferred state...
+config-set succeeded
+Installing PEAR Mail...
+Did not download optional dependencies: pear/Net_SMTP, use --alldeps to download automatically
+pear/Mail can optionally use package "pear/Net_SMTP" (version >= 1.4.1)
+downloading Mail-1.2.0.tgz ...
+Starting to download Mail-1.2.0.tgz (23,214 bytes)
+........done: 23,214 bytes
+install ok: channel://pear.php.net/Mail-1.2.0
+Installing PEAR Pager...
+downloading Pager-2.4.9.tgz ...
+Starting to download Pager-2.4.9.tgz (36,055 bytes)
+..........done: 36,055 bytes
+install ok: channel://pear.php.net/Pager-2.4.9
+Installing PEAR Structures_Graph...
+pear/pear dependency package "pear/Structures_Graph" downloaded version 1.1.0 is not the recommended version 1.0.4, but may be compatible, use --force to install
+pear/Structures_Graph cannot be installed, conflicts with installed packages
+No valid packages found
+install failed
+
+Would you like to automatically create/install apache config files? (Works for Ubuntu 14.04 default Apache installations) [yn] y
+Site default disabled.
+To activate the new configuration, you need to run:
+  service apache2 reload
+ERROR: Site loris does not exist!
+Installation complete.

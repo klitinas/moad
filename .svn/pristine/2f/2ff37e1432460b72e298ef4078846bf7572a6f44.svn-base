@@ -1,0 +1,209 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+//require_once 'HTML/QuickForm/altselect.php';
+
+
+class NDB_BVL_Instrument_demographics extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+
+    function _checkother($elements) {
+		//return false;
+		print_r($elements);
+      if ($elements[0] == 'Other, please specify:')
+      {   
+         if ($elements[1] =='')
+            return false;
+      } 
+      return true;
+   }
+
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "demographics";           // test_names.Test_name
+        $this->table = 'demographics';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+
+        // display test name
+        $this->addHeader("Demographics");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+		$this->addHeader("<HDR>");
+
+		$gender = $this->form->addElement('select', 'gender', 'Gender:',array(''=>'-Select an option-','Female'=>'Female','Male'=>'Male','Unspecified'=>'Unspecfied','Unknown'=>'Unknown'));
+		$this->addRule('gender', 'Field is required', 'required', 'client');
+
+		$vet = $this->form->addElement('select', 'vet', 'Veteran:',array(''=>'-Select an option-','yes'=>'Yes','no'=>'No'));
+		$this->addRule('veteran', 'Field is required', 'required', 'client');
+
+		//$group = $this->form->addElement('text', 'group', 'Group (PD/NC/MCI/PSP/MSA/SWEDD/OTHER):');
+		$group = $this->form->addElement('select', 'group', 'Group:',
+				 array(''=>'-Select an option-',
+					'PD'=>'PD',
+					'NC'=>'NC',
+					'MCI'=>'MCI',
+					'PSP'=>'PSP',
+					'MSA'=>'MSA',
+					'SWEDD'=>'SWEDD',
+					'OTHER'=>'OTHER')
+					);
+		$this->addRule('group', 'Field is required', 'required');
+
+
+		$ethopts = array(''=>'-Select an option-','hisp'=>'Hispanic or Latino','nonhisp'=>'Not Hispanic or Latino', 'unk'=>'Unknown omitted or not reported','nonrep'=>'Not reported');
+		$ethnicity = $this->form->addElement('select', 'ethnicity', 'Ethnicity:',$ethopts);
+		$raceopts = array(''=>'-Select an option-',
+					'american_indian/alaska_native' => 'American Indian / Alaska Native',
+					'asian' => 'Asian',
+					'native_hawaiian/pac_islander' => 'Native Hawaiian or Other Pacific Islander',
+					'black' => 'Black or African American',
+					'white' => 'White',
+					'multirace' => 'More than One Race',
+					'unknown' => 'Unknown or Not Reported');
+
+		$race = $this->form->addElement('select', 'race', 'Race:',$raceopts);
+
+		$this->addHeader("<HDR>");
+
+		$educ_year = $this->form->addElement('text', 'educ_year', 'Highest year of school completed (1-23):');
+		$this->form->registerRule('checkrange','callback','checkrange');
+		$this->addRule('educ_year', 'Enter a value from 1 to 23', 'checkrange',array(1,23));
+
+		$educopts = array(''=>'-Select an option-',
+					'Never attended / Kindergarten only' => 'Never attended / Kindergarten only',
+					'1st Grade' => '1st Grade',
+					'2nd Grade' => '2nd Grade',
+					'3rd Grade' => '3rd Grade',
+					'4th Grade' => '4th Grade',
+					'5th Grade' => '5th Grade',
+					'6th Grade' => '6th Grade',
+					'7th Grade' => '7th Grade',
+					'8th Grade' => '8th Grade',
+					'9th Grade' => '9th Grade',
+					'10th Grade' => '10th Grade',
+					'11th Grade' => '11th Grade',
+					'12th Grade, no diploma' => '12th Grade, no diploma',
+					'High school graduate' => 'High school graduate',
+					'GED or equivalent' => 'GED or equivalent',
+					'Some college, no degree' => 'Some college, no degree',
+					'Associate degree: occupation, technical, or vocational program' 
+							=> 'Associate degree: occupation, technical, or vocational program',
+					'Associate degree: academic program' => 'Associate degree: academic program',
+					"Bachelor's degree (e.g. BA, AB, BS, BBA)" => "Bachelor's degree (e.g. BA, AB, BS, BBA)",
+					"Master's degree (e.g., MA, MS, MEng, MEd, MBA)" => "Master's degree (e.g., MA, MS, MEng, MEd, MBA)",
+					"Professional school degree (e.g., MD, DDS, DVM, JD)" => "Professional school degree (e.g., MD, DDS, DVM, JD)",
+					'Unknown' => 'Unknown');
+		$educ_level = $this->form->addElement('select', 'educ_level', 'Education level (highest attained):',$educopts);	
+
+		$this->addHeader("<HDR>"); 
+
+		$employopts = array(''=>'-Select an option-',
+					'Working now' => 'Working now',
+					'Only temporarily laid off, sick leave, or maternity leave' => 'Only temporarily laid off, sick leave, or maternity leave',
+					'Looking for work, unemployed' => 'Looking for work, unemployed',
+					'Retired' => 'Retired',
+					'Disabled, permanently or temporarily' => 'Disabled, permanently or temporarily',
+					'Keeping house' => 'Keeping house',
+					'Student' => 'Student',
+					'Unknown' => 'Unknown',
+					'Other' => 'Other, please specify');
+		
+		$occupation = $this->form->addElement('text','occupation','Occupation:');
+
+		$employ_stat = $this->form->addElement('select', 'employ_stat', 'Employment Status:',$employopts);	
+		$employ_other = $this->form->addElement('text', 'employ_stat_other', ' -----  If other, please specify:');	
+
+   }
+   
+   
+}
+
+	function checkrange($ve,$rng) {
+		$minVal = $rng[0];
+		$maxVal = $rng[1];
+		if (( $ve < $minVal) or ( $ve > $maxVal)) {
+			return false;
+
+		} else {
+			return true;
+		}
+	}
+
+
+function _checkother($elements) {
+	print_r($elements);
+	if ($elements == 'Other')
+	{   
+		return false;
+		//if ($elements[1] =='')
+        //    return false;
+      } 
+      return true;
+   }
+?>

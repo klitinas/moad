@@ -1,0 +1,183 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_npi extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function additem($name,$text,$rngMin,$rngMax) {
+
+		$vals = array_combine(range($rngMin,$rngMax),range($rngMin,$rngMax));
+		$opts = array(''=>'-Select an option-') + $vals;
+		
+		$element = $this->form->addElement('select', $name, $text,$opts);
+		return $element;
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "npi";           // test_names.Test_name
+        $this->table = 'npi';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Neuropsychiatric Inventory (NPI)");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$this->addHeader("<MY TITLE>");		
+
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+		$this->addHeader("<MY TITLE>");		
+
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','A. DELUSIONS');
+
+		$this->additem('a_freq', '- Frequency (1-4):',1,4);
+		$this->additem('a_sev', '- Severity (1-3):',1,3);
+		$this->additem('a_dis', '- Distress (0-5):',0,5);
+
+	
+		$this->form->addElement('static','hdr','B. HALLUCINATIONS');
+
+		$this->additem('b_freq', '- Frequency (1-4):',1,4);
+		$this->additem('b_sev', '- Severity (1-3):',1,3);
+		$this->additem('b_dis', '- Distress (0-5):',0,5);
+
+		$this->form->addElement('static','hdr','C. AGITATION/AGGRESSION');
+
+		$this->additem('c_freq', '- Frequency (1-4):',1,4);
+		$this->additem('c_sev', '- Severity (1-3):',1,3);
+		$this->additem('c_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','D. DEPRESSION/DYSPHORIA');
+
+		$this->additem('d_freq', '- Frequency (1-4):',1,4);
+		$this->additem('d_sev', '- Severity (1-3):',1,3);
+		$this->additem('d_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','E. ANXIETY');
+
+		$this->additem('e_freq', '- Frequency (1-4):',1,4);
+		$this->additem('e_sev', '- Severity (1-3):',1,3);
+		$this->additem('e_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','F. ELATION/EUPHORIA');
+
+		$this->additem('f_freq', '- Frequency (1-4):',1,4);
+		$this->additem('f_sev', '- Severity (1-3):',1,3);
+		$this->additem('f_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','G. APATHY/INDIFFERENCE');
+
+		$this->additem('g_freq', '- Frequency (1-4):',1,4);
+		$this->additem('g_sev', '- Severity (1-3):',1,3);
+		$this->additem('g_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','H. DISINHIBITION');
+
+		$this->additem('h_freq', '- Frequency (1-4):',1,4);
+		$this->additem('h_sev', '- Severity (1-3):',1,3);
+		$this->additem('h_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','I. IRRITABILITY/LABILITY');
+
+		$this->additem('i_freq', '- Frequency (1-4):',1,4);
+		$this->additem('i_sev', '- Severity (1-3):',1,3);
+		$this->additem('i_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','J. ABERRANT MOTOR BEHAVIOR');
+
+		$this->additem('j_freq', '- Frequency (1-4):',1,4);
+		$this->additem('j_sev', '- Severity (1-3):',1,3);
+		$this->additem('j_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','K. SLEEP AND NIGHTTIME BEHAVIOR DISORDERS');
+
+		$this->additem('k_freq', '- Frequency (1-4):',1,4);
+		$this->additem('k_sev', '- Severity (1-3):',1,3);
+		$this->additem('k_dis', '- Distress (0-5):',0,5);
+
+// -------------------------------------------------------------------------------------------------------------------------
+		$this->form->addElement('static','hdr','L. APPETITE AND EATING DISORDERS');
+
+		$this->additem('l_freq', '- Frequency (1-4):',1,4);
+		$this->additem('l_sev', '- Severity (1-3):',1,3);
+		$this->additem('l_dis', '- Distress (0-5):',0,5);
+
+
+    }
+   
+   
+}
+?>

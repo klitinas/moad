@@ -1,0 +1,244 @@
+#!/usr/bin/php
+<?php
+/**
+* BMI Scoring
+*
+* PHP version 5
+*
+* @category Main
+* @package  BMI_Instrument
+* @author   Rathi Gnanasekaran <sekaranrathi@gmail.com>
+* @license  http://www.gnu.org/licenses/gpl-3.0.txt GPLv3
+* @link     https://github.com/aces/Loris
+*/
+
+require_once "../tools/generic_includes.php";
+require_once "Database.class.inc";
+
+function calwk($mass,$item,$factor) {
+	
+	$wtd_dur = $item * $factor;
+	$calwk = $wtd_dur * 3.5 * 60  * ($mass / 200);
+	return $calwk;
+}
+
+
+
+$CommentID = $argv[1];
+$db        =& Database::singleton();
+if (Utility::isErrorX($db)) {
+        print "Could not connect to database: " . $db->getMessage();
+            exit(1);
+}
+$query         = "SELECT * from champs WHERE CommentID = :CommentID";
+$WhereCriteria = array('CommentID'=>$CommentID);
+$record        = array();
+$record        = $db->pselectRow($query, $WhereCriteria);
+if (Utility::isErrorX($record)) {
+        print "Query has failed to select: ".$record->getMessage();
+            exit(2);
+}
+$scores = array();
+
+// account for weight
+
+// get corresponding CommentID
+$cID=$CommentID;
+$r = array();
+$db->select("select SessionID from flag where CommentID = '$cID'",$r);
+$r = $r[0];
+$sessionID = $r['SessionID'];	
+$stripCID = substr($cID, 0, 6);
+$r = array();
+$db->select("select CommentID from flag where Test_name='clinical' and SessionID = '$sessionID' and CommentID like '$stripCID%'",$r);
+$r = $r[0];
+$clinCID=$r['CommentID'];
+
+$weight_temp = $record['weight_temp'];
+if($weight_temp !== '') {
+	$weight = $weight_temp;
+	$clinswitch = array();
+	$clinswitch['weight'] = $record['weight_temp'];
+	$ClinWhereCriteria = array('CommentID'=>$clinCID);
+	$db->update('clinical',$clinswitch,$ClinWhereCriteria);
+	$scores['weight_temp'] = '';
+} else {
+	$cquery = "select weight from clinical where commentID = '$clinCID'";
+    $cresult = array();
+	$db->select($cquery, $cresult);
+	$cresult=$cresult[0];
+	$weight=$cresult['weight'];
+}
+
+$mass = $weight / 2.2046;
+
+$rec = $record;
+$calwk = array();
+$calwk['c07'] = calwk($mass,$rec['i07'],4.5);
+$calwk['c09'] = calwk($mass,$rec['i09'],3);
+$calwk['c10'] = calwk($mass,$rec['i10'],2);
+$calwk['c14'] = calwk($mass,$rec['i14'],6);
+$calwk['c15'] = calwk($mass,$rec['i15'],4);
+$calwk['c16'] = calwk($mass,$rec['i16'],4.5);
+$calwk['c19'] = calwk($mass,$rec['i19'],3);
+$calwk['c20'] = calwk($mass,$rec['i20'],2.5);
+$calwk['c21'] = calwk($mass,$rec['i21'],4);
+$calwk['c22'] = calwk($mass,$rec['i22'],2.25);
+$calwk['c23'] = calwk($mass,$rec['i23'],3);
+$calwk['c24'] = calwk($mass,$rec['i24'],7);
+$calwk['c25'] = calwk($mass,$rec['i25'],6);
+$calwk['c26'] = calwk($mass,$rec['i26'],3.5);
+$calwk['c27'] = calwk($mass,$rec['i27'],2.5);
+$calwk['c28'] = calwk($mass,$rec['i28'],2.5);
+$calwk['c29'] = calwk($mass,$rec['i29'],4);
+$calwk['c30'] = calwk($mass,$rec['i30'],5);
+$calwk['c31'] = calwk($mass,$rec['i31'],3);
+$calwk['c32'] = calwk($mass,$rec['i32'],5);
+$calwk['c33'] = calwk($mass,$rec['i33'],3);
+$calwk['c34'] = calwk($mass,$rec['i34'],2);
+$calwk['c35'] = calwk($mass,$rec['i35'],2);
+$calwk['c36'] = calwk($mass,$rec['i36'],3.5);
+$calwk['c37'] = calwk($mass,$rec['i37'],4.5);
+$calwk['c38'] = calwk($mass,$rec['i38'],3);
+$calwk['c39'] = calwk($mass,$rec['i39'],2.5);
+$calwk['c40'] = calwk($mass,$rec['i40'],5);
+
+$tot_cal_wk = array_sum($calwk);
+
+$fq_all = array(
+	$rec['i07'],
+	$rec['i09'],
+	$rec['i10'],
+	$rec['i14'],
+	$rec['i15'],
+	$rec['i16'],
+	$rec['i19'],
+	$rec['i20'],
+	$rec['i21'],
+	$rec['i22'],
+	$rec['i23'],
+	$rec['i24'],
+	$rec['i25'],
+	$rec['i26'],
+	$rec['i27'],
+	$rec['i28'],
+	$rec['i29'],
+	$rec['i30'],
+	$rec['i31'],
+	$rec['i32'],
+	$rec['i33'],
+	$rec['i34'],
+	$rec['i35'],
+	$rec['i36'],
+	$rec['i37'],
+	$rec['i38'],
+	$rec['i39'],
+	$rec['i40']);
+$fq_wk = array_sum($fq_all);
+
+$mod = array(
+	$rec['i07'],
+	$rec['i09'],
+	$rec['i14'],
+	$rec['i15'],
+	$rec['i16'],
+	$rec['i19'],
+	$rec['i21'],
+	$rec['i23'],
+	$rec['i24'],
+	$rec['i25'],
+	$rec['i26'],
+	$rec['i29'],
+	$rec['i30'],
+	$rec['i31'],
+	$rec['i32'],
+	$rec['i33'],
+	$rec['i36'],
+	$rec['i37'],
+	$rec['i38'],
+	$rec['i40']);
+
+$fq_wk_mod = array_sum(array(
+	$rec['i07'],
+	$rec['i09'],
+	$rec['i14'],
+	$rec['i15'],
+	$rec['i16'],
+	$rec['i19'],
+	$rec['i21'],
+	$rec['i23'],
+	$rec['i24'],
+	$rec['i25'],
+	$rec['i26'],
+	$rec['i29'],
+	$rec['i30'],
+	$rec['i31'],
+	$rec['i32'],
+	$rec['i33'],
+	$rec['i36'],
+	$rec['i37'],
+	$rec['i38'],
+	$rec['i40']));
+
+$cal_wk_mod = array_sum(array(
+	$calwk['c07'],
+	$calwk['c09'],
+	$calwk['c14'],
+	$calwk['c15'],
+	$calwk['c16'],
+	$calwk['c19'],
+	$calwk['c21'],
+	$calwk['c23'],
+	$calwk['c24'],
+	$calwk['c25'],
+	$calwk['c26'],
+	$calwk['c29'],
+	$calwk['c30'],
+	$calwk['c31'],
+	$calwk['c32'],
+	$calwk['c33'],
+	$calwk['c36'],
+	$calwk['c37'],
+	$calwk['c38'],
+	$calwk['c40']));
+
+
+$scores['fq_wk'] = $fq_wk;
+$scores['fq_wk_mod'] = $fq_wk_mod;
+$scores['tot_cal_wk'] = round($tot_cal_wk,2);
+$scores['cal_wk_mod'] = round($cal_wk_mod,2); 
+
+
+
+
+if ((array_search('', $fq_all)!==false) or (array_search('na', array_map('strtolower',$fq_all))!==false)) {
+	if (strpos($record['notes'], " AUTOMATED MESSAGE: some field(s) not entered") === FALSE) {
+		$scores['notes'] = $record['notes'] . " AUTOMATED MESSAGE: some field(s) not entered";	
+	} 
+
+	$scores['warnings'] = "Warning:  Blank entries found!";
+	$scores['fq_wk'] = NULL;
+	$scores['tot_cal_wk'] = NULL;
+} else {
+
+	$scores['notes'] = str_replace("AUTOMATED MESSAGE: some field(s) not entered"," ",$record['notes']);
+	$scores['warnings'] = NULL;
+}
+
+
+if ((array_search('', $mod)!==false) or (array_search('na', array_map('strtolower',$mod))!==false)) {
+
+	$scores['fq_wk_mod'] = NULL;
+	$scores['cal_wk_mod'] = NULL;
+}
+
+
+//save scores
+$result = $db->update('champs', $scores, $WhereCriteria);
+if ($db->isError($result)) {
+    print "Could not save total score: ". $result->getMessage();
+    exit(3);
+}
+exit(0);
+
+?>

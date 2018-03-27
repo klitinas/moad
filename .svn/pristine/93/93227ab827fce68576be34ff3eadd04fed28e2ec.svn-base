@@ -1,0 +1,279 @@
+table{@}neuropsych
+title{@}Neuropsych Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+textarea{@}notes{@}Notes: 
+numeric{@}educ{@}educ:
+select{@}educ_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}moca{@}mOcA:
+select{@}moca_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}moca_z{@}MOCA_Z:
+select{@}moca_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}drs_att{@}DRS_ATT:
+select{@}drs_att_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}d_att_am{@}D_ATT_AM:
+select{@}d_att_am_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}d_att_per{@}D_ATT_PER:
+select{@}d_att_per_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}drs_ip{@}DRS_I/P:
+select{@}drs_ip_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}d_iam{@}D_I-AM:
+select{@}d_iam_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}d_iper{@}D_I-PER:
+select{@}d_iper_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}drs_con{@}DRS_CON:
+select{@}drs_con_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}d_co_am{@}D_CO_AM:
+select{@}d_co_am_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}d_co_per{@}D_CO_PER:
+select{@}d_co_per_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}drs_cept{@}DRS_CEPT:
+select{@}drs_cept_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}d_ce_am{@}D_CE_AM:
+select{@}d_ce_am_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}d_ce_per{@}D_CE_PER:
+select{@}d_ce_per_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}drs_mem{@}DRS_MEM:
+select{@}drs_mem_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}d_m_am{@}D_M_AM:
+select{@}d_m_am_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}d_m_per{@}D_M_PER:
+select{@}d_m_per_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}t_raw{@}T_RAW:
+select{@}t_raw_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}t_amss{@}T_AMSS:
+select{@}t_amss_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}t_amss_per{@}T_AMSS_PER:
+select{@}t_amss_per_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}aemss{@}AEMSS:
+select{@}aemss_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dig_sym{@}DIG SYM:
+select{@}dig_sym_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dig_sym_sc{@}DIG_SYM_sc:
+select{@}dig_sym_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}matrix{@}matrix:
+select{@}matrix_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}matrix_sc{@}matrix_sc:
+select{@}matrix_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dig_for{@}dig_for:
+select{@}dig_for_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}dig_for_z{@}dig_for_Z:
+select{@}dig_for_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dig_back{@}dig_back:
+select{@}dig_back_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}dig_back_z{@}dig_back_Z:
+select{@}dig_back_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}digit_total{@}digit_total:
+select{@}digit_total_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}digit_sc{@}digit_sc:
+select{@}digit_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}info{@}info:
+select{@}info_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}info_sc{@}info_sc:
+select{@}info_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pict{@}pict:
+select{@}pict_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pict_sc{@}pict_sc:
+select{@}pict_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt1{@}CVLT1:
+select{@}cvlt1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt1_sc{@}CVLT1_sc:
+select{@}cvlt1_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt2{@}CVLT2:
+select{@}cvlt2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt2_sc{@}CVLT2_sc:
+select{@}cvlt2_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt3{@}CVLT3:
+select{@}cvlt3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt3_sc{@}CVLT3_sc:
+select{@}cvlt3_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt4{@}CVLT4:
+select{@}cvlt4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt4_sc{@}CVLT4_sc:
+select{@}cvlt4_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt5{@}CVLT5:
+select{@}cvlt5_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvlt5_sc{@}CVLT5_sc:
+select{@}cvlt5_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvltstm{@}CVLTSTM:
+select{@}cvltstm_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvltstm_sc{@}CVLTSTM_sc:
+select{@}cvltstm_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvtltm{@}CVTLTM:
+select{@}cvtltm_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvtltm_sc{@}CVTLTM_sc:
+select{@}cvtltm_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvltrec{@}CVLTREC:
+select{@}cvltrec_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cvltrec_sc{@}CVLTREC_sc:
+select{@}cvltrec_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}cvltavg_z{@}CVLTAVG_Z:
+select{@}cvltavg_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vr_1{@}VR_1:
+select{@}vr_1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vr_2{@}VR_2:
+select{@}vr_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vr_3{@}VR_3:
+select{@}vr_3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vr_4{@}VR_4:
+select{@}vr_4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vr_5{@}VR_5:
+select{@}vr_5_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}t_vr{@}T_VR:
+select{@}t_vr_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}t_vr_sc{@}T_VR_sc:
+select{@}t_vr_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}adread{@}adread:
+select{@}adread_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}adread_sc{@}adread_sc:
+select{@}adread_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}jolo{@}JOLO:
+select{@}jolo_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}jolo_sc{@}JOLO_sc:
+select{@}jolo_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str1{@}STR1:
+select{@}str1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str1_z{@}STR1_Z:
+select{@}str1_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str2{@}STR2:
+select{@}str2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str2_z{@}STR2_Z:
+select{@}str2_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str3{@}STR3:
+select{@}str3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str3_z{@}STR3_Z:
+select{@}str3_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}str4{@}STR4:
+select{@}str4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str4_z{@}STR4_Z:
+select{@}str4_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}stravg_z{@}STRAVG_Z:
+select{@}stravg_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str_1_2{@}STR(1:2):
+select{@}str_1_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str_z_1_2{@}STR_Z(1:2):
+select{@}str_z_1_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str3m2{@}STR3-2:
+select{@}str3m2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str3m2_z{@}STR3-2_Z:
+select{@}str3m2_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str4m_1_2{@}STR4-(1:2):
+select{@}str4m_1_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str4m_1_2_z{@}STR4-(1:2)_Z:
+select{@}str4m_1_2_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str4m3{@}STR4-3:
+select{@}str4m3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str4m3_z{@}STR4-3_Z:
+select{@}str4m3_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str3m_1_2{@}STR3-(1:2):
+select{@}str3m_1_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}str3m_1_2_z{@}STR3-(1:2)_Z:
+select{@}str3m_1_2_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}sort1{@}SORT1:
+select{@}sort1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}sort1_z{@}SORT1_Z:
+select{@}sort1_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}sort2{@}SORT2:
+select{@}sort2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}sort2_z{@}SORT2_Z:
+select{@}sort2_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}s_rec1{@}S_REC1:
+select{@}s_rec1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}s_rec1_z{@}S_REC1_Z:
+select{@}s_rec1_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}s_rec2{@}S_REC2:
+select{@}s_rec2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}s_rec2_z{@}S_REC2_Z:
+select{@}s_rec2_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}tmt1{@}TMT1:
+select{@}tmt1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt1_sc{@}TMT1_sc:
+select{@}tmt1_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}tmt2{@}TMT2:
+select{@}tmt2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt2_sc{@}TMT2_sc:
+select{@}tmt2_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}tmt3{@}TMT3:
+select{@}tmt3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt3_sc{@}TMT3_sc:
+select{@}tmt3_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}tmt4{@}TMT4:
+select{@}tmt4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt4_sc{@}TMT4_sc:
+select{@}tmt4_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}tmt5{@}TMT5:
+select{@}tmt5_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt5_sc{@}TMT5_sc:
+select{@}tmt5_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmtavg_z{@}TMTAVG_Z:
+select{@}tmtavg_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt_2_3_avg{@}TMT(2:3)_avg:
+select{@}tmt_2_3_avg_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt_2_3_sum{@}TMT(2:3)_sum:
+select{@}tmt_2_3_sum_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt4m_2_3{@}TMT4-(2:3):
+select{@}tmt4m_2_3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt4m_2_3_sum{@}TMT4-(2:3)_sum:
+select{@}tmt4m_2_3_sum_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt4m_2_3_z{@}TMT4-(2:3)_Z:
+select{@}tmt4m_2_3_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}tmt4m_2_3sum_z{@}TMT4-(2:3)sum_Z:
+select{@}tmt4m_2_3sum_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dkvf_f{@}DKVF__F:
+select{@}dkvf_f_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dkvf_a{@}DKVF__A:
+select{@}dkvf_a_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dkvf_s{@}DKVF__S:
+select{@}dkvf_s_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fas_raw{@}FAS_raw:
+select{@}fas_raw_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fas_sc{@}FAS_sc:
+select{@}fas_sc_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}dk_anim{@}DK_ANIM:
+select{@}dk_anim_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}boston{@}BOSTON:
+select{@}boston_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}cdr{@}CDR:
+select{@}cdr_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+text{@}flu_arousa{@}arousa:
+select{@}flu_arousa_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}b_rt_m{@}B_RT_M:
+select{@}b_rt_m_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}b_rt_m_z{@}B_RT_M_Z:
+select{@}b_rt_m_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}ch_rt_m{@}CH_RT_M:
+select{@}ch_rt_m_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}ch_rt_m_z{@}CH_RT_M_Z:
+select{@}ch_rt_m_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}co_rt_m{@}CO_RT_M:
+select{@}co_rt_m_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}co_rt_m_z{@}CO_RT_M_Z:
+select{@}co_rt_m_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}chmb{@}CH-B:
+select{@}chmb_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}chmb_z{@}CH-B_Z:
+select{@}chmb_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}comb{@}CO-B:
+select{@}comb_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+static{@}comb_z{@}CO-B_Z:
+select{@}comb_z_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rx_sd{@}RX_SD_:
+select{@}rx_sd_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}ch_sd{@}_CH_SD:
+select{@}ch_sd_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}co_sd{@}_CO_SD:
+select{@}co_sd_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fd_1{@}FD_1:
+select{@}fd_1_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fd_2{@}FD_2:
+select{@}fd_2_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fd_3{@}FD_3:
+select{@}fd_3_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fd_4{@}FD_4:
+select{@}fd_4_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}mmse{@}MMSE:
+select{@}mmse_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}pdcrs{@}PD-CRS:
+select{@}pdcrs_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'

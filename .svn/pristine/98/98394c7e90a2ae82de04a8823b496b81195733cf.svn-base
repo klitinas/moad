@@ -1,0 +1,132 @@
+<?php
+require_once 'HTML/QuickForm/Rule/Regex.php';
+class NDB_BVL_Instrument_gds extends NDB_BVL_Instrument
+{
+    /**
+    * sets up basic data, such as the HTML_Quickform object, and so on.
+    *
+    * @param string $commentID  the CommentID identifying the data to load
+    * @param string $page       if a multipage form, the page to show
+    * @return void
+    * @access public
+    */
+
+	function additem($field,$text) {
+		$opts = array(
+			''=>'-Select an option-',
+			'yes'=>'Yes',
+			'no'=>'No',
+			'na'=>'Not applicable');
+		$element = $this->form->addElement('select', $field, $text,$opts);
+		$this->addRule($field, 'This field is required.', 'required','client');
+		return $element; 
+	}
+
+    function setup($commentID, $page){
+        $this->formType="XIN";
+        $this->form = new HTML_Quickform('test_form');
+        $this->page = $page;            // page label (number or
+        // string - used by
+        // user-defined child classes)
+        
+        // set the object properties
+        $this->testName = "gds";           // test_names.Test_name
+        $this->table = 'gds';              // name of database table corresponding to instrument
+        // data keyed by commentID
+        $this->commentID = $commentID;
+        
+        //The array of dates/timestamps to convert to database dates/timestamps
+        //Any HTML_Quickform date elements must be listed here
+        $this->dateTimeFields=array("Date_taken");
+            
+        //The array of selects with multiple answers allowed
+        //Any HTML_Quickform multiple selects must be listed here
+        $this->_selectMultipleElements = array();
+
+        // required fields for data entry completion status
+        $this->_requiredElements = array('Examiner', '<FIRST QUESTION OF EACH PAGE>');
+
+        // setup the form
+        $this->_setupForm();
+
+    }
+    
+    //If the instrument is not paged, remove the switch from the _setupForm method and add all the form Elements in this function.
+    
+    /**
+    * method to build the HTML_Quickform object into a paged form
+    *
+    * @return void
+    * @access private
+    */
+    function _setupForm(){
+        switch($this->page) {
+            case "<testvalidate>_page1":
+            $this->_page1();
+            break;
+            
+            default:
+            $this->_main();
+            break;
+        }
+        //Defines the call back function for HTML Quickform to use when validating the form.
+        $this->form->addFormRule(array(&$this,'XINValidate'));
+    }
+    
+    /**
+    * generates the main page of the form.
+    *
+    * @return void
+    * @access private
+    *
+    */
+    function _main(){
+        // display test name
+        $this->addHeader("Geriatric Depression Scale");
+        
+        // automatically adds examiner & date of administration
+        $this->_addMetadataFields();
+
+		$notes = $this->form->addElement('textarea', 'notes', 'Notes:', array('size' => 50, 'maxlength' => 100));
+		$warnings = $this->form->addElement('static','warnings','Warnings:');
+
+		$this->form->addElement('static','hdr','FOR ALL ENTRIES BELOW ANSWER YES OR NO:');
+
+		$this->additem('i01', '1. Are you basically satisfied with your life?');
+		$this->additem('i02', '2. Have you dropped many activities and interests?');
+		$this->additem('i03', '3. Do you feel that your life is empty?');
+		$this->additem('i04', '4. Do you often get bored?');
+		$this->additem('i05', '5. Are you hopeful about the future?');
+		$this->additem('i06', "6: Are you bothered by thoughts you can't get out of your head?");
+		$this->additem('i07', '7. Are you in good spirits most of the time?');
+		$this->additem('i08', '8. Are you afraid that something bad is going to happen to you?');
+		$this->additem('i09', '9. Do you feel happy most of the time?');
+		$this->additem('i10', '10. Do you often feel helpless?');
+		$this->additem('i11', '11. Do you often get restless and fidgety?');
+		$this->additem('i12', '12. Do you prefer to stay at home, rather than going out and doing new things?');
+		$this->additem('i13', '13. Do you frequently worry about the future?');
+		$this->additem('i14', '14. Do you feel you have more problems with memory than most?');
+		$this->additem('i15', '15. Do you think it is wonderful to be alive now?');
+		$this->additem('i16', '16: Do you often feel downhearted and blue?');
+		$this->additem('i17', '17. Do you feel pretty worthless the way you are now?');
+		$this->additem('i18', '18. Do you worry a lot about the past?');
+		$this->additem('i19', '19. Do you find life very exciting?');
+		$this->additem('i20', '20. Is it hard for you to get started on new projects?');
+		$this->additem('i21', '21. Do you feel full of energy?');
+		$this->additem('i22', '22. Do you feel that your situation is hopeless?');
+		$this->additem('i23', '23. Do you think that most people are better off than you are?');
+		$this->additem('i24', '24. Do you frequently get upset over little things?');
+		$this->additem('i25', '25. Do you frequently feel like crying?');
+		$this->additem('i26', '26: Do you have trouble concentrating?');
+		$this->additem('i27', '27. Do you enjoy getting up in the morning?');
+		$this->additem('i28', '28. Do you prefer to avoid social gatherings?');
+		$this->additem('i29', '29. Is it easy for you to make decisions?');
+		$this->additem('i30', '30. Is your mind as clear as it used to be?');
+
+		$total = $this->form->addElement('static','total','Calculated total:');
+
+    }
+   
+   
+}
+?>

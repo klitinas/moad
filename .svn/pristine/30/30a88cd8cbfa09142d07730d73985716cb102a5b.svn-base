@@ -1,0 +1,32 @@
+table{@}vision
+title{@}Vision Assessment
+date{@}Date_taken{@}Date of Administration{@}2006{@}2015
+static{@}Candidate_Age{@}Candidate Age (Months)
+static{@}Window_Difference{@}Window Difference (+/- Days)
+select{@}Examiner{@}Examiner{@}NULL=>''
+text{@}color_vision{@}color_vision:
+select{@}color_vision_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vis_cont_r{@}vis_cont_R:
+select{@}vis_cont_r_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vis_cont_l{@}vis_cont_L:
+select{@}vis_cont_l_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}vis_cont_bl{@}vis_cont_BL:
+select{@}vis_cont_bl_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rt_ton{@}RT_TON:
+select{@}rt_ton_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}lt_ton{@}LT_TON:
+select{@}lt_ton_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}rabin{@}RABIN:
+select{@}rabin_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}tes_mun{@}TES_MUN:
+select{@}tes_mun_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}butterfly{@}butterfly:
+select{@}butterfly_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}fly{@}fly:
+select{@}fly_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}circles{@}circles:
+select{@}circles_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}animals{@}animals:
+select{@}animals_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
+numeric{@}ishihara{@}ishihara:
+select{@}ishihara_status{@}{@}NULL=>''{-}'not_answered'=>'Not Answered'
